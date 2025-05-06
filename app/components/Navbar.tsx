@@ -18,13 +18,13 @@ function Navbar() {
         </div>
         <div className="flex gap-x-8">
           <Button
-            // className="bg-transparent border border-[#18AEBF] rounded-md text-white"
+            className="bg-transparent border border-legendary-500 rounded-md text-white"
             variant="outline"
           >
             Login
           </Button>
           <Button
-            className="bg-[#18AEBF] rounded-md text-white"
+            className="bg-legendary-500 rounded-md text-white"
             variant="default"
           >
             Signup
