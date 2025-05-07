@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 export default function Home() {
   return (
     <div>
-      <main className="bg-black">
+      <main>
         <nav className="px-[150px] py-4"><Navbar/></nav>
       </main>
       <footer>
