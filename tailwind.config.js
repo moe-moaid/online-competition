@@ -8,6 +8,9 @@ module.exports = {
   ],
     theme: {
       extend: {
+        fontFamily: {
+          sans: ['var(--font-inter)', 'sans-serif'],
+        },
         colors: {
           legendary: {
           50: '#e3f9fb',
@@ -23,6 +26,7 @@ module.exports = {
           DEFAULT: '#18AEBF',
         },
         "gray-bg": '#101010',
+        "lightGray-bg": '#252525',
         "gray-text": '#838383',
         }
       },
