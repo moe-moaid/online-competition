@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className='bg-black'>
-        <nav className="px-[150px] py-4">
+        <nav className="px-3 lg:px-[90px] xl:px-[150px] py-4">
           <Navbar />
         </nav>
         {children}
