@@ -124,16 +124,16 @@ const MISSION_VISION = [
 ];
 function AboutPage() {
   return (
-    <div>
+    <div className="px-[10px] lg:px-[150px]">
       <div className="relative">
-        <div className="w-full h-[980px] relative">
+        <div className="w-full h-[350px] lg:h-[980px] relative">
           <Image src={"/about-header.png"} fill alt="About Us Header Image" />
         </div>
-        <div className="absolute left-[150px] top-[50%] z-50 transform -translate-y-[50%] w-1/3 tracking-widest text-white">
-          <h1 className="font-semibold text-[70px]">
+        <div className="absolute md:left-[150px] top-[50%] z-50 transform -translate-y-[50%] w-full md:w-1/2 tracking-widest text-white">
+          <h1 className="font-semibold text-[18px] lg:text-[40px] xl:text-[70px]">
             ABOUT <span className="text-legendary-500 font-semibold">US</span>
           </h1>
-          <p className="font-medium text-[24px]">
+          <p className="font-medium text-[16px] lg:text-[18px] xl:text-[24px]">
             Mackie is a free virtual singing competition organised quarterly
             which strives to bring people together from all over the world, to
             spark joy and human connection.
@@ -147,13 +147,13 @@ function AboutPage() {
         </div>
       </div>
       {/* who we are */}
-      <div className="flex flex-row gap-x-[67px] px-[165px] py-[120px] items-center">
-        <div className="w-1/2">
+      <div className="flex flex-col lg:flex-row gap-x-[67px] py-[120px] lg:items-center">
+        <div className="w-full w-max-1/2">
           <div className="relative w-full h-[370px]">
             <Image src={"/about-who-we-are.png"} fill alt="about-image" />
           </div>
         </div>
-        <div className="w-1/2 text-white">
+        <div className="w-full w-max-1/2 text-white">
           <h1 className="font-semibold text-[40px] tracking-wider mb-4">
             Who <span className="text-legendary-500">We Are</span>
           </h1>
@@ -171,21 +171,21 @@ function AboutPage() {
         </div>
       </div>
       {/* what we do */}
-      <div className="bg-gray-bg text-white px-[150px] py-[120px]">
-        <div className="flex flex-col items-center w-1/3 mx-auto text-center">
-          <h1 className="font-bold text-[40px] mb-4">
+      <div className="bg-gray-bg text-white py-[120px]">
+        <div className="flex flex-col items-center w-full md:w-1/3 mx-auto text-center">
+          <h1 className="text-[30px] lg:text-[40px] mb-4">
             What <span className="text-legendary-500">we do</span>
           </h1>
-          <p>
+          <p className="">
             Fully layered dolor sit amet, nobis id officiis layered dolor sit
             amet laboriosam.
           </p>
         </div>
-        <div className="flex flex-row flex-shrink-0 justify-center">
+        <div className="flex flex-col mt-4 md:mt-0 md:flex-row md:justify-between md:items-start">
           {WE_DO.map((item) => (
             <div
               key={item.title}
-              className="flex flex-col gap-y-4 items-center justify-between hover:bg-lightGray-bg rounded-md group px-[32px] py-10 duration-300 ease-in-out transform-all"
+              className="flex flex-col gap-y-4 items-center justify-between hover:bg-lightGray-bg rounded-md group px-3 md:px-[32px] py-10 duration-300 ease-in-out transform-all"
             >
               <div className="bg-lightGray-bg w-[60px] h-[60px] relative rounded-full group-hover:bg-legendary-500 ">
                 {item.icon}
@@ -197,9 +197,9 @@ function AboutPage() {
         </div>
       </div>
       {/* out mission */}
-      <div className="px-[150px] py-[120px] w-full flex flex-row items-center justify-center text-center gap-x-[150px]">
+      <div className="py-[120px] w-full flex flex-col md:flex-row items-center justify-center text-center gap-y-12 md:gap-y-0 md:gap-x-[150px]">
         {MISSION_VISION.map((item) => (
-          <div key={item.color} className="w-1/2 text-white">
+          <div key={item.color} className="w-full md:w-1/2 text-white">
             <h1 className="font-bold text-[40px] mb-3">
               {item.white}{" "}
               <span className="text-legendary-500">{item.color}</span>

@@ -17,7 +17,7 @@ const endCol = [
 ];
 function Footer() {
   return (
-    <div className="bg-gray-bg px-[150px] pt-14 pb-10 text-white">
+    <div className="bg-gray-bg px-[10px] md:px-[150px] pt-14 pb-10 text-white">
       <div className="flex flex-row justify-start border-b gap-x-[150px] pb-9">
         <div className="w-1/3">
           <div className="w-[250px] h-[65px]">
@@ -54,7 +54,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="flex flex-row justify-between items-center mt-4">
+      <div className="flex flex-col md:flex-row justify-between items-center mt-4">
         <p>info@showitwithmackie.com</p>
         <p>ShowWithMackie © 2022 All Rights Reserved</p>
         <div className="flex flex-row justify-between items-center gap-x-4">

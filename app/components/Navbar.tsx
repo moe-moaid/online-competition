@@ -5,10 +5,33 @@ import { Button } from "@/components/ui/button";
 function Navbar() {
   return (
     <div className="flex flex-row items-center justify-between">
-      <div className="w-[250px] h-[65px]">
-        <Image src={"/logo.png"} width={250} height={65} alt="logo" />
+      <div className="w-[250px] h-[65px] relative">
+        <Image src={"/logo.png"} fill alt="logo" />
       </div>
-      <div className="flex flex-row items-center justify-between gap-x-14">
+      <div className="flex lg:hidden">
+        <button
+          type="button"
+          className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+        >
+          <span className="sr-only">Open main menu</span>
+          <svg
+            className="size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </button>
+      </div>
+      <div className="hidden lg:flex items-center justify-between gap-x-14">
         <div className="flex text-white flex-row items-center justify-center gap-x-4">
           <Link href="/">Home</Link>
           <Link href="/about">About Us</Link>
