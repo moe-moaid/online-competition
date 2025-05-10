@@ -26,6 +26,7 @@ module.exports = {
           DEFAULT: '#18AEBF',
         },
         "gray-bg": '#101010',
+        "lightGray-bg": '#252525',
         "gray-text": '#838383',
         }
       },

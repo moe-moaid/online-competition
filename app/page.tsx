@@ -8,9 +8,6 @@ export default function Home() {
       <main>
         
       </main>
-      <footer>
-        <Footer />
-      </footer>
     </div>
   );
 }
