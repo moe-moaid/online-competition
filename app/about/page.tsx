@@ -90,18 +90,18 @@ const WE_DO = [
         <path
           d="M23.1393 9.70166L17.2323 14.4566C16.6901 14.8824 16.0206 15.1139 15.3311 15.1139C14.6417 15.1139 13.9722 14.8824 13.43 14.4566L7.47314 9.70166"
           stroke="white"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M8.76826 2H21.8229C23.7061 2.02077 25.4964 2.81696 26.78 4.20162C27.4158 4.8887 27.9062 5.69719 28.2218 6.57855C28.5373 7.45991 28.6714 8.39594 28.6161 9.33044V18.3696C28.6714 19.3041 28.5373 20.2401 28.2218 21.1214C27.9062 22.0028 27.4158 22.8113 26.78 23.4984C26.1467 24.1829 25.3805 24.7311 24.5282 25.1096C23.6759 25.4881 22.7554 25.689 21.8229 25.7H8.76826C4.72503 25.7 2 22.4114 2 18.3696V9.33044C2 5.28859 4.72503 2 8.76826 2Z"
           stroke="white"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     ),
@@ -154,7 +154,7 @@ function AboutPage() {
           </div>
         </div>
         <div className="w-1/2 text-white">
-          <h1 className="font-semibold text-[40px] tracking-wider">
+          <h1 className="font-semibold text-[40px] tracking-wider mb-4">
             Who <span className="text-legendary-500">We Are</span>
           </h1>
           <p className="font-medium text-[20px] tracking-wider">
@@ -173,7 +173,7 @@ function AboutPage() {
       {/* what we do */}
       <div className="bg-gray-bg text-white px-[150px] py-[120px]">
         <div className="flex flex-col items-center w-1/3 mx-auto text-center">
-          <h1 className="font-bold text-[40px]">
+          <h1 className="font-bold text-[40px] mb-4">
             What <span className="text-legendary-500">we do</span>
           </h1>
           <p>
@@ -199,9 +199,14 @@ function AboutPage() {
       {/* out mission */}
       <div className="px-[150px] py-[120px] w-full flex flex-row items-center justify-center text-center gap-x-[150px]">
         {MISSION_VISION.map((item) => (
-          <div className="w-1/2 text-white">
-            <h1 className="font-bold text-[40px] mb-3">{item.white} <span className="text-legendary-500">{item.color}</span></h1>
-            <p className="font-medium text-[20px] tracking-wider">{item.text}</p>
+          <div key={item.color} className="w-1/2 text-white">
+            <h1 className="font-bold text-[40px] mb-3">
+              {item.white}{" "}
+              <span className="text-legendary-500">{item.color}</span>
+            </h1>
+            <p className="font-medium text-[20px] tracking-wider">
+              {item.text}
+            </p>
           </div>
         ))}
       </div>
