@@ -129,7 +129,7 @@ function AboutPage() {
         <div className="w-full h-[350px] lg:h-[980px] relative">
           <Image src={"/about-header.png"} fill alt="About Us Header Image" />
         </div>
-        <div className="absolute left-[10px] md:left-[150px] top-[50%] z-50 transform -translate-y-[50%] w-max-full md:w-1/2 tracking-widest text-white">
+        <div className="absolute left-[12px] lg:left-[90px] xl:left-[150px] top-[50%] z-50 transform -translate-y-[50%] w-max-full md:w-1/2 tracking-widest text-white">
           <h1 className="font-semibold text-[18px] lg:text-[40px] xl:text-[70px]">
             ABOUT <span className="text-legendary-500 font-semibold">US</span>
           </h1>
@@ -147,7 +147,7 @@ function AboutPage() {
         </div>
       </div>
       {/* who we are */}
-      <div className="flex flex-col lg:flex-row gap-x-[67px] py-[120px] lg:items-center px-[10px] lg:px-[150px]">
+      <div className="flex flex-col lg:flex-row gap-x-[67px] py-[120px] lg:items-center px-3 lg:px-[90px] xl:px-[150px]">
         <div className="w-full w-max-1/2">
           <div className="relative w-full h-[370px]">
             <Image src={"/about-who-we-are.png"} fill alt="about-image" />
@@ -171,7 +171,7 @@ function AboutPage() {
         </div>
       </div>
       {/* what we do */}
-      <div className="bg-gray-bg text-white py-[120px] px-[10px] lg:px-[150px]">
+      <div className="bg-gray-bg text-white py-[120px] px-3 lg:px-[90px] xl:px-[150px]">
         <div className="flex flex-col items-center w-full md:w-1/3 mx-auto text-center">
           <h1 className="text-[30px] lg:text-[40px] mb-4">
             What <span className="text-legendary-500">we do</span>
@@ -197,7 +197,7 @@ function AboutPage() {
         </div>
       </div>
       {/* out mission */}
-      <div className="py-[120px] w-full flex flex-col md:flex-row items-center justify-center text-center gap-y-12 md:gap-y-0 md:gap-x-[150px]  px-[10px] lg:px-[150px]">
+      <div className="py-[120px] w-full flex flex-col md:flex-row items-center justify-center text-center gap-y-12 md:gap-y-0 md:gap-x-[150px] px-3 lg:px-[90px] xl:px-[150px]">
         {MISSION_VISION.map((item) => (
           <div key={item.color} className="w-full md:w-1/2 text-white">
             <h1 className="font-bold text-[40px] mb-3">
