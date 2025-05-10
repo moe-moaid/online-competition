@@ -18,8 +18,8 @@ const endCol = [
 function Footer() {
   return (
     <div className="bg-gray-bg px-[10px] md:px-[150px] pt-14 pb-10 text-white">
-      <div className="flex flex-row justify-start border-b gap-x-[150px] pb-9">
-        <div className="w-1/3">
+      <div className="flex flex-col md:flex-row justify-start border-b gap-x-[150px] pb-9">
+        <div className="w-full md:w-1/3 mb-4 md:mb-0">
           <div className="w-[250px] h-[65px]">
             <Image src="/logo.png" width={250} height={65} alt="logo" />
           </div>
@@ -29,7 +29,7 @@ function Footer() {
             spark joy and human connection.
           </p>
         </div>
-        <div className="w-2/3 flex flex-row justify-start">
+        <div className="w-full md:w-2/3 flex flex-row justify-start">
           <div className="flex w-1/2 flex-col self-stretch justify-between">
             {midCol.map((col) => (
               <Link
@@ -54,10 +54,10 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row justify-between items-center mt-4">
-        <p>info@showitwithmackie.com</p>
-        <p>ShowWithMackie © 2022 All Rights Reserved</p>
-        <div className="flex flex-row justify-between items-center gap-x-4">
+      <div className="flex flex-col md:flex-row md:justify-between items-center mt-4">
+        <p className="text-[12px] md:text-[16px]">info@showitwithmackie.com</p>
+        <p className="text-[12px] md:text-[16px]">ShowWithMackie © 2022 All Rights Reserved</p>
+        <div className="flex flex-row justify-between items-center gap-x-4 mt-4 md:mt-0">
           <SocialIcon
             url="https://www.instagram.com"
             bgColor="#252525"

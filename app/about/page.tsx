@@ -124,30 +124,30 @@ const MISSION_VISION = [
 ];
 function AboutPage() {
   return (
-    <div className="px-[10px] lg:px-[150px]">
+    <div className="">
       <div className="relative">
         <div className="w-full h-[350px] lg:h-[980px] relative">
           <Image src={"/about-header.png"} fill alt="About Us Header Image" />
         </div>
-        <div className="absolute md:left-[150px] top-[50%] z-50 transform -translate-y-[50%] w-full md:w-1/2 tracking-widest text-white">
+        <div className="absolute left-[10px] md:left-[150px] top-[50%] z-50 transform -translate-y-[50%] w-full md:w-1/2 tracking-widest text-white">
           <h1 className="font-semibold text-[18px] lg:text-[40px] xl:text-[70px]">
             ABOUT <span className="text-legendary-500 font-semibold">US</span>
           </h1>
-          <p className="font-medium text-[16px] lg:text-[18px] xl:text-[24px]">
-            Mackie is a free virtual singing competition organised quarterly
+          <p className="font-medium text-[12px] sm:text[16px] lg:text-[18px] xl:text-[24px]">
+            Show it with Mackie is a free virtual singing competition organised quarterly
             which strives to bring people together from all over the world, to
             spark joy and human connection.
           </p>
           <Button
             variant="default"
-            className="bg-legendary-500 mt-4 font-medium text-[20px]  py-[28px] px-[30px] hover:bg-legendary-600 ease-in-out duration-300"
+            className="bg-legendary-500 mt-4 font-medium sm:text-[20px]  sm:py-[28px] sm:px-[30px] hover:bg-legendary-600 ease-in-out duration-300"
           >
             Learn More
           </Button>
         </div>
       </div>
       {/* who we are */}
-      <div className="flex flex-col lg:flex-row gap-x-[67px] py-[120px] lg:items-center">
+      <div className="flex flex-col lg:flex-row gap-x-[67px] py-[120px] lg:items-center px-[10px] lg:px-[150px]">
         <div className="w-full w-max-1/2">
           <div className="relative w-full h-[370px]">
             <Image src={"/about-who-we-are.png"} fill alt="about-image" />
@@ -171,7 +171,7 @@ function AboutPage() {
         </div>
       </div>
       {/* what we do */}
-      <div className="bg-gray-bg text-white py-[120px]">
+      <div className="bg-gray-bg text-white py-[120px] px-[10px] lg:px-[150px]">
         <div className="flex flex-col items-center w-full md:w-1/3 mx-auto text-center">
           <h1 className="text-[30px] lg:text-[40px] mb-4">
             What <span className="text-legendary-500">we do</span>
@@ -181,11 +181,11 @@ function AboutPage() {
             amet laboriosam.
           </p>
         </div>
-        <div className="flex flex-col mt-4 md:mt-0 md:flex-row md:justify-between md:items-start">
+        <div className="flex flex-col mt-4 md:mt-12 md:flex-row md:justify-between md:items-start">
           {WE_DO.map((item) => (
             <div
               key={item.title}
-              className="flex flex-col gap-y-4 items-center justify-between hover:bg-lightGray-bg rounded-md group px-3 md:px-[32px] py-10 duration-300 ease-in-out transform-all"
+              className="flex flex-col gap-y-4 items-center justify-between hover:bg-lightGray-bg rounded-md group px-3 xl:px-[32px] py-10 duration-300 ease-in-out transform-all"
             >
               <div className="bg-lightGray-bg w-[60px] h-[60px] relative rounded-full group-hover:bg-legendary-500 ">
                 {item.icon}
@@ -197,7 +197,7 @@ function AboutPage() {
         </div>
       </div>
       {/* out mission */}
-      <div className="py-[120px] w-full flex flex-col md:flex-row items-center justify-center text-center gap-y-12 md:gap-y-0 md:gap-x-[150px]">
+      <div className="py-[120px] w-full flex flex-col md:flex-row items-center justify-center text-center gap-y-12 md:gap-y-0 md:gap-x-[150px]  px-[10px] lg:px-[150px]">
         {MISSION_VISION.map((item) => (
           <div key={item.color} className="w-full md:w-1/2 text-white">
             <h1 className="font-bold text-[40px] mb-3">
