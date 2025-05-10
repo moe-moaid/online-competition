@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 function Navbar() {
   return (
-    <div className="flex flex-row items-center justify-between">
+    <div className="flex flex-row items-center flex-shrink justify-between">
       <div className="w-[250px] h-[65px] relative">
         <Image src={"/logo.png"} fill alt="logo" />
       </div>

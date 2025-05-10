@@ -129,14 +129,14 @@ function AboutPage() {
         <div className="w-full h-[350px] lg:h-[980px] relative">
           <Image src={"/about-header.png"} fill alt="About Us Header Image" />
         </div>
-        <div className="absolute left-[10px] md:left-[150px] top-[50%] z-50 transform -translate-y-[50%] w-full md:w-1/2 tracking-widest text-white">
+        <div className="absolute left-[10px] md:left-[150px] top-[50%] z-50 transform -translate-y-[50%] w-max-full md:w-1/2 tracking-widest text-white">
           <h1 className="font-semibold text-[18px] lg:text-[40px] xl:text-[70px]">
             ABOUT <span className="text-legendary-500 font-semibold">US</span>
           </h1>
           <p className="font-medium text-[12px] sm:text[16px] lg:text-[18px] xl:text-[24px]">
-            Show it with Mackie is a free virtual singing competition organised quarterly
-            which strives to bring people together from all over the world, to
-            spark joy and human connection.
+            Show it with Mackie is a free virtual singing competition organised
+            quarterly which strives to bring people together from all over the
+            world, to spark joy and human connection.
           </p>
           <Button
             variant="default"
