@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 function Navbar() {
   return (
-    <div className="flex flex-row items-center flex-shrink justify-between">
+    <div className="flex flex-row items-center flex-shrink justify-between" area-label='Global'>
       <div className="w-[250px] h-[65px] relative">
         <Image src={"/logo.png"} fill alt="logo" />
       </div>
@@ -18,14 +18,14 @@ function Navbar() {
             className="size-6"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             aria-hidden="true"
             data-slot="icon"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
             />
           </svg>
