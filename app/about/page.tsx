@@ -173,7 +173,7 @@ function AboutPage() {
       {/* what we do */}
       <div className="bg-gray-bg text-white py-[120px] px-3 lg:px-[90px] xl:px-[150px]">
         <div className="flex flex-col items-center w-full md:w-1/3 mx-auto text-center">
-          <h1 className="text-[30px] lg:text-[40px] mb-4">
+          <h1 className="text-[30px] lg:text-[40px] font-bold mb-4">
             What <span className="text-legendary-500">we do</span>
           </h1>
           <p className="">
@@ -185,9 +185,9 @@ function AboutPage() {
           {WE_DO.map((item) => (
             <div
               key={item.title}
-              className="flex flex-col gap-y-4 items-center justify-between hover:bg-lightGray-bg rounded-md group px-3 xl:px-[32px] py-10 duration-300 ease-in-out transform-all"
+              className="flex flex-col gap-y-4 items-center justify-between hover:bg-lightGray-bg rounded-md group px-3 xl:px-[32px] py-10 duration-300 ease-in-out"
             >
-              <div className="bg-lightGray-bg w-[60px] h-[60px] relative rounded-full group-hover:bg-legendary-500 ">
+              <div className="bg-lightGray-bg w-[60px] h-[60px] relative rounded-full group-hover:bg-legendary-500 duration-300 ease-in-out">
                 {item.icon}
               </div>
               <h6 className="text-[20px] font-bold">{item.title}</h6>
