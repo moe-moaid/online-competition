@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import MciContainer from "../components/MciContainer";
 
 const WE_DO = [
   {
@@ -148,7 +149,7 @@ function AboutPage() {
         </div>
       </div>
       {/* who we are */}
-      <div className="flex flex-col lg:flex-row gap-x-[67px] py-[120px] lg:items-center px-3 lg:px-[90px] xl:px-[150px]">
+      <MciContainer className="flex flex-col lg:flex-row gap-x-[67px] py-[120px] lg:items-center">
         <div className="w-full w-max-1/2">
           <div className="relative w-full h-[370px]">
             <Image src={"/about-who-we-are.png"} fill alt="about-image" />
@@ -170,9 +171,9 @@ function AboutPage() {
             achieve their dreams
           </p>
         </div>
-      </div>
+      </MciContainer>
       {/* what we do */}
-      <div className="bg-gray-bg text-white py-[120px] px-3 lg:px-[90px] xl:px-[150px]">
+      <MciContainer className="bg-gray-bg py-[120px] text-white ">
         <div className="flex flex-col items-center w-full md:w-1/3 mx-auto text-center">
           <h1 className="text-[30px] lg:text-[40px] font-bold mb-4">
             What <span className="text-legendary-500">we do</span>
@@ -196,9 +197,10 @@ function AboutPage() {
             </div>
           ))}
         </div>
-      </div>
+      </MciContainer>
+
       {/* out mission */}
-      <div className="py-[120px] w-full flex flex-col md:flex-row items-center justify-center text-center gap-y-12 md:gap-y-0 md:gap-x-[150px] px-3 lg:px-[90px] xl:px-[150px]">
+      <MciContainer className="py-[120px] w-full flex flex-col md:flex-row items-center justify-center text-center gap-y-12 md:gap-y-0 md:gap-x-[150px]">
         {MISSION_VISION.map((item) => (
           <div key={item.color} className="w-full md:w-1/2 text-white">
             <h1 className="font-bold text-[40px] mb-3">
@@ -210,7 +212,7 @@ function AboutPage() {
             </p>
           </div>
         ))}
-      </div>
+      </MciContainer>
     </div>
   );
 }
