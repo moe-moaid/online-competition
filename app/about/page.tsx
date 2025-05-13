@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const WE_DO = [
@@ -162,9 +163,9 @@ function AboutPage() {
             quarterly which strives to bring people together from all over the
             world, to spark joy and human connection. Our Innovative Platform
             has been founded on the basis of our mother company:{" "}
-            <span className="text-legendary-500 font-semibold">
+            <Link href='https://www.mackieentertainment.com' className="text-legendary-500 font-semibold">
               Mackie Entertainment
-            </span>{" "}
+            </Link>{" "}
             as a collaborative and cohesive way of helping talented people
             achieve their dreams
           </p>
