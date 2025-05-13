@@ -187,7 +187,7 @@ function AboutPage() {
               key={item.title}
               className="flex flex-col gap-y-4 items-center justify-between hover:bg-lightGray-bg rounded-md group px-3 xl:px-[32px] py-10 duration-300 ease-in-out"
             >
-              <div className="bg-lightGray-bg w-[60px] h-[60px] relative rounded-full group-hover:bg-legendary-500 duration-700 ease-in-out">
+              <div className="bg-lightGray-bg w-[60px] h-[60px] relative rounded-full group-hover:bg-legendary-500 duration-300 ease-in-out">
                 {item.icon}
               </div>
               <h6 className="text-[20px] font-bold">{item.title}</h6>
