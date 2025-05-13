@@ -148,67 +148,58 @@ function AboutPage() {
         </div>
       </div>
       {/* who we are */}
-      <MciContainer>
-        <div className="flex flex-col lg:flex-row gap-x-[67px] py-[120px] lg:items-center">
-          <div className="w-full w-max-1/2">
-            <div className="relative w-full h-[370px]">
-              <Image src={"/about-who-we-are.png"} fill alt="about-image" />
-            </div>
+      <MciContainer className="flex flex-col lg:flex-row gap-x-[67px] py-[120px] lg:items-center">
+        <div className="w-full w-max-1/2">
+          <div className="relative w-full h-[370px]">
+            <Image src={"/about-who-we-are.png"} fill alt="about-image" />
           </div>
-          <div className="w-full w-max-1/2 text-white">
-            <h1 className="font-semibold text-[40px] tracking-wider mb-4">
-              Who <span className="text-legendary-500">We Are</span>
-            </h1>
-            <p className="font-medium text-[20px] tracking-wider">
-              Show it with Mackie is a free virtual singing competition
-              organised quarterly which strives to bring people together from
-              all over the world, to spark joy and human connection. Our
-              Innovative Platform has been founded on the basis of our mother
-              company:{" "}
-              <span className="text-legendary-500 font-semibold">
-                Mackie Entertainment
-              </span>{" "}
-              as a collaborative and cohesive way of helping talented people
-              achieve their dreams
-            </p>
-          </div>
+        </div>
+        <div className="w-full w-max-1/2 text-white">
+          <h1 className="font-semibold text-[40px] tracking-wider mb-4">
+            Who <span className="text-legendary-500">We Are</span>
+          </h1>
+          <p className="font-medium text-[20px] tracking-wider">
+            Show it with Mackie is a free virtual singing competition organised
+            quarterly which strives to bring people together from all over the
+            world, to spark joy and human connection. Our Innovative Platform
+            has been founded on the basis of our mother company:{" "}
+            <span className="text-legendary-500 font-semibold">
+              Mackie Entertainment
+            </span>{" "}
+            as a collaborative and cohesive way of helping talented people
+            achieve their dreams
+          </p>
         </div>
       </MciContainer>
       {/* what we do */}
-      <MciContainer>
-        <div className="bg-gray-bg text-white py-[120px] ">
-          <div className="px-3 lg:px-[90px] xl:px-[150px]">
-            <div className="flex flex-col items-center w-full md:w-1/3 mx-auto text-center">
-              <h1 className="text-[30px] lg:text-[40px] mb-4">
-                What <span className="text-legendary-500">we do</span>
-              </h1>
-              <p className="">
-                Fully layered dolor sit amet, nobis id officiis layered dolor
-                sit amet laboriosam.
-              </p>
+      <MciContainer className="bg-gray-bg py-[120px] text-white ">
+        <div className="flex flex-col items-center w-full md:w-1/3 mx-auto text-center">
+          <h1 className="text-[30px] lg:text-[40px] mb-4">
+            What <span className="text-legendary-500">we do</span>
+          </h1>
+          <p className="">
+            Fully layered dolor sit amet, nobis id officiis layered dolor sit
+            amet laboriosam.
+          </p>
+        </div>
+        <div className="flex flex-col mt-4 md:mt-12 md:flex-row md:justify-between md:items-start">
+          {WE_DO.map((item) => (
+            <div
+              key={item.title}
+              className="flex flex-col gap-y-4 items-center justify-between hover:bg-lightGray-bg rounded-md group px-3 xl:px-[32px] py-10 duration-300 ease-in-out transform-all"
+            >
+              <div className="bg-lightGray-bg w-[60px] h-[60px] relative rounded-full group-hover:bg-legendary-500 ">
+                {item.icon}
+              </div>
+              <h6 className="text-[20px] font-bold">{item.title}</h6>
+              <p className="text-center tracking-widest">{item.description}</p>
             </div>
-            <div className="flex flex-col mt-4 md:mt-12 md:flex-row md:justify-between md:items-start">
-              {WE_DO.map((item) => (
-                <div
-                  key={item.title}
-                  className="flex flex-col gap-y-4 items-center justify-between hover:bg-lightGray-bg rounded-md group px-3 xl:px-[32px] py-10 duration-300 ease-in-out transform-all"
-                >
-                  <div className="bg-lightGray-bg w-[60px] h-[60px] relative rounded-full group-hover:bg-legendary-500 ">
-                    {item.icon}
-                  </div>
-                  <h6 className="text-[20px] font-bold">{item.title}</h6>
-                  <p className="text-center tracking-widest">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </MciContainer>
 
       {/* out mission */}
-      <div className="py-[120px] w-full flex flex-col md:flex-row items-center justify-center text-center gap-y-12 md:gap-y-0 md:gap-x-[150px] px-3 lg:px-[90px] xl:px-[150px]">
+      <MciContainer className="py-[120px] w-full flex flex-col md:flex-row items-center justify-center text-center gap-y-12 md:gap-y-0 md:gap-x-[150px]">
         {MISSION_VISION.map((item) => (
           <div key={item.color} className="w-full md:w-1/2 text-white">
             <h1 className="font-bold text-[40px] mb-3">
@@ -220,7 +211,7 @@ function AboutPage() {
             </p>
           </div>
         ))}
-      </div>
+      </MciContainer>
     </div>
   );
 }
