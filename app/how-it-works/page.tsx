@@ -62,34 +62,32 @@ const Points = [
 ];
 function page() {
   return (
-    <MciContainer className="relative h-screen w-full ">
-          <div 
-        className="absolute inset-0 z-0 bg-[url('/how-it-works.png')] bg-cover bg-center"
-      />
+    <MciContainer className="flex flex-col h-screen items-stretch w-full">
+      <div className="absolute inset-0 z-0 bg-[url('/how-it-works.png')] bg-cover bg-center h-full w-full" />
       <div className="absolute inset-0 bg-black/90" />
-      <h1 className="text-white relative z-10 font-semibold text-[48px] mb-5 mt-10">
+      <h1 className=" relative text-white font-semibold text-[48px] mb-5 mt-10">
         How it <span className="text-legendary-500">Works</span>
       </h1>
       <div className="text-white relative">
         {Points.map((point, i) => (
-            <div
-              key={`${i} - ${point.title}`}
-              className={`flex flex-row ${
-                point.ul ? "items-start" : "items-center"
-              } gap-x-4 mb-6`}
-            >
-              <div className="">{point_icon}</div>
-              <div className="">
-                <p className={`${point.ul ? "mt-4" : "mt-0"}`}>{point.title}</p>
-                {point.ul && (
-                  <ul className="list-disc ms-4 mt-2">
-                    {point.ul.map((list, i) => (
-                      <li key={`${i} - ${list}`}>{list}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+          <div
+            key={`${i} - ${point.title}`}
+            className={`flex flex-row ${
+              point.ul ? "items-start" : "items-center"
+            } gap-x-4 mb-6`}
+          >
+            <div className="">{point_icon}</div>
+            <div className="">
+              <p className={`${point.ul ? "mt-4" : "mt-0"}`}>{point.title}</p>
+              {point.ul && (
+                <ul className="list-disc ms-4 mt-2">
+                  {point.ul.map((list, i) => (
+                    <li key={`${i} - ${list}`}>{list}</li>
+                  ))}
+                </ul>
+              )}
             </div>
+          </div>
         ))}
       </div>
     </MciContainer>
