@@ -37,7 +37,7 @@ function page() {
                 className="text-legendary-500 font-medium"
               >
                 Mackie Entertainment
-              </Link>
+              </Link>{" "}
               was built 7 years ago out of the desire to keep our audience
               engaged with stunning Events, Management, Production, Concerts,
               Talent Booking & Music Production while complimenting them with
