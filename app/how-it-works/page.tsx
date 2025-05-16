@@ -62,9 +62,8 @@ const Points = [
 ];
 function page() {
   return (
-    <MciContainer className="flex flex-col h-screen items-stretch w-full">
-      <div className="absolute inset-0 z-0 bg-[url('/how-it-works.png')] bg-cover bg-center h-full w-full" />
-      <div className="absolute inset-0 bg-black/90" />
+    <MciContainer className="bg-cover pb-1 bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative">
+      <div className="absolute inset-0 bg-black/80" />
       <h1 className=" relative text-white font-semibold text-[48px] mb-5 mt-10">
         How it <span className="text-legendary-500">Works</span>
       </h1>
