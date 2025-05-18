@@ -30,17 +30,18 @@ const Rules = [
 ];
 function page() {
   return (
-    <MciContainer>
-      <div className="flex flex-col items-center text-white">
+    <MciContainer className="py-[120px] bg-cover bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative">
+      <div className="absolute inset-0 bg-black/80" />
+      <div className="relative flex flex-col items-center text-white">
         <h1 className="font-bold text-[40px]">
           Rules of <span className="text-legendary-500">Mackie</span>
         </h1>
         <p>Rules are simple, so simple you can't mess up, listed below</p>
       </div>
-      <div className="flex flex-row flex-wrap text-white justify-center">
+      <div className="relative flex flex-row flex-wrap text-white justify-center px-12">
         {Rules.map((rule, i) => (
           <div key={`${rule.number} - ${i}`} className="flex flex-row jsutify-start w-1/3 items-baseline">
-            <p className="font-bold text-[120px] text-white/20 inline-block">
+            <p className="font-bold text-[120px] text-white/20 -top-1/2">
               {rule.number}
             </p>
             <div>
