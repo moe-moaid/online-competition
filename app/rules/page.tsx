@@ -40,11 +40,11 @@ function page() {
       </div>
       <div className="relative flex flex-row flex-wrap text-white justify-center px-12">
         {Rules.map((rule, i) => (
-          <div key={`${rule.number} - ${i}`} className="flex flex-row jsutify-start w-1/3 items-baseline">
+          <div key={`${rule.number} - ${i}`} className="flex flex-row jsutify-start w-1/3 items-start">
             <p className="font-bold text-[120px] text-white/20 -top-1/2">
               {rule.number}
             </p>
-            <div>
+            <div className="self-center translate-y-1/2">
               <h4 className="font-bold text-[20px]">{rule.title}</h4>
               <p>{rule.desc}</p>
             </div>
