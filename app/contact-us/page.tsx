@@ -4,8 +4,9 @@ import { SocialIcon } from "react-social-icons";
 
 function page() {
   return (
-    <MciContainer className="py-[120px]">
-      <div className="flex flex-col gap-y-8 md:gap-y-0 md:flex-row xl:px-28 md:gap-x-8 items-start">
+    <MciContainer className="py-[120px] bg-cover bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative">
+        <div className="bg-black/90 inset-0 absolute"/>
+      <div className="flex flex-col gap-y-8 md:gap-y-0 md:flex-row xl:px-28 md:gap-x-8 items-start relative">
         {/* left col */}
         <div className="flex flex-col w-full md:w-1/2 text-white gap-y-5">
           <h1 className="font-bold text-[42px]">
