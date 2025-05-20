@@ -11,7 +11,7 @@ const midCol = [
 ];
 const endCol = [
   { name: "Voting", href: "/voting" },
-  { name: "Privacy Policy", href: "/privacy policy" },
+  { name: "Privacy Policy", href: "/privacy-policy" },
   { name: "FAQ", href: "/faq" },
   { name: "Contact Us", href: "/contact-us" },
 ];
