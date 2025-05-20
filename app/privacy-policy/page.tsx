@@ -78,11 +78,12 @@ const PPs = [
 ];
 function page() {
   return (
-    <MciContainer className="text-white py-[120px]">
-      <h1 className="font-bold text-[42px]">
+    <MciContainer className="text-white py-[120px] bg-cover bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative">
+      <div className="absolute inset-0 bg-black/90" />
+      <h1 className="font-bold text-[42px] relative">
         Privacy <span className="text-legendary-500">Policy</span>
       </h1>
-      <div className="">
+      <div className="relative">
         <ol className="nested-decimal">
           <li>
             <span className="underline">Definitions</span>
