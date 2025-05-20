@@ -126,7 +126,7 @@ function page() {
             </ol>
           </li>
           {PPs.map((mainPoint, i) => (
-            <li key={`${i} - ${mainPoint.main}`} className="tracking-wider leading-8 text-[28px] font-medium">
+            <li key={`${i} - ${mainPoint.main}`} className="tracking-wider leading-10 text-[28px] font-medium">
               <span className="underline">{mainPoint.main}</span>
               <ol className={`${mainPoint.inner ? "no-numbering py-5 text-[20px] font-light" : "pt-5 text-[20px] font-light"}`}>
                 {mainPoint.inners &&
