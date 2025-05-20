@@ -1,11 +1,12 @@
 import React from "react";
 import MciContainer from "../components/MciContainer";
 import { SocialIcon } from "react-social-icons";
+import { Button } from "@/components/ui/button";
 
 function page() {
   return (
     <MciContainer className="py-[120px] bg-cover bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative">
-        <div className="bg-black/90 inset-0 absolute"/>
+      <div className="bg-black/90 inset-0 absolute" />
       <div className="flex flex-col gap-y-8 md:gap-y-0 md:flex-row xl:px-28 md:gap-x-8 items-start relative">
         {/* left col */}
         <div className="flex flex-col w-full md:w-1/2 text-white gap-y-5">
@@ -79,7 +80,7 @@ function page() {
         </div>
         {/* right col */}
         <div className="bg-gray-bg text-white w-full md:w-1/2 px-4 md:px-8 xl:px-16 py-8 md:py-12 lg:py-20 rounded-lg">
-          <form action="" className="flex flex-col justify-between gap-y-8">
+          <form className="flex flex-col justify-between gap-y-8">
             <div className="flex flex-col space-y-2 w-full">
               <label htmlFor="name">
                 Name<span className="text-red-600">*</span>
@@ -103,9 +104,24 @@ function page() {
               />
             </div>
             <div className="flex flex-col space-y-2 w-full">
-                    <label htmlFor="message">Message<span className="text-red-600">*</span></label>
-                    <textarea name="message" placeholder="Your Message..." className="outline-none border border-white rounded-md px-3 py-1 bg-transparent text-[#838383] hover:border-legendary-500 hover:text-white focus:border-legendary-500 focus:text-white" rows={8}></textarea>
-                </div>
+              <label htmlFor="message">
+                Message<span className="text-red-600">*</span>
+              </label>
+              <textarea
+                name="message"
+                placeholder="Your Message..."
+                className="outline-none border border-white rounded-md px-3 py-1 bg-transparent text-[#838383] hover:border-legendary-500 hover:text-white focus:border-legendary-500 focus:text-white"
+                rows={8}
+              ></textarea>
+            </div>
+            <Button
+              type="submit"
+              variant="default"
+              className="bg-legendary-500 rounded-lg py-6"
+              size="lg"
+            >
+              Send
+            </Button>
           </form>
         </div>
       </div>
