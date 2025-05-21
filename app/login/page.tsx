@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 function page() {
   return (
     <MciContainer className="text-white h-full py-[120px] bg-cover bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative z-0">
-        <div className="bg-black/85 absolute inset-0 -z-10" />
+        <div className="bg-black/80 absolute inset-0 -z-10" />
       <div className="w-full md:w-4/5 lg:w-3/5 xl:w-2/5 mx-auto bg-gray-bg px-2 sm:px-10 md:px-14 lg:px-24 py-12 rounded-lg">
         <h1 className="font-semibold text-[48px] text-center w-full mb-10">
           log<span className="text-legendary-500">in</span>

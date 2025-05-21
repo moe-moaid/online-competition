@@ -79,7 +79,7 @@ const PPs = [
 function page() {
   return (
     <MciContainer className="text-white py-[120px] bg-cover bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative z-0">
-      <div className="absolute inset-0 bg-black/90 -z-10" />
+      <div className="absolute inset-0 bg-black/80 -z-10" />
       <h1 className="font-bold text-[42px]">
         Privacy <span className="text-legendary-500">Policy</span>
       </h1>
