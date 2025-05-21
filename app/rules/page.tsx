@@ -30,23 +30,30 @@ const Rules = [
 ];
 function page() {
   return (
-    <MciContainer className="py-[120px] bg-cover bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative">
-      <div className="absolute inset-0 bg-black/80" />
-      <div className="relative flex flex-col items-center text-white">
+    <MciContainer className="py-[120px] bg-cover bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative z-0">
+      <div className="absolute inset-0 bg-black/80 -z-10" />
+      <div className="flex flex-col items-center text-white">
         <h1 className="font-bold text-[40px]">
           Rules of <span className="text-legendary-500">Mackie</span>
         </h1>
         <p>Rules are simple, so simple you can't mess up, listed below</p>
       </div>
-      <div className="relative flex flex-col lg:flex-row flex-wrap text-white justify-center px-12">
+      <div className="flex flex-col lg:flex-row flex-wrap text-white justify-center px-12">
         {Rules.map((rule, i) => (
-          <div key={`${rule.number} - ${i}`} className="flex flex-row jsutify-start lg:w-1/3 items-start">
+          <div
+            key={`${rule.number} - ${i}`}
+            className="flex flex-row jsutify-start lg:w-1/3 items-start"
+          >
             <p className="font-bold text-[120px] text-white/20 -top-1/2">
               {rule.number}
             </p>
             <div className="self-center translate-y-1/2 w-full">
-              <h4 className="font-bold text-[16px] md:text-[18px] lg:text-[20px]">{rule.title}</h4>
-              <p className="text-[12px] md:text-[14px] lg:text-[16px]">{rule.desc}</p>
+              <h4 className="font-bold text-[16px] md:text-[18px] lg:text-[20px]">
+                {rule.title}
+              </h4>
+              <p className="text-[12px] md:text-[14px] lg:text-[16px]">
+                {rule.desc}
+              </p>
             </div>
           </div>
         ))}

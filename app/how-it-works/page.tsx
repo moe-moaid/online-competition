@@ -62,12 +62,12 @@ const Points = [
 ];
 function page() {
   return (
-    <MciContainer className="bg-cover pb-1 bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative">
-      <div className="absolute inset-0 bg-black/80" />
-      <h1 className=" relative text-white font-semibold text-[48px] mb-5 mt-10">
+    <MciContainer className="bg-cover pb-1 bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative z-0">
+      <div className="absolute inset-0 bg-black/80 -z-10" />
+      <h1 className="text-white font-semibold text-[48px] mb-5 mt-10">
         How it <span className="text-legendary-500">Works</span>
       </h1>
-      <div className="text-white relative">
+      <div className="text-white">
         {Points.map((point, i) => (
           <div
             key={`${i} - ${point.title}`}

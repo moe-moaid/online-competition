@@ -25,9 +25,9 @@ const Qs: { question: string; answer: string }[] = [
 ];
 function page() {
   return (
-    <MciContainer className="py-[120px] text-white bg-cover bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative">
-      <div className="bg-black/90 absolute inset-0" />
-      <Accordion type="single" collapsible className="w-full relative">
+    <MciContainer className="py-[120px] text-white bg-cover bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative z-0">
+      <div className="bg-black/90 absolute inset-0 -z-10" />
+      <Accordion type="single" collapsible className="w-full">
         {Qs.map((q, i) => (
           <AccordionItem key={`${i} - ${q.question}`} value={`${i + 1}`}>
             <AccordionTrigger className="group [&>svg]:hidden">
