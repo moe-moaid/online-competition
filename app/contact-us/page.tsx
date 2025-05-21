@@ -52,7 +52,7 @@ function page() {
           </div>
           <div className="flex flex-row items-center justify-start gap-x-4">
             <SocialIcon
-              url="https://www.instagrapm.com"
+              url="https://www.instagram.com"
               bgColor="#252525"
               fgColor="white"
             />
@@ -112,7 +112,7 @@ function page() {
                 placeholder="Your Message..."
                 className="outline-none border border-white rounded-md px-3 py-1 bg-transparent text-[#838383] hover:border-legendary-500 hover:text-white focus:border-legendary-500 focus:text-white"
                 rows={8}
-              ></textarea>
+              />
             </div>
             <Button
               type="submit"
