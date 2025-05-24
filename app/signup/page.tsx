@@ -2,6 +2,7 @@ import React from "react";
 import MciContainer from "../components/MciContainer";
 import MciInput from "../components/MciInput";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 function page() {
   return (
@@ -84,7 +85,7 @@ function page() {
           <Button className="bg-lightGray-bg">Facebook</Button>
           <Button className="bg-lightGray-bg">Apple</Button>
         </div>
-        <p>Already have an account? <span className="text-legendary-500">Log in</span></p>
+        <p>Already have an account? <Link href='/login' className="text-legendary-500">Log in</Link></p>
       </form>
     </div>
   );
