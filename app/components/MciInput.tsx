@@ -18,7 +18,7 @@ function MciInput({
   fullWidth
 }: inputProps) {
   return (
-    <div className={`flex flex-col gap-y-3 ${fullWidth ? 'w-full' : ''} ${className}`}>
+    <div className={`flex flex-col gap-y-3 text-white ${fullWidth ? 'w-full' : ''} ${className}`}>
       {/* <label htmlFor={name}>{`${label}`}</label> */}
       <label htmlFor={name}>{label ? label : ''}{required && <span className="text-red-600">*</span>}</label>
       <input

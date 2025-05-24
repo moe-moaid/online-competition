@@ -122,6 +122,29 @@
 } */
 
 @layer components {
+.mci-separator::before {
+    position: absolute;
+    /* display: block; */
+    content: '';
+    border-left: solid 90px #18aebf;
+    height: 2px;
+    border-radius: 2px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+.mci-separator::after {
+    position: absolute;
+    content: '';
+    border-right: solid 90px #18aebf;
+    height: 2px;
+    border-radius: 2px;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+
   .nested-decimal {
     counter-reset: section;
     list-style-type: none;
@@ -195,3 +218,4 @@
     text-decoration: none !important;
   }
 }
+
