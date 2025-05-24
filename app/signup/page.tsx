@@ -85,7 +85,7 @@ function page() {
           <Button className="bg-lightGray-bg">Facebook</Button>
           <Button className="bg-lightGray-bg">Apple</Button>
         </div>
-        <p>Already have an account? <Link href='/login' className="text-legendary-500">Log in</Link></p>
+        <p className="text-white">Already have an account? <Link href='/login' className="text-legendary-500">Log in</Link></p>
       </form>
     </div>
   );
