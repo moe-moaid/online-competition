@@ -80,10 +80,11 @@ function page() {
           Or sign up with
         </p>
         <div className="">
-          <Button>Google</Button>
-          <Button>Facebook</Button>
-          <Button>Apple</Button>
+          <Button className="bg-lightGray-bg">Google</Button>
+          <Button className="bg-lightGray-bg">Facebook</Button>
+          <Button className="bg-lightGray-bg">Apple</Button>
         </div>
+        <p>Already have an account? <span className="text-legendary-500">Log in</span></p>
       </form>
     </div>
   );
