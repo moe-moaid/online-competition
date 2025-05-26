@@ -9,11 +9,29 @@ function page() {
     <div className="py-[120px] flex flex-col justify-center items-center">
       <form
         action=""
-        className="flex flex-col items-center w-full px-4 md:w-2/3 lg-1/2 justify-center py-12 bg-gray-bg rounded-lg gap-y-8"
+        className="flex flex-col items-center w-full px-4 md:w-2/3 lg-1/2 justify-center py-12 bg-gray-bg rounded-lg gap-y-8 md:gap-y-12"
       >
-        <h1 className="text-white">
+        <h1 className="text-white font-semibold text-[48px]">
           Sign <span className="text-legendary-500">up</span>
         </h1>
+        <div className="flex flex-col sm:flex-row justify-start items-center w-full gap-x-6">
+          <div className="relative bg-lightGray-bg w-[80px] h-[80px] rounded-full">
+            <svg
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M27 8.125H22.75L21.7375 5.2875C21.6675 5.09334 21.5394 4.92551 21.3704 4.80693C21.2015 4.68835 21.0001 4.62482 20.7938 4.625H11.2063C10.7844 4.625 10.4062 4.89063 10.2656 5.2875L9.25 8.125H5C3.61875 8.125 2.5 9.24375 2.5 10.625V24.875C2.5 26.2562 3.61875 27.375 5 27.375H27C28.3813 27.375 29.5 26.2562 29.5 24.875V10.625C29.5 9.24375 28.3813 8.125 27 8.125ZM16 22.375C13.2375 22.375 11 20.1375 11 17.375C11 14.6125 13.2375 12.375 16 12.375C18.7625 12.375 21 14.6125 21 17.375C21 20.1375 18.7625 22.375 16 22.375ZM13 17.375C13 18.1706 13.3161 18.9337 13.8787 19.4963C14.4413 20.0589 15.2044 20.375 16 20.375C16.7956 20.375 17.5587 20.0589 18.1213 19.4963C18.6839 18.9337 19 18.1706 19 17.375C19 16.5793 18.6839 15.8163 18.1213 15.2537C17.5587 14.6911 16.7956 14.375 16 14.375C15.2044 14.375 14.4413 14.6911 13.8787 15.2537C13.3161 15.8163 13 16.5793 13 17.375Z"
+                fill="white"
+              />
+            </svg>
+          </div>
+            <p className="text-white">Upload Profile Picture</p>
+        </div>
         <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-x-8">
           <MciInput
             name="name"
@@ -81,7 +99,11 @@ function page() {
           Or sign up with
         </p>
         <div className="flex flex-row justify-between w-[320px] gap-x-6">
-          <Button className="bg-lightGray-bg flex-1" variant='default' size='lg'>
+          <Button
+            className="bg-lightGray-bg flex-1"
+            variant="default"
+            size="lg"
+          >
             <svg
               width="36"
               height="36"
@@ -122,7 +144,11 @@ function page() {
               </defs>
             </svg>
           </Button>
-          <Button className="bg-lightGray-bg flex-1" variant='default' size='lg'>
+          <Button
+            className="bg-lightGray-bg flex-1"
+            variant="default"
+            size="lg"
+          >
             <svg
               width="36"
               height="36"
@@ -149,7 +175,11 @@ function page() {
               </defs>
             </svg>
           </Button>
-          <Button className="bg-lightGray-bg flex-1" variant='default' size='lg'>
+          <Button
+            className="bg-lightGray-bg flex-1"
+            variant="default"
+            size="lg"
+          >
             <svg
               width="30"
               height="36"
