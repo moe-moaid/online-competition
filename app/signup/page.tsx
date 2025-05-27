@@ -14,7 +14,7 @@ function page() {
         <h1 className="text-white font-semibold text-[48px]">
           Sign <span className="text-legendary-500">up</span>
         </h1>
-        <div className="flex flex-col sm:flex-row justify-start items-center w-full gap-x-6">
+        <div className="flex flex-row justify-start items-center w-full gap-x-6">
           <div className="relative bg-lightGray-bg w-[80px] h-[80px] rounded-full">
             <svg
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
@@ -32,7 +32,7 @@ function page() {
           </div>
             <p className="text-white">Upload Profile Picture</p>
         </div>
-        <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-x-8">
+        <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-x-8 gap-y-8 sm:gap-y-0">
           <MciInput
             name="name"
             label="Full Name"
@@ -42,7 +42,7 @@ function page() {
           />
           <MciInput name="age" label="Age" placeholder="Age" fullWidth />
         </div>
-        <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-x-8">
+        <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-x-8 gap-y-8 sm:gap-y-0">
           <MciInput
             name="email"
             label="Email"
@@ -58,7 +58,7 @@ function page() {
             fullWidth
           />
         </div>
-        <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-x-8">
+        <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-x-8 gap-y-8 sm:gap-y-0">
           <MciInput
             name="password"
             label="Password"
@@ -74,7 +74,7 @@ function page() {
             fullWidth
           />
         </div>
-        <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-x-8">
+        <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-x-8 gap-y-8 sm:gap-y-0">
           <MciInput
             name="country"
             label="Country"
