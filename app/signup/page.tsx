@@ -9,7 +9,7 @@ function page() {
     <div className="py-[120px] flex flex-col justify-center items-center">
       <form
         action=""
-        className="flex flex-col items-center w-full px-4 md:w-2/3 lg:w-1/2 justify-center py-12 bg-gray-bg rounded-lg gap-y-8 md:gap-y-12"
+        className="flex flex-col items-center w-full px-4 lg:px-10 md:w-2/3 lg:w-1/2 justify-center py-12 bg-gray-bg rounded-lg gap-y-8 md:gap-y-12"
       >
         <h1 className="text-white font-semibold text-[48px]">
           Sign <span className="text-legendary-500">up</span>
