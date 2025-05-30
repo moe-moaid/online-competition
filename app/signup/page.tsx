@@ -3,6 +3,7 @@ import MciContainer from "../components/MciContainer";
 import MciInput from "../components/MciInput";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import VidCard from "../components/VidCard";
 
 function page() {
   return (
@@ -203,6 +204,7 @@ function page() {
           </Link>
         </p>
       </form>
+      <VidCard country="USA" />
     </div>
   );
 }
