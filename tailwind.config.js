@@ -28,6 +28,7 @@ module.exports = {
         "gray-bg": '#101010',
         "lightGray-bg": '#252525',
         "gray-text": '#838383',
+        "white-text": '#B0B0B0',
         }
       },
     },

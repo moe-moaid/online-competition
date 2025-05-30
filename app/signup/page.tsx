@@ -204,7 +204,7 @@ function page() {
           </Link>
         </p>
       </form>
-      <VidCard country="USA" />
+      <VidCard country="USA" title="Let Me Down Slowly" artist="Farooq" isVerified artistImageUrl="/singre-image.png" songThumbnailUrl="/song-thumbnail.png" />
     </div>
   );
 }
