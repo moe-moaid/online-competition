@@ -1,11 +1,27 @@
-import React from "react";
-import MciContainer from "../components/MciContainer";
+"use client";
+import React, { useEffect } from "react";
 import MciInput from "../components/MciInput";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import VidCard from "../components/VidCard";
+import { gql, useQuery } from "@apollo/client";
+import client from "@/lib/apolloClient";
 
+const GET_VIDEOS = gql`
+  query GetVideos {
+    videos {
+      id
+      title
+      url
+      createdAt
+    }
+  }
+`;
 function page() {
+  const { data, loading, error } = useQuery(GET_VIDEOS, { client });
+  useEffect(() => {
+    console.log('my query', data, loading, error);
+  }, [data, loading]);
   return (
     <div className="py-[120px] flex flex-col justify-center items-center">
       <form
@@ -31,7 +47,7 @@ function page() {
               />
             </svg>
           </div>
-            <p className="text-white">Upload Profile Picture</p>
+          <p className="text-white">Upload Profile Picture</p>
         </div>
         <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-x-8 gap-y-8 sm:gap-y-0">
           <MciInput
@@ -204,7 +220,14 @@ function page() {
           </Link>
         </p>
       </form>
-      <VidCard country="USA" title="Let Me Down Slowly" artist="Farooq" isVerified artistImageUrl="/singre-image.png" songThumbnailUrl="/song-thumbnail.png" />
+      <VidCard
+        country="USA"
+        title="Let Me Down Slowly"
+        artist="Farooq"
+        isVerified
+        artistImageUrl="/singre-image.png"
+        songThumbnailUrl="/song-thumbnail.png"
+      />
     </div>
   );
 }
