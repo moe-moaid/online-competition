@@ -17,11 +17,31 @@ const GET_VIDEOS = gql`
     }
   }
 `;
+
+const GET_ARTIST = gql`
+  query GetArtists {
+    artists {
+      name
+      age
+      email
+      phone
+      locationId
+      videos {
+      id
+      title
+      url
+      createdAt
+      }
+    }
+  }
+`;
 function page() {
   const { data, loading, error } = useQuery(GET_VIDEOS, { client });
+  const { data: artistData, loading: artistLoading, error: artistError } = useQuery(GET_ARTIST, { client });
   useEffect(() => {
-    console.log('my query', data, loading, error);
-  }, [data, loading]);
+    console.log("videos query ===", data, loading, error);
+    console.log("artist query ===", artistData, artistLoading, artistError);
+  }, [data, artistData]);
   return (
     <div className="py-[120px] flex flex-col justify-center items-center">
       <form
