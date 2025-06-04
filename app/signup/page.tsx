@@ -27,17 +27,21 @@ const GET_ARTIST = gql`
       phone
       locationId
       videos {
-      id
-      title
-      url
-      createdAt
+        id
+        title
+        url
+        createdAt
       }
     }
   }
 `;
 function page() {
   const { data, loading, error } = useQuery(GET_VIDEOS, { client });
-  const { data: artistData, loading: artistLoading, error: artistError } = useQuery(GET_ARTIST, { client });
+  const {
+    data: artistData,
+    loading: artistLoading,
+    error: artistError,
+  } = useQuery(GET_ARTIST, { client });
   useEffect(() => {
     console.log("videos query ===", data, loading, error);
     console.log("artist query ===", artistData, artistLoading, artistError);
