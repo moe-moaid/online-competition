@@ -6,20 +6,22 @@ type Params = {
 };
 
 export function useUploadVideo() {
-  const AXIOS = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_UPLOAD_VIDEO_API_URL,
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    url: process.env.NEXT_PUBLIC_UPLOAD_VIDEO_API_URL + "/videos",
-  });
-
   return useMutation({
     mutationFn: async ({ data }: Params) => {
-      const response = await AXIOS.request({
-        data,
-      });
+      console.log("data from api ===", data);
+
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_UPLOAD_VIDEO_API_URL}videos/upload`,
+          data,
+           {
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / (progressEvent.total || 1)
+            );
+            console.log(`Upload Progress: ${percentCompleted}%`);
+          },
+        }
+      );
       return response.data;
     },
   });

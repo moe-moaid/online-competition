@@ -1,9 +1,7 @@
 "use client";
 import { useUploadVideo } from "@/lib/uploadService";
-import { ReactElement, useRef } from "react";
 
 export default function Home() {
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const { mutate, data, error, isPending } = useUploadVideo();
   const handleVideoUpload = (e: React.FormEvent<HTMLFormElement>) => {
@@ -16,8 +14,11 @@ export default function Home() {
 
     const uploadFormData = new FormData();
     uploadFormData.append("video", file);
-    console.log("file name ===", file.name);
 
+    console.log("file name ===", file, uploadFormData, typeof uploadFormData);
+    for (let [key, value] of uploadFormData.entries()) {
+      console.log('form entries', key, value);
+    }
     mutate({
       data: uploadFormData,
     });
@@ -28,7 +29,7 @@ export default function Home() {
         <div>
           <p>something here to prevent hydration error</p>
           <form onSubmit={handleVideoUpload}>
-            <input type="file" name="video" accept="video/*" />
+            <input type="file" name="video" />
             <button type="submit" disabled={isPending}>
               <p className="text-white">
                 {isPending ? "Uploading..." : "Upload"}
