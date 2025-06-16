@@ -1,5 +1,43 @@
 "use client";
 import { useUploadVideo } from "@/lib/uploadService";
+import MciInput from "./components/MciInput";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+
+type Geners =
+  | "Hip Pop"
+  | "Rap"
+  | "RNB"
+  | "Afrobeat"
+  | "Raggae"
+  | "Dancehall"
+  | "Reggarton"
+  | "Others";
+const geners: Geners[] = [
+  "Hip Pop",
+  "Rap",
+  "RNB",
+  "Afrobeat",
+  "Raggae",
+  "Dancehall",
+  "Reggarton",
+  "Others",
+];
 
 export default function Home() {
   return (
@@ -15,6 +53,8 @@ export default function Home() {
 }
 
 function VideoUploadingForm() {
+  const [open, setOpen] = useState<boolean>(false);
+  const [gener, setGener] = useState<Geners | undefined>();
   const { mutate, data, error, isPending } = useUploadVideo();
   const handleVideoUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,16 +78,70 @@ function VideoUploadingForm() {
     });
   };
   return (
-    <form onSubmit={handleVideoUpload}>
-      <input type="file" name="video" />
-      <button type="submit" disabled={isPending}>
-        <p className="text-white">{isPending ? "Uploading..." : "Upload"}</p>
-      </button>
+    <form className="flex flex-row justify-center items-center px-14" onSubmit={handleVideoUpload}>
+      <div className="flex flex-col">
+        <input type="text" name="discription" />
+        <textarea cols={5} rows={7} />
+        <input type="text" name="title" />
+        <MciInput
+          name="title"
+          label="Song Name"
+          placeholder="Enter sont name"
+          required
+          fullWidth
+        />
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded={open}
+              className="w-[200px] justify-between"
+            >
+              {gener ? gener : "Select category"}
+              <ChevronsUpDown className="opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-[200px] p-0">
+            <Command>
+              <CommandInput placeholder="Search framework..." className="h-9" />
+              <CommandList>
+                <CommandEmpty>No framework found.</CommandEmpty>
+                <CommandGroup>
+                  {geners.map((gener, i) => (
+                    <CommandItem
+                      key={`${gener} - ${i}`}
+                      value={gener}
+                      onSelect={(currentGener) => {
+                        setGener(
+                          currentGener === geners[i] ? "" : currentGener
+                        );
+                        setOpen(false);
+                      }}
+                    >
+                      {gener}
+                      <Check
+                        className={cn(
+                          "ms-auto",
+                          gener === gener ? "opacity-100" : "opacity-0"
+                        )}
+                      />
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </PopoverContent>
+        </Popover>
+      </div>
+      <div className="flex flex-col justify-between">
+        <button type="submit" disabled={isPending}>
+          <p className="text-white">{isPending ? "Uploading..." : "Upload"}</p>
+        </button>
 
-      <input type="text" name="discription" />
-      <textarea cols={5} rows={7} />
-      <input type="text" name="title" />
-      <input type="text" name="gener" />
+        <input type="file" name="video" />
+      </div>
+
       {error && <p className="text-amber-500">Error uploading video</p>}
       {data && <p className="text-lime-500">Upload successful!</p>}
     </form>
