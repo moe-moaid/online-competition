@@ -44,7 +44,6 @@ export default function Home() {
     <div>
       <main>
         <div>
-          <p>something here to prevent hydration error</p>
           <VideoUploadingForm />
         </div>
       </main>
@@ -78,17 +77,23 @@ function VideoUploadingForm() {
     });
   };
   return (
-    <form className="flex flex-row justify-center items-center px-14" onSubmit={handleVideoUpload}>
-      <div className="flex flex-col">
-        <input type="text" name="discription" />
-        <textarea cols={5} rows={7} />
-        <input type="text" name="title" />
+    <form
+      className="flex flex-row justify-center items-center px-14 gap-x-4"
+      onSubmit={handleVideoUpload}
+    >
+      <div className="flex flex-col gap-y-4">
         <MciInput
           name="title"
           label="Song Name"
           placeholder="Enter sont name"
           required
           fullWidth
+        />
+        <textarea
+          className="outline-none resize-none bg-transparent border rounded-lg border-white hover:border-legendary-500 focus:border-legendary-500 text-white p-4"
+          cols={5}
+          rows={7}
+          placeholder="Song Desctiption"
         />
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
@@ -134,12 +139,12 @@ function VideoUploadingForm() {
           </PopoverContent>
         </Popover>
       </div>
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col justify-between self-stretch">
+        <input type="file" name="video" className="text-white" />
+
         <button type="submit" disabled={isPending}>
           <p className="text-white">{isPending ? "Uploading..." : "Upload"}</p>
         </button>
-
-        <input type="file" name="video" />
       </div>
 
       {error && <p className="text-amber-500">Error uploading video</p>}
