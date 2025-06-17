@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import MciInput from "../components/MciInput";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
