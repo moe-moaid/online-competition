@@ -68,8 +68,8 @@ function VideoUploadingForm() {
       data: uploadFormData,
     });
   };
-  console.log('gener ===', currentGener);
-  
+  console.log("gener ===", currentGener);
+
   return (
     <form
       className="flex flex-row justify-center items-center px-14 gap-x-4"
@@ -108,7 +108,6 @@ function VideoUploadingForm() {
               <DropdownMenuItem
                 key={`${gener} - ${i}`}
                 onSelect={() => {
-                  console.log('i am selected!!');
                   setCurrentGener(gener === currentGener ? undefined : gener);
                 }}
               >
