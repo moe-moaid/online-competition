@@ -1,22 +1,15 @@
 "use client";
 import { useUploadVideo } from "@/lib/uploadService";
 import MciInput from "./components/MciInput";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { useState } from "react";
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 type Geners =
@@ -52,7 +45,6 @@ export default function Home() {
 }
 
 function VideoUploadingForm() {
-  const [open, setOpen] = useState<boolean>(false);
   const [gener, setGener] = useState<Geners | undefined>();
   const { mutate, data, error, isPending } = useUploadVideo();
   const handleVideoUpload = (e: React.FormEvent<HTMLFormElement>) => {
@@ -76,6 +68,8 @@ function VideoUploadingForm() {
       data: uploadFormData,
     });
   };
+  console.log('gener ===', gener);
+  
   return (
     <form
       className="flex flex-row justify-center items-center px-14 gap-x-4"
@@ -95,49 +89,34 @@ function VideoUploadingForm() {
           rows={7}
           placeholder="Song Desctiption"
         />
-        <Popover open={open} onOpenChange={setOpen}>
-          <PopoverTrigger asChild>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
-              role="combobox"
-              aria-expanded={open}
-              className="w-[200px] justify-between"
+              className="flex flex-row justify-between items-center hover:bg-white"
             >
-              {gener ? gener : "Select category"}
-              <ChevronsUpDown className="opacity-50" />
+              {gener ? gener : "Select a Gener "}
+              <ChevronDown className="w-4 h-4" />
             </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-[200px] p-0">
-            <Command>
-              <CommandInput placeholder="Search framework..." className="h-9" />
-              <CommandList>
-                <CommandEmpty>No framework found.</CommandEmpty>
-                <CommandGroup>
-                  {geners.map((gener, i) => (
-                    <CommandItem
-                      key={`${gener} - ${i}`}
-                      value={gener}
-                      onSelect={(currentGener) => {
-                        setGener(
-                          currentGener === geners[i] ? "" : currentGener
-                        );
-                        setOpen(false);
-                      }}
-                    >
-                      {gener}
-                      <Check
-                        className={cn(
-                          "ms-auto",
-                          gener === gener ? "opacity-100" : "opacity-0"
-                        )}
-                      />
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              </CommandList>
-            </Command>
-          </PopoverContent>
-        </Popover>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            side="bottom"
+            align="start"
+            className="bg-white min-w-full w-[--radix-dropdown-menu-trigger-width]"
+          >
+            {geners.map((gener, i) => (
+              <DropdownMenuItem
+                key={`${gener} - ${i}`}
+                onSelect={() => {
+                  console.log('i am selected!!');
+                  setGener(gener );
+                }}
+              >
+                {gener}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
       <div className="flex flex-col justify-between self-stretch">
         <input type="file" name="video" className="text-white" />
