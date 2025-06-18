@@ -45,7 +45,7 @@ export default function Home() {
 }
 
 function VideoUploadingForm() {
-  const [gener, setGener] = useState<Geners | undefined>();
+  const [currentGener, setCurrentGener] = useState<Geners | undefined>();
   const { mutate, data, error, isPending } = useUploadVideo();
   const handleVideoUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -68,7 +68,7 @@ function VideoUploadingForm() {
       data: uploadFormData,
     });
   };
-  console.log('gener ===', gener);
+  console.log('gener ===', currentGener);
   
   return (
     <form
@@ -95,7 +95,7 @@ function VideoUploadingForm() {
               variant="outline"
               className="flex flex-row justify-between items-center hover:bg-white"
             >
-              {gener ? gener : "Select a Gener "}
+              {currentGener ? currentGener : "Select a Gener "}
               <ChevronDown className="w-4 h-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -109,7 +109,7 @@ function VideoUploadingForm() {
                 key={`${gener} - ${i}`}
                 onSelect={() => {
                   console.log('i am selected!!');
-                  setGener(gener );
+                  setCurrentGener(gener === currentGener ? undefined : gener);
                 }}
               >
                 {gener}
