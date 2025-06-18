@@ -83,39 +83,50 @@ function VideoUploadingForm() {
           required
           fullWidth
         />
-        <textarea
-          className="outline-none resize-none bg-transparent border rounded-lg border-white hover:border-legendary-500 focus:border-legendary-500 text-white p-4"
-          cols={5}
-          rows={7}
-          placeholder="Song Desctiption"
-        />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              className="flex flex-row justify-between items-center hover:bg-white"
-            >
-              {currentGener ? currentGener : "Select a Gener "}
-              <ChevronDown className="w-4 h-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            side="bottom"
-            align="start"
-            className="bg-white min-w-full w-[--radix-dropdown-menu-trigger-width]"
-          >
-            {geners.map((gener, i) => (
-              <DropdownMenuItem
-                key={`${gener} - ${i}`}
-                onSelect={() => {
-                  setCurrentGener(gener === currentGener ? undefined : gener);
-                }}
+        <div className="flex flex-col gap-y-2">
+          <p className="text-white">
+            Description<span className="text-red-600">*</span>
+          </p>
+          <textarea
+            className="outline-none resize-none bg-transparent border rounded-lg border-white hover:border-legendary-500 focus:border-legendary-500 text-white p-4"
+            cols={5}
+            rows={7}
+            placeholder="Add Desctiption"
+          />
+        </div>
+        <div className="flex flex-col gap-y-2">
+          <p className="text-white">
+            Category<span className="text-red-600">*</span>
+          </p>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                className="flex flex-row justify-between items-center hover:bg-white"
               >
-                {gener}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+                {currentGener ? currentGener : "Select Category"}
+                <ChevronDown className="w-4 h-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              side="bottom"
+              align="start"
+              className="bg-white min-w-full w-[--radix-dropdown-menu-trigger-width]"
+            >
+              {geners.map((gener, i) => (
+                <DropdownMenuItem
+                className="focus:bg-lightGray-bg focus:text-white focus:cursor-pointer"
+                  key={`${gener} - ${i}`}
+                  onSelect={() => {
+                    setCurrentGener(gener === currentGener ? undefined : gener);
+                  }}
+                >
+                  {gener}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
       <div className="flex flex-col justify-between self-stretch">
         <input type="file" name="video" className="text-white" />
