@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler} from "react-hook-form";
 import { VideoUploadFormType } from "@/lib/types/videoUploadFormType";
 
 type Geners =
@@ -53,8 +53,11 @@ function VideoUploadingForm() {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors, isValid },
   } = useForm<VideoUploadFormType>();
+  const selectedGener = watch('gener');
   console.log(errors);
   
   const handleFormSubmission = (values: VideoUploadFormType) => {
@@ -72,7 +75,7 @@ function VideoUploadingForm() {
     >
       <div className="flex flex-col gap-y-4">
         <MciInput
-          {...register("title", { required: true })}
+          {...register("title")}
           name="title"
           label="Song Name"
           placeholder="Enter sont name"
@@ -84,7 +87,7 @@ function VideoUploadingForm() {
             Description<span className="text-red-600">*</span>
           </p>
           <textarea
-            {...register("description", { required: true })}
+            {...register("description")}
             className="outline-none resize-none bg-transparent border rounded-lg border-white hover:border-legendary-500 focus:border-legendary-500 text-white p-4"
             cols={5}
             rows={7}
@@ -95,13 +98,13 @@ function VideoUploadingForm() {
           <p className="text-white">
             Category<span className="text-red-600">*</span>
           </p>
-          <DropdownMenu {...register("gener", { required: true })}>
+          <DropdownMenu {...register("gener")}>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
                 className="flex flex-row justify-between items-center hover:bg-white"
               >
-                {currentGener ? currentGener : "Select Category"}
+                {selectedGener || "Select Category"}
                 <ChevronDown className="w-4 h-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -115,7 +118,7 @@ function VideoUploadingForm() {
                   className="focus:bg-lightGray-bg focus:text-white focus:cursor-pointer"
                   key={`${gener} - ${i}`}
                   onSelect={() => {
-                    setCurrentGener(gener === currentGener ? undefined : gener);
+                    setValue("gener", gener);
                   }}
                 >
                   {gener}
@@ -129,7 +132,7 @@ function VideoUploadingForm() {
         <div className="border border-white h-full rounded-lg flex flex-col items-center justify-center px-4">
           <input
             id="video"
-            {...register("video", { required: true })}
+            {...register("video")}
             type="file"
             accept=".mp4"
             required
@@ -161,7 +164,7 @@ function VideoUploadingForm() {
         <button type="button" className="text-white">
           Cancel
         </button>
-        <button type="submit" className="text-white">
+        <button type="submit" className="text-white py-2 bg-legendary-500 hover:bg-transparent hover:outline-solid  hover:outline-1 hover:outline-legendary-500  hover:text-legendary-500 rounded-lg transition-all duration-300 ease-in-out">
           Upload
         </button>
       </div>
