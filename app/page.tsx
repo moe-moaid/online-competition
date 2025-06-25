@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React from "react";
 import { useUploadVideo } from "@/lib/uploadService";
 import MciInput from "./components/MciInput";
 import { useState } from "react";
@@ -10,8 +10,9 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { VideoUploadFormType } from "@/lib/types/videoUploadFormType";
 
 type Geners =
   | "Hip Pop"
@@ -46,38 +47,32 @@ export default function Home() {
 }
 
 function VideoUploadingForm() {
+  // import { useForm, SubmitHandler } from 'react-hook-form'
   const [currentGener, setCurrentGener] = useState<Geners | undefined>();
   const { mutate, data, error, isPending } = useUploadVideo();
-  const handleVideoUpload = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const file = formData.get("video") as File;
-
-    if (!file || file.size === 0) return;
-
-    const uploadFormData = new FormData();
-    uploadFormData.append("video", file);
-    uploadFormData.append("title", "My Cool Video");
-    uploadFormData.append("description", "Optional description");
-    uploadFormData.append("artistId", "3");
-
-    for (let [key, value] of uploadFormData.entries()) {
-      console.log("form entries", key, value);
-    }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<VideoUploadFormType>();
+  console.log(errors);
+  
+  const handleFormSubmission = (values: VideoUploadFormType) => {
+    console.log("values ===", values);
+    console.log("clicked the button!");
+    const req_body = { ...values, artist: 1 };
     mutate({
-      data: uploadFormData,
+      data: req_body,
     });
   };
-  console.log("gener ===", currentGener);
-
   return (
     <form
       className="flex flex-row justify-center items-stretch px-14 gap-x-4"
-      onSubmit={handleVideoUpload}
+      onSubmit={handleSubmit(handleFormSubmission)}
     >
       <div className="flex flex-col gap-y-4">
         <MciInput
+          {...register("title", { required: true })}
           name="title"
           label="Song Name"
           placeholder="Enter sont name"
@@ -89,6 +84,7 @@ function VideoUploadingForm() {
             Description<span className="text-red-600">*</span>
           </p>
           <textarea
+            {...register("description", { required: true })}
             className="outline-none resize-none bg-transparent border rounded-lg border-white hover:border-legendary-500 focus:border-legendary-500 text-white p-4"
             cols={5}
             rows={7}
@@ -99,7 +95,7 @@ function VideoUploadingForm() {
           <p className="text-white">
             Category<span className="text-red-600">*</span>
           </p>
-          <DropdownMenu>
+          <DropdownMenu {...register("gener", { required: true })}>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
@@ -130,13 +126,12 @@ function VideoUploadingForm() {
         </div>
       </div>
       <div className="flex flex-col self-stretch">
-        <div className="border border-white h-full rounded-lg flex flex-col items-center justify-center">
+        <div className="border border-white h-full rounded-lg flex flex-col items-center justify-center px-4">
           <input
-            id="aboutImage"
-            name="aboutImage"
+            id="video"
+            {...register("video", { required: true })}
             type="file"
             accept=".mp4"
-            // onChange={myImage}
             required
             hidden
           />
@@ -156,10 +151,19 @@ function VideoUploadingForm() {
               fill="white"
             />
           </svg>
-          <label className="text-gray-text underline hover:cursor-pointer" htmlFor="aboutImage">
+          <label
+            className="text-gray-text underline hover:cursor-pointer"
+            htmlFor="video"
+          >
             Drag your video here or import from your PC
           </label>
         </div>
+        <button type="button" className="text-white">
+          Cancel
+        </button>
+        <button type="submit" className="text-white">
+          Upload
+        </button>
       </div>
 
       {error && <p className="text-amber-500">Error uploading video</p>}

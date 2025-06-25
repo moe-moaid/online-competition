@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
+import { VideoUploadFormType } from "./types/videoUploadFormType";
 
 type Params = {
-  data: FormData;
+  data: VideoUploadFormType;
 };
 
 export function useUploadVideo() {
