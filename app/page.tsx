@@ -11,8 +11,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useForm, SubmitHandler} from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { VideoUploadFormType } from "@/lib/types/videoUploadFormType";
+import { Alert, AlertTitle } from "@/components/ui/alert";
 
 type Geners =
   | "Hip Pop"
@@ -57,13 +58,18 @@ function VideoUploadingForm() {
     setValue,
     formState: { errors, isValid },
   } = useForm<VideoUploadFormType>();
-  const selectedGener = watch('gener');
-  console.log(errors);
-  
+  const selectedGener = watch("gener");
+
   const handleFormSubmission = (values: VideoUploadFormType) => {
     console.log("values ===", values);
-    console.log("clicked the button!");
-    const req_body = { ...values, artist: 1 };
+    const req_body = new FormData();
+    const file = values.video?.[0];
+    req_body.append("video", file);
+    req_body.append("tittle", values.title);
+    req_body.append("decrtiption", values.description);
+    req_body.append("gener", values.gener);
+    req_body.append("artist", "1");
+
     mutate({
       data: req_body,
     });
@@ -164,11 +170,15 @@ function VideoUploadingForm() {
         <button type="button" className="text-white">
           Cancel
         </button>
-        <button type="submit" className="text-white py-2 bg-legendary-500 hover:bg-transparent hover:outline-solid  hover:outline-1 hover:outline-legendary-500  hover:text-legendary-500 rounded-lg transition-all duration-300 ease-in-out">
+        <button
+          type="submit"
+          className="text-white py-2 bg-legendary-500 hover:bg-transparent hover:outline-solid  hover:outline-1 hover:outline-legendary-500  hover:text-legendary-500 rounded-lg transition-all duration-300 ease-in-out"
+        >
           Upload
         </button>
       </div>
 
+      {error && <p className="text-amber-500">Error uploading video</p>}
       {error && <p className="text-amber-500">Error uploading video</p>}
       {data && <p className="text-lime-500">Upload successful!</p>}
     </form>

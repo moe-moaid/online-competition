@@ -8,13 +8,15 @@ type Params = {
 
 export function useUploadVideo() {
   return useMutation({
-    mutationFn: async ({ data }: Params) => {
-      console.log("data from api ===", data);
+    mutationFn: async ({ data }: {data: FormData}) => {
 
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_UPLOAD_VIDEO_API_URL}videos/upload`,
-          data,
-           {
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
           onUploadProgress: (progressEvent) => {
             const percentCompleted = Math.round(
               (progressEvent.loaded * 100) / (progressEvent.total || 1)
