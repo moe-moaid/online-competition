@@ -1,7 +1,17 @@
+export type Category =
+  | "Hip Pop"
+  | "Rap"
+  | "RNB"
+  | "Afrobeat"
+  | "Raggae"
+  | "Dancehall"
+  | "Reggarton"
+  | "Others";
+
 export type VideoUploadFormType = {
   title: string;
   description: string;
-  gener: string;
+  category: Category;
   video: FileList;
-  artist: string;
-}
+  artistId: string;
+};

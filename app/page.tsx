@@ -12,19 +12,11 @@ import {
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { VideoUploadFormType } from "@/lib/types/videoUploadFormType";
+import { Category, VideoUploadFormType } from "@/lib/types/videoUploadFormType";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 
-type Geners =
-  | "Hip Pop"
-  | "Rap"
-  | "RNB"
-  | "Afrobeat"
-  | "Raggae"
-  | "Dancehall"
-  | "Reggarton"
-  | "Others";
-const geners: Geners[] = [
+
+const categories: Category[] = [
   "Hip Pop",
   "Rap",
   "RNB",
@@ -49,7 +41,6 @@ export default function Home() {
 
 function VideoUploadingForm() {
   // import { useForm, SubmitHandler } from 'react-hook-form'
-  const [currentGener, setCurrentGener] = useState<Geners | undefined>();
   const { mutate, data, error, isPending } = useUploadVideo();
   const {
     register,
@@ -58,7 +49,7 @@ function VideoUploadingForm() {
     setValue,
     formState: { errors, isValid },
   } = useForm<VideoUploadFormType>();
-  const selectedGener = watch("gener");
+  const selectedGener = watch("category");
 
   const handleFormSubmission = (values: VideoUploadFormType) => {
     console.log("values ===", values);
@@ -67,8 +58,8 @@ function VideoUploadingForm() {
     req_body.append("video", file);
     req_body.append("tittle", values.title);
     req_body.append("decrtiption", values.description);
-    req_body.append("gener", values.gener);
-    req_body.append("artist", "1");
+    req_body.append("category", values.category);
+    req_body.append("artistId", "1");
 
     mutate({
       data: req_body,
@@ -104,7 +95,7 @@ function VideoUploadingForm() {
           <p className="text-white">
             Category<span className="text-red-600">*</span>
           </p>
-          <DropdownMenu {...register("gener")}>
+          <DropdownMenu {...register("category")}>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
@@ -119,15 +110,15 @@ function VideoUploadingForm() {
               align="start"
               className="bg-white min-w-full w-[--radix-dropdown-menu-trigger-width]"
             >
-              {geners.map((gener, i) => (
+              {categories.map((category, i) => (
                 <DropdownMenuItem
                   className="focus:bg-lightGray-bg focus:text-white focus:cursor-pointer"
-                  key={`${gener} - ${i}`}
+                  key={`${category} - ${i}`}
                   onSelect={() => {
-                    setValue("gener", gener);
+                    setValue("category", category);
                   }}
                 >
-                  {gener}
+                  {category}
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>
