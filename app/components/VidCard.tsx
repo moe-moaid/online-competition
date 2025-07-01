@@ -10,7 +10,7 @@ type Props = {
   artist: string;
   isVerified: boolean;
   songThumbnailUrl: string;
-  artistImageUrl: string;
+  avatarUrl: string;
 };
 function VidCard({
   country,
@@ -18,19 +18,13 @@ function VidCard({
   artist,
   isVerified,
   songThumbnailUrl,
-  artistImageUrl,
+  avatarUrl,
 }: Props) {
   return (
     <div className="p-5 text-white bg-gray-bg w-[380px] h-[480px] rounded-[20px]">
       <div className="relative w-full h-[360px] rounded-[20px] mb-6 overflow-clip">
         <div className="relative w-full h-full">
-          <Image
-            src={songThumbnailUrl}
-            fill
-            alt="song thumbnail"
-            objectFit="cover"
-            loading="lazy"
-          />
+          <video className="w-full h-full object-cover" controls src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${songThumbnailUrl}`} />
         </div>
         <p className="absolute top-0 left-1/2 -translate-x-1/2 px-6 py-1 rounded-bl-lg rounded-br-lg bg-legendary-500 font-semibold text-[20px]">
           {country}
@@ -39,7 +33,8 @@ function VidCard({
       <div className="flex flex-row justify-between items-center w-full">
         <div className="flex flex-row justify-start items-start gap-x-4">
           <div className="relative rounded-full w-10 h-10 overflow-clip">
-            <Image src={artistImageUrl} fill alt="singer image" loading="lazy"/>
+            <img src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${avatarUrl}`} alt="artist avatar" />
+            {/* <Image src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${avatarUrl}.jpeg`} fill alt="singer image" loading="lazy"/> */}
           </div>
           <div className="flex-flex-col gap-y-4">
             <p className="font-medium text-[18px]">{title}</p>

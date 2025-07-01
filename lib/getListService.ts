@@ -6,7 +6,7 @@ export function useGetListVideos() {
     queryKey: ["videos"],
     queryFn: async () => {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_UPLOAD_VIDEO_API_URL}videos`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}videos`,
         {
           headers: {
             "Content-Type": "application/json",

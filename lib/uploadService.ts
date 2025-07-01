@@ -11,7 +11,7 @@ export function useUploadVideo() {
     mutationFn: async ({ data }: {data: FormData}) => {
 
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_UPLOAD_VIDEO_API_URL}videos/upload`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}videos/upload`,
         data,
         {
           headers: {

@@ -13,7 +13,7 @@ export default function Home() {
       <main>
           <MciContainer className="flex flex-row flex-wrap justify-center items-ceneter gap-4">
           {videos && videos.map((video: videoType, i: number) => (
-            <VidCard key={`${video.title} - ${i}`} title={video.title} country={video.artist.location.country} isVerified artist={video.artist.name} artistImageUrl="https://picsum.photos/200" songThumbnailUrl="https://picsum.photos/200"/>
+            <VidCard key={`${video.title} - ${i}`} title={video.title} country={video.artist.location.country} isVerified artist={video.artist.name} avatarUrl={video.artist.avatar.url} songThumbnailUrl={video.url}/>
           )) }
           </MciContainer>
       </main>
