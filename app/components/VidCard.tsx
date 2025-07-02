@@ -1,9 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React from "react";
-// type Props = {
-//   country: string;
-// };
+import React, { MouseEventHandler, useRef, useState } from "react";
 type Props = {
   country: string;
   title: string;
@@ -20,11 +17,74 @@ function VidCard({
   songThumbnailUrl,
   avatarUrl,
 }: Props) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaing] = useState<boolean>(false);
+  const [overlay, setOverlay] = useState<boolean>(false);
+
+  function playPauseController() {
+    if (ref.current) {
+      if (isPlaying) {
+        ref.current.pause();
+        setIsPlaing(false);
+      } else {
+        ref.current.play();
+        setIsPlaing(true);
+      }
+    }
+  }
+  function handlePlay() {
+    setIsPlaing(true);
+  }
+  function handlePause() {
+    setIsPlaing(false);
+  }
+  function handleHover() {
+    setOverlay(!overlay);
+  }
+
   return (
     <div className="p-5 text-white bg-gray-bg w-[380px] h-[480px] rounded-[20px]">
       <div className="relative w-full h-[360px] rounded-[20px] mb-6 overflow-clip">
-        <div className="relative w-full h-full">
-          <video className="w-full h-full object-cover" controls src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${songThumbnailUrl}`} />
+        <div
+          className="relative w-full h-full"
+          onMouseEnter={handleHover}
+          onMouseLeave={handleHover}
+        >
+          <div
+            className={`absolute left-0 right-0 top-0 origin-bottom ${
+              overlay ? "scale-y-100 opacity-100" : "scale-y-0  opacity-0"
+            } bottom-0 bg-black/65 ease-in-out duration-300`}
+          />
+          <video
+            ref={ref}
+            className="w-full h-full object-cover"
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${songThumbnailUrl}`}
+            onPlay={handlePlay}
+            onPause={handlePause}
+          />
+          <button
+            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
+              overlay && "scale-125"
+            } ease-in-out duration-300`}
+            onClick={playPauseController}
+          >
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="20" cy="20" r="18.5" stroke="white" strokeWidth="3" />
+              <path
+                d="M25.3333 20.0001L16 14.6667M16 14.6667V25.3334V14.6667ZM25.3333 20.0001L16 25.3334L25.3333 20.0001Z"
+                stroke="white"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
         </div>
         <p className="absolute top-0 left-1/2 -translate-x-1/2 px-6 py-1 rounded-bl-lg rounded-br-lg bg-legendary-500 font-semibold text-[20px]">
           {country}
@@ -33,8 +93,12 @@ function VidCard({
       <div className="flex flex-row justify-between items-center w-full">
         <div className="flex flex-row justify-start items-start gap-x-4">
           <div className="relative rounded-full w-10 h-10 overflow-clip">
-            <img src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${avatarUrl}`} alt="artist avatar" />
-            {/* <Image src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${avatarUrl}.jpeg`} fill alt="singer image" loading="lazy"/> */}
+            <Image
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${avatarUrl}`}
+              fill
+              alt="singer image"
+              loading="lazy"
+            />
           </div>
           <div className="flex-flex-col gap-y-4">
             <p className="font-medium text-[18px]">{title}</p>
