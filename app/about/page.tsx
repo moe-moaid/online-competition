@@ -132,7 +132,7 @@ function AboutPage() {
           <Image src={"/about-header.png"} fill alt="About Us Header Image" />
         </div>
         <div className="absolute left-[12px] lg:left-[90px] xl:left-[150px] top-[50%] z-50 transform -translate-y-[50%] w-max-full md:w-1/2 tracking-widest text-white">
-          <h1 className="font-semibold text-[18px] lg:text-[40px] xl:text-[70px]">
+          <h1 className="font-semibold text-[18px] lg:text-[40px] xl:text-[72px]">
             ABOUT <span className="text-legendary-500 font-semibold">US</span>
           </h1>
           <p className="font-medium text-[12px] sm:text[16px] lg:text-[18px] xl:text-[24px]">

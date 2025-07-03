@@ -52,7 +52,9 @@ function VidCard({
         >
           <div
             className={`absolute left-0 right-0 top-0 origin-bottom ${
-              overlay ? "scale-y-100 opacity-100" : "scale-y-0  opacity-0"
+              overlay && !isPlaying
+                ? "scale-y-100 opacity-100"
+                : "scale-y-0  opacity-0"
             } bottom-0 bg-black/65 ease-in-out duration-300`}
           />
           <video
