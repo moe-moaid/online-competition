@@ -83,8 +83,8 @@ export default function Home() {
             <h1 className="text-white text-center mb-14 font-semibold text-[40px]">
               Featured <span className="text-legendary-500">Video</span>
             </h1>
-            <div className="flex flex-row justify-between items-center gap-x-4">
-              <div className="relative w-1/2">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-y-4 md:gap-x-4">
+              <div className="relative w-full md:w-1/2">
                 <button
                   className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 scale-125 ease-in-out duration-300"
                   onClick={handlePlayPause}
@@ -113,14 +113,14 @@ export default function Home() {
                   </svg>
                 </button>
                 <video
-                className="rounded-sm"
+                className="rounded-sm w-full"
                   ref={ref}
                   src={process.env.NEXT_PUBLIC_API_BASE_URL + videos?.[7].url}
                   onPlay={handlePlay}
                   onPause={handlePause}
                 />
               </div>
-              <div className="flex flex-col items-start gap-y-4 text-white w-1/2">
+              <div className="flex flex-col items-start gap-y-4 text-white w-full md:w-1/2">
                 <h3 className="text-[32px] font-semibold">{videos?.[7].title}</h3>
                 <p className="text-[24px]">{videos?.[7].description}</p>
                 <button className="bg-transparent border border-legendary-500 rounded-md text-legendary-500 text-[20px] font-medium px-4 py-2">
