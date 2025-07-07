@@ -5,11 +5,13 @@ import VidCard from "./components/VidCard";
 import { videoType } from "@/lib/types/videoType";
 import MciContainer from "./components/MciContainer";
 import Image from "next/image";
+import PlayVideo from "./components/PlayVideo";
 
 export default function Home() {
   const { data: videos, error: vid_error } = useGetListVideos();
   const ref = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [displayVid, setDisplayVid] = useState<string | undefined>();
   function handlePlay() {
     if (ref.current) {
       setIsPlaying(true);
@@ -27,14 +29,26 @@ export default function Home() {
       ref.current.play();
     }
   }
+
+  console.log("display ===", displayVid);
+
   return (
     <>
-      <main>
+      <main className="relative">
+        {displayVid && (
+          <>
+            <div
+              className="absolute top-0 bottom-0 left-0 right-0 bg-black/65 z-30"
+              onClick={() => setDisplayVid(undefined)}
+            />
+            <PlayVideo video={displayVid} setDisplayVid={setDisplayVid} />
+          </>
+        )}
         <section className="w-full">
           <div className="relative h-[350px] sm:h-[550] md:h-[750px] lg:h-[980px]">
             <div className="absolute z-10 left-0 right-0 top-0 bottom-0 bg-black/45" />
             <Image src="/hero.jpg" fill alt="hero" />
-            <div className="absolute start-[12px] lg:start-[90px] xl:start-[150px] top-[50%] z-50 transform -translate-y-[50%] w-max-full md:w-1/2 tracking-widest text-white">
+            <div className="absolute start-[12px] lg:start-[90px] xl:start-[150px] top-[50%] z-10 transform -translate-y-[50%] w-max-full md:w-1/2 tracking-widest text-white">
               <h1 className="font-semibold text-[18px] lg:text-[40px] xl:text-[72px]">
                 All <span className="text-legendary-500">Abroad</span>
               </h1>
@@ -73,7 +87,8 @@ export default function Home() {
                   isVerified
                   artist={video.artist.name}
                   avatarUrl={video.artist.avatar.url}
-                  songThumbnailUrl={video.url}
+                  videoUrl={video.url}
+                  setDisplayVid={setDisplayVid}
                 />
               ))}
           </MciContainer>
@@ -113,7 +128,7 @@ export default function Home() {
                   </svg>
                 </button>
                 <video
-                className="rounded-sm w-full"
+                  className="rounded-sm w-full"
                   ref={ref}
                   src={process.env.NEXT_PUBLIC_API_BASE_URL + videos?.[7].url}
                   onPlay={handlePlay}
@@ -121,7 +136,9 @@ export default function Home() {
                 />
               </div>
               <div className="flex flex-col items-start gap-y-4 text-white w-full md:w-1/2">
-                <h3 className="text-[32px] font-semibold">{videos?.[7].title}</h3>
+                <h3 className="text-[32px] font-semibold">
+                  {videos?.[7].title}
+                </h3>
                 <p className="text-[24px]">{videos?.[7].description}</p>
                 <button className="bg-transparent border border-legendary-500 rounded-md text-legendary-500 text-[20px] font-medium px-4 py-2">
                   View More

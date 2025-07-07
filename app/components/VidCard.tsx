@@ -1,21 +1,22 @@
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React, { MouseEventHandler, useRef, useState } from "react";
+import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 type Props = {
   country: string;
   title: string;
   artist: string;
   isVerified: boolean;
-  songThumbnailUrl: string;
+  videoUrl: string;
   avatarUrl: string;
+  setDisplayVid: Dispatch<SetStateAction<string | undefined>>;
 };
 function VidCard({
   country,
   title,
   artist,
   isVerified,
-  songThumbnailUrl,
+  videoUrl,
   avatarUrl,
+  setDisplayVid,
 }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaing] = useState<boolean>(false);
@@ -23,20 +24,8 @@ function VidCard({
 
   function playPauseController() {
     if (ref.current) {
-      if (isPlaying) {
-        ref.current.pause();
-        setIsPlaing(false);
-      } else {
-        ref.current.play();
-        setIsPlaing(true);
-      }
+      setDisplayVid(videoUrl);
     }
-  }
-  function handlePlay() {
-    setIsPlaing(true);
-  }
-  function handlePause() {
-    setIsPlaing(false);
   }
   function handleHover() {
     setOverlay(!overlay);
@@ -52,17 +41,13 @@ function VidCard({
         >
           <div
             className={`absolute left-0 right-0 top-0 origin-bottom ${
-              overlay && !isPlaying
-                ? "scale-y-100 opacity-100"
-                : "scale-y-0  opacity-0"
+              overlay && !isPlaying ? "opacity-100" : "opacity-0"
             } bottom-0 bg-black/65 ease-in-out duration-300`}
           />
           <video
             ref={ref}
             className="w-full h-full object-cover"
-            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${songThumbnailUrl}`}
-            onPlay={handlePlay}
-            onPause={handlePause}
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${videoUrl}`}
           />
           <button
             className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
