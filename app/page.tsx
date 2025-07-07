@@ -30,20 +30,9 @@ export default function Home() {
     }
   }
 
-  console.log("display ===", displayVid);
-
   return (
     <>
       <main className="relative">
-        {displayVid && (
-          <>
-            <div
-              className="absolute top-0 bottom-0 left-0 right-0 bg-black/65 z-30"
-              onClick={() => setDisplayVid(undefined)}
-            />
-            <PlayVideo video={displayVid} setDisplayVid={setDisplayVid} />
-          </>
-        )}
         <section className="w-full">
           <div className="relative h-[350px] sm:h-[550] md:h-[750px] lg:h-[980px]">
             <div className="absolute z-10 left-0 right-0 top-0 bottom-0 bg-black/45" />
@@ -91,6 +80,9 @@ export default function Home() {
                   setDisplayVid={setDisplayVid}
                 />
               ))}
+            {displayVid && (
+              <PlayVideo video={displayVid} setDisplayVid={setDisplayVid} />
+            )}
           </MciContainer>
         </section>
         <section>
