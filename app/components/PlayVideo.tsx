@@ -28,7 +28,14 @@ function PlayVideo({
     }
   }
   return (
-    <div className="absolute start-10 end-40 top-40 z-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div
+        className="absolute top-0 bottom-0 start-0 end-0 bg-black/65"
+        onClick={() => {
+          console.log("clicked! ");
+          setDisplayVid(undefined);
+        }}
+      />
       <div className="relative">
         <video
           ref={ref}
@@ -38,7 +45,7 @@ function PlayVideo({
           onClick={handleVideoClick}
         ></video>
         <button
-          className="absolute start-5 top-5 z-20"
+          className="absolute end-5 top-5 z-20"
           onClick={() => setDisplayVid(undefined)}
         >
           <svg
