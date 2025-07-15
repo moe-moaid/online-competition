@@ -15,10 +15,10 @@ function Vote() {
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${videos?.[0].url}`}
           controls
         />
-        <div className="flex flex-row justify-between h-full ms-[160px]">
+        <div className="flex flex-row justify-start h-full ms-[160px]">
           <div className="h-full overflow-y-auto start-[150px] top-0 flex flex-col gap-y-4 items-start text-white">
             <div className="z-10 pe-10 border-e border-white">
-            <h1 className="z-10">Videos</h1>
+              <h1 className="z-10">Videos</h1>
               {videos?.map((video: videoType, i: number) => {
                 return (
                   <div key={`${video.title} - ${i}`} className="mb-4">
@@ -45,6 +45,29 @@ function Vote() {
                 );
               })}
             </div>
+          </div>
+          <div className="text-white flex flex-col justify-end">
+            <h1>{videos?.[0].title}</h1>
+            <p>by {videos?.[0].artist.name}</p>
+            <button className="bg-legendary-500 text-white rounded-full px-4 py-3 flex flex-row gap-x-4 justify-between items-center">
+              <p>Play Video</p>
+              <span>
+                <svg
+                  width="15"
+                  height="20"
+                  viewBox="0 0 15 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M0.742348 0.154431C0.00534203 0.584573 -0.000601596 0.664177 2.40459e-05 10.0454C0.000493277 18.5391 0.0120676 18.8864 0.307996 19.3726C0.692609 20.0048 1.2438 20.1547 2.03649 19.8427C2.92584 19.4927 14.3141 11.6407 14.6277 11.1612C14.7741 10.9373 14.9297 10.4866 14.9735 10.1594C15.1237 9.03856 14.8406 8.78815 8.5283 4.45946C5.31063 2.25296 2.42955 0.343412 2.1258 0.216328C1.4842 -0.0522569 1.12415 -0.0682403 0.742348 0.154431Z"
+                    fill="white"
+                  />
+                </svg>
+              </span>
+            </button>
           </div>
         </div>
       </section>
