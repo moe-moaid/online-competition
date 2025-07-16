@@ -9,11 +9,10 @@ function Vote() {
   return (
     <>
       <section className="h-[580px] relative">
-        {/* <div className="absolute bg-black/70 top-0 bottom-0 start-0 end-0 z-0" /> */}
+        <div className="absolute bg-black/70 top-0 bottom-0 start-0 end-0 z-0" />
         <video
           className="w-full h-full object-cover absolute -z-10"
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${videos?.[0].url}`}
-          controls
         />
         <div className="flex flex-row justify-start h-full ms-[160px]">
           <div className="h-full overflow-y-auto start-[150px] top-0 flex flex-col gap-y-4 items-start text-white">
@@ -46,11 +45,11 @@ function Vote() {
               })}
             </div>
           </div>
-          <div className="text-white flex flex-col justify-end">
-            <h1>{videos?.[0].title}</h1>
-            <p>by {videos?.[0].artist.name}</p>
-            <button className="bg-legendary-500 text-white rounded-full px-4 py-3 flex flex-row gap-x-4 justify-between items-center">
-              <p>Play Video</p>
+          <div className="text-white flex flex-col justify-end ps-10 pb-40 z-10">
+            <h1 className="text-[72px] font-bold text-transparent [-webkit-text-stroke:2px_white] capitalize">{videos?.[0].title}</h1>
+            <p className="text-[40px] font-medium underline mb-6">by {videos?.[0].artist.name}</p>
+            <button className="bg-legendary-500 text-white rounded-full px-6 py-3 flex flex-row gap-x-4 w-fit justify-between items-center flex-shrink">
+              <p className="text-[24px]">Play Video</p>
               <span>
                 <svg
                   width="15"
