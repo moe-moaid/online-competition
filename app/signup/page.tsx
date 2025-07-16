@@ -249,8 +249,9 @@ function page() {
         title="Let Me Down Slowly"
         artist="Farooq"
         isVerified
-        artistImageUrl="/singre-image.png"
-        songThumbnailUrl="/song-thumbnail.png"
+        avatarUrl="/singre-image.png"
+        videoUrl=""
+        setDisplayVid={() => true}
       />
     </div>
   );
