@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { useGetListVideos } from "@/lib/getListService";
 import { videoType } from "@/lib/types/videoType";
 import Image from "next/image";
+import CustomControls from "./components/CustomControls";
 
 function Vote() {
   const { data: videos, error: vid_error } = useGetListVideos();
@@ -20,6 +21,7 @@ function Vote() {
         {!isVideoPlaying && (
           <div className="absolute bg-black/70 top-0 bottom-0 start-0 end-0 z-0" />
         )}
+<CustomControls currentVideo={videoRef.current} isVideoPlaying={isVideoPlaying} setIsVideoPlaying={setIsVideoPlaying}/>
         <video
           ref={videoRef}
           className="w-full h-full object-cover absolute -z-10"
