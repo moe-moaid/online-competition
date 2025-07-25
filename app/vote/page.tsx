@@ -90,11 +90,6 @@ function Vote() {
                   </svg>
                 </span>
               </button>
-<CustomControls
-                currentVideo={videoRef.current}
-                isVideoPlaying={isVideoPlaying}
-                setIsVideoPlaying={setIsVideoPlaying}
-              />
             </div>
           </div>
         )}

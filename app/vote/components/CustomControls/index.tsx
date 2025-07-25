@@ -22,7 +22,7 @@ function CustomControls({
 
       <div className="z-10 flex flex-row justify-between items-center">
         {/* Volume control */}
-        {/* <SoundControl /> */}
+        <SoundControl currentVideo={currentVideo} />
 
         {/* <div> */}
           {/* play, pose, and seek buttons  ▶️⏸️ ⏪️⏩️ */}

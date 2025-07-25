@@ -15,7 +15,7 @@ function PlayPauseButton({
   }
   return (
     <div className="flex flex-row jsutify-center gap-x-8 items-center">
-      <button onClick={() => skip(-2)}>
+      <button onClick={() => skip(-10)}>
         <svg
           width="24"
           height="25"
@@ -80,7 +80,7 @@ function PlayPauseButton({
           </svg>
         </button>
       )}
-      <button onClick={() => skip(2)}>
+      <button onClick={() => skip(10)}>
         <svg
           width="24"
           height="25"
