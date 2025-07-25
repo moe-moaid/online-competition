@@ -8,7 +8,7 @@ function SoundControl({ currentVideo }: Props) {
   function volumeControl(e: ChangeEvent<HTMLInputElement>) {
     const safeVolum = Number(e.target.value) / 100;
     setVolume(safeVolum);
-    if (currentVideo) currentVideo.volume = volume;
+    if (currentVideo) currentVideo.volume = safeVolum;
   }
 
   return (
@@ -108,7 +108,7 @@ function SoundControl({ currentVideo }: Props) {
           min={0}
           max={100}
           onChange={(e) => volumeControl(e)}
-          defaultValue={volume}
+          defaultValue={volume * 100}
         />
       </button>
     </div>
