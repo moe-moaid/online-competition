@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGetListVideos } from "@/lib/getListService";
 import { videoType } from "@/lib/types/videoType";
 import Image from "next/image";
@@ -16,6 +16,12 @@ function Vote() {
     }
   }
 
+  useEffect(() => {
+    if (videoRef.current?.ended) {
+      setIsVideoPlaying(false);
+    }
+  }, [])
+
   return (
     <>
       <section className="h-[580px] relative">
@@ -24,9 +30,14 @@ function Vote() {
         )}
         <video
           ref={videoRef}
-          className="w-full h-full object-cover absolute -z-10"
+          className="w-full h-full object-cover absolute"
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${videos?.[0].url}`}
           onEnded={() => setIsVideoPlaying(false)}
+          controlsList="nodownload"
+          controls={ false }
+          disablePictureInPicture
+          disableRemotePlayback
+          preload="metadata"
         />
         <div className="flex flex-row justify-start h-full ms-[160px]">
           <div className="h-full overflow-y-auto start-[150px] top-0 flex flex-col gap-y-4 items-start text-white">
