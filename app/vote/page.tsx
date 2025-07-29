@@ -4,9 +4,14 @@ import { useGetListVideos } from "@/lib/getListService";
 import { videoType } from "@/lib/types/videoType";
 import Image from "next/image";
 import CustomControls from "./components/CustomControls";
+import { useQueryClient } from "@tanstack/react-query";
 
 function Vote() {
   const { data: videos, error: vid_error } = useGetListVideos();
+  const queryClient = useQueryClient();
+
+  // let videos = queryClient.getQueryData(["videos"]);
+
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   function playVideo() {
@@ -20,7 +25,14 @@ function Vote() {
     if (videoRef.current?.ended) {
       setIsVideoPlaying(false);
     }
-  }, [])
+  }, []);
+
+  if (!videos)
+    return (
+      <p className="text-white font-bold text-[42px] text-center">
+        No videos found
+      </p>
+    );
 
   return (
     <>
@@ -34,7 +46,7 @@ function Vote() {
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${videos?.[0].url}`}
           onEnded={() => setIsVideoPlaying(false)}
           controlsList="nodownload"
-          controls={ false }
+          controls={false}
           disablePictureInPicture
           disableRemotePlayback
           preload="metadata"
