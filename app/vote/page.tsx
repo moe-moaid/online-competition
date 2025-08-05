@@ -4,14 +4,11 @@ import { useGetListVideos } from "@/lib/getListService";
 import { videoType } from "@/lib/types/videoType";
 import Image from "next/image";
 import CustomControls from "./components/CustomControls";
-import { useQueryClient } from "@tanstack/react-query";
 import Filter from "./components/Filters";
+import MciContainer from "../components/MciContainer";
 
 function Vote() {
-  const { data: videos, error: vid_error } = useGetListVideos();
-  const queryClient = useQueryClient();
-
-  // let videos = queryClient.getQueryData(["videos"]);
+  const { data: videos } = useGetListVideos();
 
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -132,8 +129,10 @@ function Vote() {
         </div>
       </section>
       {/* filters and videos section */}
-      <section className="flex flex-col md:flex-row items-start justify-start ">
+      <section className="flex flex-col md:flex-row items-start justify-start mt-16">
+        <MciContainer>
             <Filter />
+        </MciContainer>
       </section>
     </>
   );

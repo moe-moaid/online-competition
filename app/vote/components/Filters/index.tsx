@@ -16,8 +16,8 @@ function Filter() {
 
   return (
     <div>
-      <h6 className="text-white text-[24px]">By Category</h6>
-      <div className="bg-gray-bg rounded-lg px-5 py-3">
+      <h6 className="text-white text-[24px] mb-5">By Category</h6>
+      <div className="bg-gray-bg rounded-lg px-5 py-3 w-[380px]">
         <div className="flex flex-col gap-y-4 justify-center text-white max-w-xs">
           {categories.map((cat, i) => {
             const isChecked = query.includes(cat);
