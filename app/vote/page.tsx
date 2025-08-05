@@ -5,6 +5,7 @@ import { videoType } from "@/lib/types/videoType";
 import Image from "next/image";
 import CustomControls from "./components/CustomControls";
 import { useQueryClient } from "@tanstack/react-query";
+import Filter from "./components/Filters";
 
 function Vote() {
   const { data: videos, error: vid_error } = useGetListVideos();
@@ -36,6 +37,7 @@ function Vote() {
 
   return (
     <>
+    {/* top videos seciton */}
       <section className="h-[580px] relative">
         {!isVideoPlaying && (
           <div className="absolute bg-black/70 top-0 bottom-0 start-0 end-0 z-0" />
@@ -128,6 +130,10 @@ function Vote() {
             )}
           </div>
         </div>
+      </section>
+      {/* filters and videos section */}
+      <section className="flex flex-col md:flex-row items-start justify-start ">
+            <Filter />
       </section>
     </>
   );
