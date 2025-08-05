@@ -3,6 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 
 export function useGetListVideos() {
   return useQuery({
+    staleTime: 1000 * 60 * 5,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
     queryKey: ["videos"],
     queryFn: async () => {
       const response = await axios.get(
