@@ -32,6 +32,7 @@ function Vote() {
       </p>
     );
 
+    // optimization needed
   return (
     <>
     {/* top videos seciton */}
