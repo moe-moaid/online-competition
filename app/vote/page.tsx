@@ -35,7 +35,6 @@ function Vote() {
       </p>
     );
 
-  // optimization needed
   return (
     <>
       {/* top videos seciton */}
@@ -136,21 +135,24 @@ function Vote() {
       <section className="">
         <MciContainer className="flex flex-col md:flex-row items-start gap-x-10 justify-start mt-16">
           <Filter />
-          <div className="flex flex-col md:flex-row gap-6 flex-wrap">
-            {videos?.map((video: videoType, i: number) => {
-              return (
-                <VidCard
-                  key={`${video.title} - ${i}`}
-                  title={video.title}
-                  country={video.artist.location.country}
-                  isVerified
-                  artist={video.artist.name}
-                  avatarUrl={video.artist.avatar.url}
-                  videoUrl={video.url}
-                  setDisplayVid={setDisplayVid}
-                />
-              );
-            })}
+          <div>
+            <p className="text-white text-[24px] mb-5">{ `Round 1 All Videos (${videos.length})` }</p>
+            <div className="flex flex-col md:flex-row gap-x-5 gap-y-10 flex-wrap justify-start items-center">
+              {videos?.map((video: videoType, i: number) => {
+                return (
+                  <VidCard
+                    key={`${video.title} - ${i}`}
+                    title={video.title}
+                    country={video.artist.location.country}
+                    isVerified
+                    artist={video.artist.name}
+                    avatarUrl={video.artist.avatar.url}
+                    videoUrl={video.url}
+                    setDisplayVid={setDisplayVid}
+                  />
+                );
+              })}
+            </div>
           </div>
         </MciContainer>
       </section>

@@ -67,7 +67,7 @@ export default function Home() {
           <h1 className="text-white text-center my-12 text-[40px] font-semibold">
             Videos
           </h1>
-          <MciContainer className="flex flex-row flex-wrap justify-center items-ceneter gap-4">
+          <MciContainer className="flex flex-row flex-wrap justify-center items-ceneter gap-x-6 gap-y-10">
             {videos &&
               videos.map((video: videoType, i: number) => (
                 <VidCard
