@@ -1,11 +1,12 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { useGetListVideos } from "@/lib/getListService";
-import VidCard from "./components/VidCard";
 import { videoType } from "@/lib/types/videoType";
 import MciContainer from "./components/MciContainer";
 import Image from "next/image";
 import PlayVideo from "./components/PlayVideo";
+import { lazy } from "react";
+const VidCard = lazy(() => import('./components/VidCard'));
 
 export default function Home() {
   const { data: videos, error: vid_error } = useGetListVideos();

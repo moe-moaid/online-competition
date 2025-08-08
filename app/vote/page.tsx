@@ -6,9 +6,12 @@ import Image from "next/image";
 import CustomControls from "./components/CustomControls";
 import Filter from "./components/Filters";
 import MciContainer from "../components/MciContainer";
+import { lazy } from "react";
+const VidCard = lazy(() => import("../components/VidCard"));
 
 function Vote() {
   const { data: videos } = useGetListVideos();
+  const [displayVid, setDisplayVid] = useState<string | undefined>();
 
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -32,10 +35,10 @@ function Vote() {
       </p>
     );
 
-    // optimization needed
+  // optimization needed
   return (
     <>
-    {/* top videos seciton */}
+      {/* top videos seciton */}
       <section className="h-[580px] relative">
         {!isVideoPlaying && (
           <div className="absolute bg-black/70 top-0 bottom-0 start-0 end-0 z-0" />
@@ -130,9 +133,25 @@ function Vote() {
         </div>
       </section>
       {/* filters and videos section */}
-      <section className="flex flex-col md:flex-row items-start justify-start mt-16">
-        <MciContainer>
-            <Filter />
+      <section className="">
+        <MciContainer className="flex flex-col md:flex-row items-start gap-x-10 justify-start mt-16">
+          <Filter />
+          <div className="flex flex-col md:flex-row gap-6 flex-wrap">
+            {videos?.map((video: videoType, i: number) => {
+              return (
+                <VidCard
+                  key={`${video.title} - ${i}`}
+                  title={video.title}
+                  country={video.artist.location.country}
+                  isVerified
+                  artist={video.artist.name}
+                  avatarUrl={video.artist.avatar.url}
+                  videoUrl={video.url}
+                  setDisplayVid={setDisplayVid}
+                />
+              );
+            })}
+          </div>
         </MciContainer>
       </section>
     </>
