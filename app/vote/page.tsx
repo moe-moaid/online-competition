@@ -134,8 +134,10 @@ function Vote() {
       </section>
       {/* filters and videos section */}
       <section className="">
-        <MciContainer className="flex flex-col md:flex-row items-start gap-x-10 justify-start mt-16">
+        <MciContainer className="flex flex-col md:flex-row items-start gap-x-9 justify-start mt-16">
           <Filter />
+          <div>
+          <h6 className="text-white text-[24px] mb-5">Videos</h6>
           <div className="flex flex-col md:flex-row gap-6 flex-wrap">
             {videos?.map((video: videoType, i: number) => {
               return (
@@ -151,7 +153,7 @@ function Vote() {
                 />
               );
             })}
-          </div>
+          </div></div>
         </MciContainer>
       </section>
     </>
