@@ -137,23 +137,24 @@ function Vote() {
         <MciContainer className="flex flex-col md:flex-row items-start gap-x-9 justify-start mt-16">
           <Filter />
           <div>
-          <h6 className="text-white text-[24px] mb-5">Videos</h6>
-          <div className="flex flex-col md:flex-row gap-6 flex-wrap">
-            {videos?.map((video: videoType, i: number) => {
-              return (
-                <VidCard
-                  key={`${video.title} - ${i}`}
-                  title={video.title}
-                  country={video.artist.location.country}
-                  isVerified
-                  artist={video.artist.name}
-                  avatarUrl={video.artist.avatar.url}
-                  videoUrl={video.url}
-                  setDisplayVid={setDisplayVid}
-                />
-              );
-            })}
-          </div></div>
+            <h6 className="text-white text-[24px] mb-5">Videos</h6>
+            <div className="flex flex-col md:flex-row gap-6 flex-wrap">
+              {videos?.map((video: videoType, i: number) => {
+                return (
+                  <VidCard
+                    key={`${video.title} - ${i}`}
+                    title={video.title}
+                    country={video.artist.location.country}
+                    isVerified
+                    artist={video.artist.name}
+                    avatarUrl={video.artist.avatar.url}
+                    videoUrl={video.url}
+                    setDisplayVid={setDisplayVid}
+                  />
+                );
+              })}
+            </div>
+          </div>
         </MciContainer>
       </section>
     </>

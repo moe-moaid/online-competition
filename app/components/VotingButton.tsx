@@ -1,8 +1,12 @@
+'use client';
 import React from "react";
 
-function VotingButton() {
+type Props = {
+    setShowVote?: React.Dispatch<boolean>;
+}
+function VotingButton({setShowVote}: Props) {
   return (
-    <button className="w-14 h-14">
+    <button className="w-14 h-14" onClick={() => setShowVote?.(true)}>
       <svg
         width="56"
         height="56"
