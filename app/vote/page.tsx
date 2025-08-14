@@ -38,6 +38,7 @@ function Vote() {
   // optimization needed
   return (
     <>
+    <div className=""></div>
       {/* top videos seciton */}
       <section className="h-[580px] relative">
         {!isVideoPlaying && (
