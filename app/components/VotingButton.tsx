@@ -1,12 +1,11 @@
 'use client';
+import { useVoteContext } from "@/lib/context/vote context";
 import React from "react";
 
-type Props = {
-    setShowVote?: React.Dispatch<boolean>;
-}
-function VotingButton({setShowVote}: Props) {
+function VotingButton() {
+  const { setIsVoteOpen } = useVoteContext();
   return (
-    <button className="w-14 h-14" onClick={() => setShowVote?.(true)}>
+    <button className="w-14 h-14" onClick={() => setIsVoteOpen(true)}>
       <svg
         width="56"
         height="56"

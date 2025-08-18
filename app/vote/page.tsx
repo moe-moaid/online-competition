@@ -7,11 +7,13 @@ import CustomControls from "./components/CustomControls";
 import Filter from "./components/Filters";
 import MciContainer from "../components/MciContainer";
 import { lazy } from "react";
+import { useVoteContext } from "@/lib/context/vote context";
 const VidCard = lazy(() => import("../components/VidCard"));
 
 function Vote() {
   const { data: videos } = useGetListVideos();
   const [displayVid, setDisplayVid] = useState<string | undefined>();
+  const { isVoteOpen, setIsVoteOpen } = useVoteContext();
 
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -35,10 +37,15 @@ function Vote() {
       </p>
     );
 
-  // optimization needed
   return (
-    <>
-    <div className=""></div>
+    <div className="relative">
+      {isVoteOpen && (
+        <div
+          className="bg-black/20 absolute top-0 left-0 bottom-0 right-0 z-10 backdrop-blur-sm hover:cursor-pointer transition-transform duration-1000 ease-in-out"
+          onClick={() => setIsVoteOpen(false)}
+        />
+      )}
+
       {/* top videos seciton */}
       <section className="h-[580px] relative">
         {!isVideoPlaying && (
@@ -158,7 +165,7 @@ function Vote() {
           </div>
         </MciContainer>
       </section>
-    </>
+    </div>
   );
 }
 
