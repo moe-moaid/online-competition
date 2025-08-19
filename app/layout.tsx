@@ -5,6 +5,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { VoteProvider } from "@/lib/context/vote context";
+import PaymentForm from "./components/PaymentForm";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,7 +28,7 @@ export default function RootLayout({
         <QueryClientProvider client={queryClient}>
           <VoteProvider>
             {children}
-            
+            <PaymentForm />
             <Footer />
           </VoteProvider>
         </QueryClientProvider>

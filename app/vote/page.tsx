@@ -40,8 +40,7 @@ function Vote() {
     );
 
   return (
-    <div className={`${isVoteOpen && 'h-screen overflow-hidden'}`}>
-      <PaymentForm />
+    <div className={`relative ${isVoteOpen && 'h-screen overflow-hidden'}`}>
       {isVoteOpen && (
         <>
           <div
