@@ -9,6 +9,7 @@ import MciContainer from "../components/MciContainer";
 import { lazy } from "react";
 import { useVoteContext } from "@/lib/context/vote context";
 import clsx from "clsx";
+import PaymentForm from "../components/PaymentForm";
 const VidCard = lazy(() => import("../components/VidCard"));
 
 function Vote() {
@@ -16,7 +17,6 @@ function Vote() {
   const [displayVid, setDisplayVid] = useState<string | undefined>();
   const { isVoteOpen, setIsVoteOpen, currentVideoId } = useVoteContext();
 
-  console.log(currentVideoId);
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   function playVideo() {
@@ -40,12 +40,15 @@ function Vote() {
     );
 
   return (
-    <div className={`relative ${isVoteOpen && 'h-screen overflow-hidden'}`}>
+    <div className={`${isVoteOpen && 'h-screen overflow-hidden'}`}>
+      <PaymentForm />
       {isVoteOpen && (
-        <div
-          className="bg-black/20 absolute top-0 left-0 bottom-0 right-0 z-20 backdrop-blur-sm hover:cursor-pointer transition-transform duration-1000 ease-in-out"
-          onClick={() => setIsVoteOpen(false)}
-        />
+        <>
+          <div
+            className="bg-black/20 absolute top-0 left-0 bottom-0 right-0 z-20 backdrop-blur-sm hover:cursor-pointer transition-transform duration-1000 ease-in-out"
+            onClick={() => setIsVoteOpen(false)}
+          />
+        </>
       )}
 
       {/* top videos seciton */}
