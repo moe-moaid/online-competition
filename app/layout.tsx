@@ -27,9 +27,11 @@ export default function RootLayout({
         <QueryClientProvider client={queryClient}>
           <VoteProvider>
             {children}
+            
+            <Footer />
           </VoteProvider>
         </QueryClientProvider>
-        <Footer />
+
       </body>
     </html>
   );

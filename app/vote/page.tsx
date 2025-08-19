@@ -8,13 +8,15 @@ import Filter from "./components/Filters";
 import MciContainer from "../components/MciContainer";
 import { lazy } from "react";
 import { useVoteContext } from "@/lib/context/vote context";
+import clsx from "clsx";
 const VidCard = lazy(() => import("../components/VidCard"));
 
 function Vote() {
   const { data: videos } = useGetListVideos();
   const [displayVid, setDisplayVid] = useState<string | undefined>();
-  const { isVoteOpen, setIsVoteOpen } = useVoteContext();
+  const { isVoteOpen, setIsVoteOpen, currentVideoId } = useVoteContext();
 
+  console.log(currentVideoId);
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   function playVideo() {
@@ -30,7 +32,7 @@ function Vote() {
     }
   }, []);
 
-  if (!videos)
+  if (!videos || videos.length === 0)
     return (
       <p className="text-white font-bold text-[42px] text-center">
         No videos found
@@ -38,10 +40,10 @@ function Vote() {
     );
 
   return (
-    <div className="relative">
+    <div className={`relative ${isVoteOpen && 'h-screen overflow-hidden'}`}>
       {isVoteOpen && (
         <div
-          className="bg-black/20 absolute top-0 left-0 bottom-0 right-0 z-10 backdrop-blur-sm hover:cursor-pointer transition-transform duration-1000 ease-in-out"
+          className="bg-black/20 absolute top-0 left-0 bottom-0 right-0 z-20 backdrop-blur-sm hover:cursor-pointer transition-transform duration-1000 ease-in-out"
           onClick={() => setIsVoteOpen(false)}
         />
       )}
@@ -150,13 +152,8 @@ function Vote() {
               {videos?.map((video: videoType, i: number) => {
                 return (
                   <VidCard
+                    video={video}
                     key={`${video.title} - ${i}`}
-                    title={video.title}
-                    country={video.artist.location.country}
-                    isVerified
-                    artist={video.artist.name}
-                    avatarUrl={video.artist.avatar.url}
-                    videoUrl={video.url}
                     setDisplayVid={setDisplayVid}
                   />
                 );

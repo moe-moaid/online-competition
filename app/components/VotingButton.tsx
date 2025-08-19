@@ -1,11 +1,18 @@
 'use client';
 import { useVoteContext } from "@/lib/context/vote context";
+import { videoType } from "@/lib/types/videoType";
 import React from "react";
 
-function VotingButton() {
-  const { setIsVoteOpen } = useVoteContext();
+type Props = {
+  currentVideoId: number;
+}
+function VotingButton({ currentVideoId }: Props) {
+  const { setIsVoteOpen, setCurrentVideoId } = useVoteContext();
   return (
-    <button className="w-14 h-14" onClick={() => setIsVoteOpen(true)}>
+    <button className="w-14 h-14" onClick={() => {
+      setIsVoteOpen(true)
+      setCurrentVideoId?.(currentVideoId);
+      }}>
       <svg
         width="56"
         height="56"
