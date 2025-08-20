@@ -72,7 +72,7 @@ const InitView = ({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g clip-path="url(#clip0_223_14930)">
+          <g clipPath="url(#clip0_223_14930)">
             <path
               d="M9.17762 2.1001H3.32762C2.95262 2.1001 2.57762 2.4001 2.50262 2.7751L0.177622 17.7751C0.102622 18.0751 0.327622 18.3001 0.627622 18.3001H3.40262C3.77762 18.3001 4.15262 18.0001 4.22762 17.6251L4.82762 13.5751C4.90262 13.2001 5.20262 12.9001 5.65262 12.9001H7.52762C11.3526 12.9001 13.6026 11.0251 14.2026 7.3501C14.4276 5.7751 14.2026 4.5001 13.4526 3.6001C12.6276 2.6251 11.1276 2.1001 9.17762 2.1001ZM9.85262 7.5751C9.55262 9.6751 7.90262 9.6751 6.40262 9.6751H5.50262L6.10262 5.7751C6.10262 5.5501 6.32762 5.4001 6.55262 5.4001H6.92762C7.97762 5.4001 8.95262 5.4001 9.47762 6.0001C9.85262 6.3001 10.0026 6.8251 9.85262 7.5751Z"
               fill="#003087"
@@ -150,6 +150,13 @@ const InitView = ({
   );
 };
 
+const PaymentInputs = [
+  { lable: "Name on card", placeHolder: "Name on card", name: "name" },
+  { lable: "Email address", placeHolder: "example@mail.com", name: "email" },
+  { lable: "Card number", placeHolder: "Card number", name: "number" },
+  { lable: "Expiry date", placeHolder: "MM/YY", name: "expiry" },
+  { lable: "CVC", placeHolder: "CVC", name: "cvc" },
+];
 const CardView = ({
   setMethod,
 }: {
@@ -172,13 +179,25 @@ const CardView = ({
             />
           </svg>
         </button>
-        <p className="">Debit Card</p>
+        <p className="text-[24px] font-semibold">Debit Card</p>
       </div>
       <form className="flex flex-col gap-y-6 mt-6 w-full" action="">
-        <div className="flex flex-col items-start gap-y-2">
-          <label className="text-white" htmlFor="name">Name on card</label>
-          <input className="bg-transparent border border-white rounded-sm text-gray-text px-2 py-4 focus:text-white focus:border-legendary-500 outline-none stroke-none w-full" name="name" type="text" placeholder="Name on card" />
-        </div>
+        {PaymentInputs.map((input, index) => (
+          <div key={`${input.name} - ${index}`} className="flex flex-col items-start gap-y-2">
+            <label className="text-white text-[20px]" htmlFor={input.name}>
+              {input.lable}
+            </label>
+            <input
+              className="bg-transparent border border-white rounded-sm text-gray-text px-2 py-4 focus:text-white focus:border-legendary-500 outline-none stroke-none w-full"
+              name={input.name}
+              type="text"
+              placeholder={input.placeHolder}
+            />
+          </div>
+        ))}
+        <button className="w-full bg-white rounded-md py-4 text-center text-[#333333] text-[20px] font-semibold">
+          Confirm Payment and Vote
+        </button>
       </form>
     </div>
   );
