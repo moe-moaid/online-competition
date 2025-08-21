@@ -2,9 +2,12 @@
 import { useVoteContext } from "@/lib/context/vote context";
 import clsx from "clsx";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import VidCard from "./VidCard";
+import { useGetListVideos } from "@/lib/getListService";
+import { videoType } from "@/lib/types/videoType";
 
 function PaymentForm() {
-  const { isVoteOpen, setIsVoteOpen } = useVoteContext();
+  const { isVoteOpen, setIsVoteOpen, currentVideoId } = useVoteContext();
   const [method, setMethod] = useState<"paypal" | "card" | null>(null);
   useEffect(() => {
     if (!isVoteOpen) {
@@ -15,7 +18,7 @@ function PaymentForm() {
   return (
     <div
       className={clsx(
-        "origin-right fixed top-0 right-0 bottom-0 text-white z-30 scale-x-0 transition-transform duration-300 ease-in-out h-100 bg-black w-1/4 border-s border-gray-text",
+        "origin-right fixed top-0 right-0 bottom-0 text-white z-30 scale-x-0 transition-transform duration-300 ease-in-out h-100 bg-black w-1/4 border-s border-gray-text h-screen overflow-y-scroll",
         isVoteOpen && "scale-x-100"
       )}
     >
@@ -41,7 +44,9 @@ function PaymentForm() {
         </button>
       </div>
       {!method && <InitView setMethod={setMethod} />}
-      {method === "card" && <CardView setMethod={setMethod} />}
+      {method === "card" && (
+        <CardView setMethod={setMethod} currentVideoId={currentVideoId} />
+      )}
     </div>
   );
 }
@@ -155,13 +160,18 @@ const PaymentInputs = [
   { lable: "Email address", placeHolder: "example@mail.com", name: "email" },
   { lable: "Card number", placeHolder: "Card number", name: "number" },
   { lable: "Expiry date", placeHolder: "MM/YY", name: "expiry" },
-  { lable: "CVC", placeHolder: "CVC", name: "cvc" },
+  { lable: "CVC/CVV", placeHolder: "CVC/CVV", name: "cvc" },
 ];
 const CardView = ({
   setMethod,
+  currentVideoId,
 }: {
   setMethod: Dispatch<SetStateAction<"paypal" | "card" | null>>;
+  currentVideoId?: number;
 }) => {
+  const { data: videos } = useGetListVideos();
+  const video = videos.filter((video: videoType) => video.id === currentVideoId)[0];
+  
   return (
     <div className="flex flex-col items-start justify-center px-6 mt-6">
       <div className="flex flex-row justify-start items-center gap-x-4">
@@ -183,7 +193,10 @@ const CardView = ({
       </div>
       <form className="flex flex-col gap-y-6 mt-6 w-full" action="">
         {PaymentInputs.map((input, index) => (
-          <div key={`${input.name} - ${index}`} className="flex flex-col items-start gap-y-2">
+          <div
+            key={`${input.name} - ${index}`}
+            className="flex flex-col items-start gap-y-2"
+          >
             <label className="text-white text-[20px]" htmlFor={input.name}>
               {input.lable}
             </label>
@@ -195,6 +208,14 @@ const CardView = ({
             />
           </div>
         ))}
+        <div className="w-full">
+          <div className="flex flex-row justify-between items-center ">
+            <p className="text-gray-text text-[16px]">you are voting for</p>
+            <button className="text-legendary-500 text-[16px]">change</button>
+          </div>
+          <div className="bg-gray-bg h-5 w-5 p-4 rounded-md">
+          </div>
+        </div>
         <button className="w-full bg-white rounded-md py-4 text-center text-[#333333] text-[20px] font-semibold">
           Confirm Payment and Vote
         </button>

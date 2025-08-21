@@ -16,9 +16,10 @@ function VidCard({ video, setDisplayVid }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaing] = useState<boolean>(false);
   const [overlay, setOverlay] = useState<boolean>(false);
+  console.log( '===', video )
   const {id, title, artist:{name, location:{country}, avatar: {url}}, url:videoUrl, } = video;
+  console.log( '===', name, country, url )
   const isVerified = true;
-
   function playPauseController() {
     if (ref.current) {
       setDisplayVid(videoUrl);
