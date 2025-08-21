@@ -6,7 +6,7 @@ import MciContainer from "./components/MciContainer";
 import Image from "next/image";
 import PlayVideo from "./components/PlayVideo";
 import { lazy } from "react";
-const VidCard = lazy(() => import('./components/VidCard'));
+const VidCard = lazy(() => import("./components/VidCard"));
 
 export default function Home() {
   const { data: videos, error: vid_error } = useGetListVideos();
@@ -69,18 +69,16 @@ export default function Home() {
           </h1>
           <MciContainer className="flex flex-row flex-wrap justify-center items-ceneter gap-4">
             {videos &&
-              videos.map((video: videoType, i: number) => (
-                <VidCard
-                  key={`${video.title} - ${i}`}
-                  title={video.title}
-                  country={video.artist.location.country}
-                  isVerified
-                  artist={video.artist.name}
-                  avatarUrl={video.artist.avatar.url}
-                  videoUrl={video.url}
-                  setDisplayVid={setDisplayVid}
-                />
-              ))}
+              videos.map((video: videoType, i: number) => {
+                console.log(video);
+                return (
+                  <VidCard
+                    key={`${video.title} - ${i}`}
+                    video={video}
+                    setDisplayVid={setDisplayVid}
+                  />
+                );
+              })}
             {displayVid && (
               <PlayVideo video={displayVid} setDisplayVid={setDisplayVid} />
             )}

@@ -1,6 +1,7 @@
 import { Category } from "./videoUploadFormType";
 
 export type videoType = {
+  id: number;
   artistId: number;
   artist: {
     name: string;
