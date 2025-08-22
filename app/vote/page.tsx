@@ -10,15 +10,17 @@ import { lazy } from "react";
 import { useVoteContext } from "@/lib/context/vote context";
 import clsx from "clsx";
 import PaymentForm from "../components/PaymentForm";
+import VotePreview from "./components/VotePreview";
 const VidCard = lazy(() => import("../components/VidCard"));
 
 function Vote() {
   const { data: videos } = useGetListVideos();
   const [displayVid, setDisplayVid] = useState<string | undefined>();
-  const { isVoteOpen, setIsVoteOpen, currentVideoId } = useVoteContext();
+  const { isVoteOpen, setIsVoteOpen, currentVideoId, isChangeOpen } = useVoteContext();
 
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const selectedVideoForVoting = videos.find((video) => video.id === currentVideoId); 
   function playVideo() {
     if (videoRef.current && videoRef.current.paused) {
       videoRef.current.play();
@@ -147,7 +149,14 @@ function Vote() {
       {/* filters and videos section */}
       <section className="">
         <MciContainer className="flex flex-col md:flex-row items-start gap-x-9 justify-start mt-16">
-          <Filter />
+          <div className="flex flex-col gap-y-6">
+            <Filter />
+            {isChangeOpen && (
+              <>
+              <VotePreview
+              </>
+            )}
+          </div>
           <div>
             <h6 className="text-white text-[24px] mb-5">Videos</h6>
             <div className="flex flex-col md:flex-row gap-6 flex-wrap">

@@ -5,6 +5,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import VidCard from "./VidCard";
 import { useGetListVideos } from "@/lib/getListService";
 import { videoType } from "@/lib/types/videoType";
+import VotePreview from "../vote/components/VotePreview";
 
 function PaymentForm() {
   const { isVoteOpen, setIsVoteOpen, currentVideoId } = useVoteContext();
@@ -170,7 +171,7 @@ const CardView = ({
   currentVideoId?: number;
 }) => {
   const { data: videos } = useGetListVideos();
-  const video = videos.filter((video: videoType) => video.id === currentVideoId)[0];
+  const video = videos.find((video: videoType) => video.id === currentVideoId);
   
   return (
     <div className="flex flex-col items-start justify-center px-6 mt-6">
@@ -213,7 +214,8 @@ const CardView = ({
             <p className="text-gray-text text-[16px]">you are voting for</p>
             <button className="text-legendary-500 text-[16px]">change</button>
           </div>
-          <div className="bg-gray-bg h-5 w-5 p-4 rounded-md">
+          <div className="bg-gray-bg p-4 mt-4 rounded-md w-full">
+            <VotePreview video={video}/>
           </div>
         </div>
         <button className="w-full bg-white rounded-md py-4 text-center text-[#333333] text-[20px] font-semibold">
