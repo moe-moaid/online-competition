@@ -8,8 +8,6 @@ import Filter from "./components/Filters";
 import MciContainer from "../components/MciContainer";
 import { lazy } from "react";
 import { useVoteContext } from "@/lib/context/vote context";
-import clsx from "clsx";
-import PaymentForm from "../components/PaymentForm";
 import VotePreview from "./components/VotePreview";
 const VidCard = lazy(() => import("../components/VidCard"));
 
@@ -20,7 +18,7 @@ function Vote() {
 
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const selectedVideoForVoting = videos.find((video) => video.id === currentVideoId); 
+  const selectedVideoForVoting = videos?.find((video) => video.id === currentVideoId); 
   function playVideo() {
     if (videoRef.current && videoRef.current.paused) {
       videoRef.current.play();
@@ -153,7 +151,7 @@ function Vote() {
             <Filter />
             {isChangeOpen && (
               <>
-              <VotePreview
+              <VotePreview />
               </>
             )}
           </div>

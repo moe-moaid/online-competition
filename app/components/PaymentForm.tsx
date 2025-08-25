@@ -171,7 +171,7 @@ const CardView = ({
   currentVideoId?: number;
 }) => {
   const { data: videos } = useGetListVideos();
-  const video = videos.find((video: videoType) => video.id === currentVideoId);
+  const video = videos?.find((video: videoType) => video.id === currentVideoId);
   
   return (
     <div className="flex flex-col items-start justify-center px-6 mt-6">

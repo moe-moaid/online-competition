@@ -70,7 +70,6 @@ export default function Home() {
           <MciContainer className="flex flex-row flex-wrap justify-center items-ceneter gap-4">
             {videos &&
               videos.map((video: videoType, i: number) => {
-                console.log(video);
                 return (
                   <VidCard
                     key={`${video.title} - ${i}`}
@@ -118,13 +117,15 @@ export default function Home() {
                     />
                   </svg>
                 </button>
-                <video
-                  className="rounded-sm w-full"
-                  ref={ref}
-                  src={process.env.NEXT_PUBLIC_API_BASE_URL + videos?.[7].url}
-                  onPlay={handlePlay}
-                  onPause={handlePause}
-                />
+                {videos?.[7] && process.env.NEXT_PUBLIC_API_BASE_URL && (
+                  <video
+                    className="rounded-sm w-full"
+                    ref={ref}
+                    src={process.env.NEXT_PUBLIC_API_BASE_URL + videos?.[7].url}
+                    onPlay={handlePlay}
+                    onPause={handlePause}
+                  />
+                )}
               </div>
               <div className="flex flex-col items-start gap-y-4 text-white w-full md:w-1/2">
                 <h3 className="text-[32px] font-semibold">

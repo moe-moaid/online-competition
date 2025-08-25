@@ -2,14 +2,14 @@ import { videoType } from "@/lib/types/videoType";
 import Image from "next/image";
 import React from "react";
 
-function VotePreview({ video }: { video: videoType }) {
+function VotePreview({ video }: { video?: videoType }) {
   return (
     <>
       <div className="relative w-full h-full rounded-lg overflow-clip">
         <div className={`absolute inset-0 bg-black/65`} />
         <video
           className="w-full h-full object-cover"
-          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${video.url}`}
+          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${video?.url}`}
         />
 
         <svg
@@ -33,16 +33,16 @@ function VotePreview({ video }: { video: videoType }) {
       <div className="flex flex-row justify-start items-start gap-x-4 mt-4">
         <div className="relative rounded-full w-10 h-10 overflow-clip">
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${video.artist.avatar.url}`}
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${video?.artist.avatar.url}`}
             fill
             alt="singer image"
             loading="lazy"
           />
         </div>
         <div className="flex-flex-col gap-y-4">
-          <p className="font-medium text-[14px]">{video.title}</p>
+          <p className="font-medium text-[14px]">{video?.title}</p>
           <p className="flex flex-row items-center gap-x-2 font-medium text-gray-text text-[12px]">
-            By {`${video.artist.name} `}
+            By {`${video?.artist.name} `}
             <span>
               <svg
                 width="16"
