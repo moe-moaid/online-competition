@@ -8,7 +8,7 @@ import { videoType } from "@/lib/types/videoType";
 import VotePreview from "../vote/components/VotePreview";
 
 function PaymentForm() {
-  const { isVoteOpen, setIsVoteOpen, currentVideoId } = useVoteContext();
+  const { isVoteOpen, setIsVoteOpen, currentVoteVideoId } = useVoteContext();
   const [method, setMethod] = useState<"paypal" | "card" | null>(null);
   useEffect(() => {
     if (!isVoteOpen) {
@@ -46,7 +46,7 @@ function PaymentForm() {
       </div>
       {!method && <InitView setMethod={setMethod} />}
       {method === "card" && (
-        <CardView setMethod={setMethod} currentVideoId={currentVideoId} />
+        <CardView setMethod={setMethod} currentVideoId={currentVoteVideoId} />
       )}
     </div>
   );

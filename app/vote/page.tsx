@@ -14,11 +14,11 @@ const VidCard = lazy(() => import("../components/VidCard"));
 function Vote() {
   const { data: videos } = useGetListVideos();
   const [displayVid, setDisplayVid] = useState<string | undefined>();
-  const { isVoteOpen, setIsVoteOpen, currentVideoId, isChangeOpen } = useVoteContext();
+  const { isVoteOpen, setIsVoteOpen, currentVoteVideoId, isChangeOpen } = useVoteContext();
 
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const selectedVideoForVoting = videos?.find((video) => video.id === currentVideoId); 
+  const selectedVideoForVoting = videos?.find((video) => video.id === currentVoteVideoId); 
   function playVideo() {
     if (videoRef.current && videoRef.current.paused) {
       videoRef.current.play();
