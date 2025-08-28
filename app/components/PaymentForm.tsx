@@ -172,7 +172,8 @@ const CardView = ({
 }) => {
   const { data: videos } = useGetListVideos();
   const video = videos?.find((video: videoType) => video.id === currentVideoId);
-  
+  const { setIsChangeVoteOpen } = useVoteContext();
+
   return (
     <div className="flex flex-col items-start justify-center px-6 mt-6">
       <div className="flex flex-row justify-start items-center gap-x-4">
@@ -212,13 +213,22 @@ const CardView = ({
         <div className="w-full">
           <div className="flex flex-row justify-between items-center ">
             <p className="text-gray-text text-[16px]">you are voting for</p>
-            <button className="text-legendary-500 text-[16px]">change</button>
+            <button
+              type="button"
+              className="text-legendary-500 text-[16px]"
+              onClick={() => setIsChangeVoteOpen(true)}
+            >
+              change
+            </button>
           </div>
           <div className="bg-gray-bg p-4 mt-4 rounded-md w-full">
-            <VotePreview video={video}/>
+            <VotePreview video={video} />
           </div>
         </div>
-        <button className="w-full bg-white rounded-md py-4 text-center text-[#333333] text-[20px] font-semibold">
+        <button
+          type="submit"
+          className="w-full bg-white rounded-md py-4 text-center text-[#333333] text-[20px] font-semibold"
+        >
           Confirm Payment and Vote
         </button>
       </form>

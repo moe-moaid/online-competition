@@ -40,7 +40,7 @@ function VotePreview({ video }: { video?: videoType }) {
           />
         </div>
         <div className="flex-flex-col gap-y-4">
-          <p className="font-medium text-[14px]">{video?.title}</p>
+          <p className="font-medium text-[14px] text-white">{video?.title}</p>
           <p className="flex flex-row items-center gap-x-2 font-medium text-gray-text text-[12px]">
             By {`${video?.artist.name} `}
             <span>

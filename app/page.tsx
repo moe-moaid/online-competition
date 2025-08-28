@@ -6,6 +6,7 @@ import MciContainer from "./components/MciContainer";
 import Image from "next/image";
 import PlayVideo from "./components/PlayVideo";
 import { lazy } from "react";
+import CArdsFilterView from "./components/CardsFilterView";
 const VidCard = lazy(() => import("./components/VidCard"));
 
 export default function Home() {
@@ -63,7 +64,8 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section>
+        <CArdsFilterView />
+        {/* <section>
           <h1 className="text-white text-center my-12 text-[40px] font-semibold">
             Videos
           </h1>
@@ -82,7 +84,7 @@ export default function Home() {
               <PlayVideo video={displayVid} setDisplayVid={setDisplayVid} />
             )}
           </MciContainer>
-        </section>
+        </section> */}
         <section>
           <MciContainer className="mt-14 bg-gray-bg py-32">
             <h1 className="text-white text-center mb-14 font-semibold text-[40px]">

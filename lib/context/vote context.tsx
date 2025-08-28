@@ -11,8 +11,8 @@ import { videoType } from "../types/videoType";
 type ContextType = {
   isVoteOpen: boolean;
   setIsVoteOpen: Dispatch<SetStateAction<boolean>>;
-  isChangeOpen: boolean;
-  setIsChangeOpen: Dispatch<SetStateAction<boolean>>;
+  isChangeVoteOpen: boolean;
+  setIsChangeVoteOpen: Dispatch<SetStateAction<boolean>>;
   currentVoteVideoId?: number;
   setCurrentVoteVideoId?: Dispatch<SetStateAction<number | undefined>>;
 };
@@ -20,11 +20,11 @@ const VoteContext = createContext<ContextType | null>(null);
 
 export const VoteProvider = ({ children }: PropsWithChildren) => {
   const [isVoteOpen, setIsVoteOpen] = useState<boolean>(false);
-  const [isChangeOpen, setIsChangeOpen] = useState<boolean>(false);
+  const [isChangeVoteOpen, setIsChangeVoteOpen] = useState<boolean>(false);
   const [currentVoteVideoId, setCurrentVoteVideoId] = useState<number>();
   return (
     <VoteContext.Provider
-      value={{ isVoteOpen, setIsVoteOpen, currentVoteVideoId, setCurrentVoteVideoId, isChangeOpen, setIsChangeOpen }}
+      value={{ isVoteOpen, setIsVoteOpen, currentVoteVideoId, setCurrentVoteVideoId, isChangeVoteOpen, setIsChangeVoteOpen }}
     >
       {children}
     </VoteContext.Provider>

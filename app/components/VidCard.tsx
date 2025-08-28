@@ -2,25 +2,26 @@ import Image from "next/image";
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import VotingButton from "./VotingButton";
 import { videoType } from "@/lib/types/videoType";
+import { useVoteContext } from "@/lib/context/vote context";
+
 type Props = {
-  // country: string;
-  // title: string;
-  // artist: string;
-  // isVerified: boolean;
-  // videoUrl: string;
-  // avatarUrl: string;
   video: videoType;
   setDisplayVid: Dispatch<SetStateAction<string | undefined>>;
 };
+
 function VidCard({ video, setDisplayVid }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaing] = useState<boolean>(false);
   const [overlay, setOverlay] = useState<boolean>(false);
   const {id, title, artist:{name, location:{country}, avatar: {url}}, url:videoUrl, } = video;
+  const {isChangeVoteOpen, setCurrentVoteVideoId, setIsChangeVoteOpen} = useVoteContext();
   const isVerified = true;
   function playPauseController() {
-    if (ref.current) {
+    if (ref.current && !isChangeVoteOpen) {
       setDisplayVid(videoUrl);
+    } else if (isChangeVoteOpen) {
+      setCurrentVoteVideoId?.(id);
+      setIsChangeVoteOpen(false);
     }
   }
   function handleHover() {
