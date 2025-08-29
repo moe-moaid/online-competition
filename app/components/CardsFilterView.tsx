@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import { useGetListVideos } from "@/lib/getListService";
 import { videoType } from "@/lib/types/videoType";
 import Filter from "../vote/components/Filters";
@@ -12,10 +12,10 @@ const VidCard = lazy(() => import("./VidCard"));
 
 type Props = {
   showFilters?: boolean;
+  setDisplayVid: Dispatch<SetStateAction<string | undefined>>;
 };
-function CArdsFilterView({ showFilters }: Props) {
+function CArdsFilterView({ showFilters, setDisplayVid }: Props) {
   const { data: videos } = useGetListVideos();
-  const [displayVid, setDisplayVid] = useState<string | undefined>();
   const {
     isVoteOpen,
     setIsVoteOpen,
@@ -41,7 +41,9 @@ function CArdsFilterView({ showFilters }: Props) {
       {/* filters and videos section */}
       <section
         className={clsx(
-          isChangeVoteOpen ? "fixed inset-0 z-40 bg-black overflow-y-scroll" : "relative",
+          isChangeVoteOpen
+            ? "fixed inset-0 z-40 bg-black overflow-y-scroll"
+            : "relative"
           // isVoteOpen && "h-screen overflow-hidden"
         )}
       >
@@ -79,7 +81,7 @@ function CArdsFilterView({ showFilters }: Props) {
                   <VidCard
                     video={video}
                     key={`${video.title} - ${i}`}
-                    setDisplayVid={setDisplayVid}
+                    setDisplayVid={() => setDisplayVid(video.url)}
                   />
                 );
               })}

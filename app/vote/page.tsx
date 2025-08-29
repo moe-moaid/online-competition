@@ -149,7 +149,7 @@ function Vote() {
         </div>
       </section>
       {/* filters and videos section */}
-      <CArdsFilterView showFilters={true} />
+      <CArdsFilterView showFilters={true} setDisplayVid={setDisplayVid} />
     </div>
   );
 }

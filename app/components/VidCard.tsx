@@ -18,7 +18,7 @@ function VidCard({ video, setDisplayVid }: Props) {
   const isVerified = true;
   function playPauseController() {
     if (ref.current && !isChangeVoteOpen) {
-      setDisplayVid(videoUrl);
+      setDisplayVid?.(videoUrl);
     } else if (isChangeVoteOpen) {
       setCurrentVoteVideoId?.(id);
       setIsChangeVoteOpen(false);
