@@ -4,14 +4,13 @@ import { useGetListVideos } from "@/lib/getListService";
 import { videoType } from "@/lib/types/videoType";
 import Image from "next/image";
 import CustomControls from "./components/CustomControls";
-import Filter from "./components/Filters";
-import MciContainer from "../components/MciContainer";
-import { lazy } from "react";
-const VidCard = lazy(() => import("../components/VidCard"));
+import { useVoteContext } from "@/lib/context/vote context";
+import CArdsFilterView from "../components/CardsFilterView";
 
 function Vote() {
   const { data: videos } = useGetListVideos();
   const [displayVid, setDisplayVid] = useState<string | undefined>();
+  const { isVoteOpen, setIsVoteOpen, currentVoteVideoId } = useVoteContext();
 
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -28,16 +27,24 @@ function Vote() {
     }
   }, []);
 
-  if (!videos)
+  if (!videos || videos.length === 0)
     return (
       <p className="text-white font-bold text-[42px] text-center">
         No videos found
       </p>
     );
 
-  // optimization needed
   return (
-    <>
+    <div className={`relative ${isVoteOpen && "h-screen overflow-hidden"}`}>
+      {isVoteOpen && (
+        <>
+          <div
+            className="bg-black/20 absolute top-0 left-0 bottom-0 right-0 z-20 backdrop-blur-sm hover:cursor-pointer transition-transform duration-1000 ease-in-out"
+            onClick={() => setIsVoteOpen(false)}
+          />
+        </>
+      )}
+
       {/* top videos seciton */}
       <section className="h-[580px] relative">
         {!isVideoPlaying && (
@@ -133,28 +140,8 @@ function Vote() {
         </div>
       </section>
       {/* filters and videos section */}
-      <section className="">
-        <MciContainer className="flex flex-col md:flex-row items-start gap-x-10 justify-start mt-16">
-          <Filter />
-          <div className="flex flex-col md:flex-row gap-6 flex-wrap">
-            {videos?.map((video: videoType, i: number) => {
-              return (
-                <VidCard
-                  key={`${video.title} - ${i}`}
-                  title={video.title}
-                  country={video.artist.location.country}
-                  isVerified
-                  artist={video.artist.name}
-                  avatarUrl={video.artist.avatar.url}
-                  videoUrl={video.url}
-                  setDisplayVid={setDisplayVid}
-                />
-              );
-            })}
-          </div>
-        </MciContainer>
-      </section>
-    </>
+      <CArdsFilterView showFilters={true} setDisplayVid={setDisplayVid} />
+    </div>
   );
 }
 

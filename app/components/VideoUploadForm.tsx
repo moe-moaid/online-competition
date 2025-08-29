@@ -26,7 +26,6 @@ function VideoUploadForm() {
     "Others",
   ];
   const handleFormSubmission = (values: VideoUploadFormType) => {
-    console.log("values ===", values);
     const req_body = new FormData();
     const file = values.video?.[0];
     req_body.append("video", file);
