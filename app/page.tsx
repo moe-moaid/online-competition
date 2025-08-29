@@ -9,7 +9,7 @@ import { lazy } from "react";
 const VidCard = lazy(() => import('./components/VidCard'));
 
 export default function Home() {
-  const { data: videos, error: vid_error } = useGetListVideos();
+  const { data: videos } = useGetListVideos();
   const ref = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [displayVid, setDisplayVid] = useState<string | undefined>();

@@ -9,9 +9,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 function VideoUploadForm() {
-  const { mutate, data, error, isPending } = useUploadVideo();
+  const { mutate, data, error } = useUploadVideo();
   const { register, handleSubmit, watch, setValue } =
     useForm<VideoUploadFormType>();
   const selectedGener = watch("category");

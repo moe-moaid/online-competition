@@ -1,4 +1,3 @@
-import { videoType } from "@/lib/types/videoType";
 import React, {
   useState,
   useRef,
