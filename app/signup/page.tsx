@@ -43,8 +43,6 @@ function page() {
     error: artistError,
   } = useQuery(GET_ARTIST, { client });
   useEffect(() => {
-    console.log("videos query ===", data, loading, error);
-    console.log("artist query ===", artistData, artistLoading, artistError);
   }, [data, artistData]);
   return (
     <div className="py-[120px] flex flex-col justify-center items-center">

@@ -18,13 +18,11 @@ function CArdsFilterView({ showFilters, setDisplayVid }: Props) {
   const { data: videos } = useGetListVideos();
   const {
     isVoteOpen,
-    setIsVoteOpen,
     currentVoteVideoId,
     isChangeVoteOpen,
     setIsChangeVoteOpen,
   } = useVoteContext();
 
-  const videoRef = useRef<HTMLVideoElement>(null);
   const currentlyVotingFor = videos?.find(
     (video) => video.id === currentVoteVideoId
   );
@@ -44,7 +42,6 @@ function CArdsFilterView({ showFilters, setDisplayVid }: Props) {
           isChangeVoteOpen
             ? "fixed inset-0 z-40 bg-black overflow-y-scroll"
             : "relative"
-          // isVoteOpen && "h-screen overflow-hidden"
         )}
       >
         <MciContainer className="flex flex-col md:flex-row items-start gap-x-9 justify-start mt-16">

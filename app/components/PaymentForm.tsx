@@ -2,7 +2,6 @@
 import { useVoteContext } from "@/lib/context/vote context";
 import clsx from "clsx";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import VidCard from "./VidCard";
 import { useGetListVideos } from "@/lib/getListService";
 import { videoType } from "@/lib/types/videoType";
 import VotePreview from "../vote/components/VotePreview";

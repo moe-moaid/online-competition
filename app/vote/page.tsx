@@ -4,13 +4,8 @@ import { useGetListVideos } from "@/lib/getListService";
 import { videoType } from "@/lib/types/videoType";
 import Image from "next/image";
 import CustomControls from "./components/CustomControls";
-import Filter from "./components/Filters";
-import MciContainer from "../components/MciContainer";
-import { lazy } from "react";
 import { useVoteContext } from "@/lib/context/vote context";
-import VotePreview from "./components/VotePreview";
 import CArdsFilterView from "../components/CardsFilterView";
-const VidCard = lazy(() => import("../components/VidCard"));
 
 function Vote() {
   const { data: videos } = useGetListVideos();
@@ -19,10 +14,6 @@ function Vote() {
 
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const currentlyVotingFor = videos?.find(
-    (video) => video.id === currentVoteVideoId
-  );
-  console.log("currentlyVotingFor", currentlyVotingFor);
   function playVideo() {
     if (videoRef.current && videoRef.current.paused) {
       videoRef.current.play();
