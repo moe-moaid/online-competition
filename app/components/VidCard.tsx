@@ -11,7 +11,6 @@ type Props = {
 
 function VidCard({ video, setDisplayVid }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaing] = useState<boolean>(false);
   const [overlay, setOverlay] = useState<boolean>(false);
   const {id, title, artist:{name, location:{country}, avatar: {url}}, url:videoUrl, } = video;
   const {isChangeVoteOpen, setCurrentVoteVideoId, setIsChangeVoteOpen} = useVoteContext();
@@ -38,7 +37,7 @@ function VidCard({ video, setDisplayVid }: Props) {
         >
           <div
             className={`absolute left-0 right-0 top-0 origin-bottom ${
-              overlay && !isPlaying ? "opacity-100" : "opacity-0"
+              overlay && "opacity-100" 
             } bottom-0 bg-black/65 ease-in-out duration-300`}
           />
           <video

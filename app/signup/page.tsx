@@ -1,49 +1,40 @@
 "use client";
-import React, { useEffect, useRef } from "react";
 import MciInput from "../components/MciInput";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import VidCard from "../components/VidCard";
-import { gql, useQuery } from "@apollo/client";
-import client from "@/lib/apolloClient";
+// import { gql } from "@apollo/client";
 
-const GET_VIDEOS = gql`
-  query GetVideos {
-    videos {
-      id
-      title
-      url
-      createdAt
-    }
-  }
-`;
+// const GET_VIDEOS = gql`
+//   query GetVideos {
+//     videos {
+//       id
+//       title
+//       url
+//       createdAt
+//     }
+//   }
+// `;
 
-const GET_ARTIST = gql`
-  query GetArtists {
-    artists {
-      name
-      age
-      email
-      phone
-      locationId
-      videos {
-        id
-        title
-        url
-        createdAt
-      }
-    }
-  }
-`;
+// const GET_ARTIST = gql`
+//   query GetArtists {
+//     artists {
+//       name
+//       age
+//       email
+//       phone
+//       locationId
+//       videos {
+//         id
+//         title
+//         url
+//         createdAt
+//       }
+//     }
+//   }
+// `;
+
 function page() {
-  const { data, loading, error } = useQuery(GET_VIDEOS, { client });
-  const {
-    data: artistData,
-    loading: artistLoading,
-    error: artistError,
-  } = useQuery(GET_ARTIST, { client });
-  useEffect(() => {
-  }, [data, artistData]);
   return (
     <div className="py-[120px] flex flex-col justify-center items-center">
       <form

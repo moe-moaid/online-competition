@@ -8,7 +8,7 @@ import CArdsFilterView from "./components/CardsFilterView";
 import { useVoteContext } from "@/lib/context/vote context";
 
 export default function Home() {
-  const { data: videos, error: vid_error } = useGetListVideos();
+  const { data: videos } = useGetListVideos();
   const ref = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [displayVid, setDisplayVid] = useState<string | undefined>();
