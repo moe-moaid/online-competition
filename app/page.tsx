@@ -1,18 +1,19 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { useGetListVideos } from "@/lib/getListService";
-import { videoType } from "@/lib/types/videoType";
 import MciContainer from "./components/MciContainer";
 import Image from "next/image";
 import PlayVideo from "./components/PlayVideo";
-import { lazy } from "react";
-const VidCard = lazy(() => import('./components/VidCard'));
+import CArdsFilterView from "./components/CardsFilterView";
+import { useVoteContext } from "@/lib/context/vote context";
 
 export default function Home() {
   const { data: videos } = useGetListVideos();
   const ref = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [displayVid, setDisplayVid] = useState<string | undefined>();
+  const { isChangeVoteOpen } = useVoteContext();
+  const { isVoteOpen, setIsVoteOpen } = useVoteContext();
   function handlePlay() {
     if (ref.current) {
       setIsPlaying(true);
@@ -33,7 +34,15 @@ export default function Home() {
 
   return (
     <>
-      <main className="relative">
+      <main className={`relative ${isVoteOpen && "h-screen overflow-hidden"}`}>
+        {isVoteOpen && (
+          <>
+            <div
+              className="bg-black/20 absolute top-0 left-0 bottom-0 right-0 z-20 backdrop-blur-sm hover:cursor-pointer transition-transform duration-1000 ease-in-out"
+              onClick={() => setIsVoteOpen(false)}
+            />
+          </>
+        )}
         <section className="w-full">
           <div className="relative h-[350px] sm:h-[550] md:h-[750px] lg:h-[980px]">
             <div className="absolute z-10 left-0 right-0 top-0 bottom-0 bg-black/45" />
@@ -63,29 +72,10 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section>
-          <h1 className="text-white text-center my-12 text-[40px] font-semibold">
-            Videos
-          </h1>
-          <MciContainer className="flex flex-row flex-wrap justify-center items-ceneter gap-4">
-            {videos &&
-              videos.map((video: videoType, i: number) => (
-                <VidCard
-                  key={`${video.title} - ${i}`}
-                  title={video.title}
-                  country={video.artist.location.country}
-                  isVerified
-                  artist={video.artist.name}
-                  avatarUrl={video.artist.avatar.url}
-                  videoUrl={video.url}
-                  setDisplayVid={setDisplayVid}
-                />
-              ))}
-            {displayVid && (
-              <PlayVideo video={displayVid} setDisplayVid={setDisplayVid} />
-            )}
-          </MciContainer>
-        </section>
+        <CArdsFilterView showFilters={isChangeVoteOpen} setDisplayVid={setDisplayVid} />
+        {displayVid && (
+          <PlayVideo video={displayVid} setDisplayVid={setDisplayVid} />
+        )}
         <section>
           <MciContainer className="mt-14 bg-gray-bg py-32">
             <h1 className="text-white text-center mb-14 font-semibold text-[40px]">
@@ -120,13 +110,15 @@ export default function Home() {
                     />
                   </svg>
                 </button>
-                <video
-                  className="rounded-sm w-full"
-                  ref={ref}
-                  src={process.env.NEXT_PUBLIC_API_BASE_URL + videos?.[7].url}
-                  onPlay={handlePlay}
-                  onPause={handlePause}
-                />
+                {videos?.[7] && process.env.NEXT_PUBLIC_API_BASE_URL && (
+                  <video
+                    className="rounded-sm w-full"
+                    ref={ref}
+                    src={process.env.NEXT_PUBLIC_API_BASE_URL + videos?.[7].url}
+                    onPlay={handlePlay}
+                    onPause={handlePause}
+                  />
+                )}
               </div>
               <div className="flex flex-col items-start gap-y-4 text-white w-full md:w-1/2">
                 <h3 className="text-[32px] font-semibold">

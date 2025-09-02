@@ -31,7 +31,6 @@ function PlayVideo({
       <div
         className="absolute top-0 bottom-0 start-0 end-0 bg-black/65"
         onClick={() => {
-          console.log("clicked! ");
           setDisplayVid(undefined);
         }}
       />

@@ -21,7 +21,6 @@ export function useUploadVideo() {
             const percentCompleted = Math.round(
               (progressEvent.loaded * 100) / (progressEvent.total || 1)
             );
-            console.log(`Upload Progress: ${percentCompleted}%`);
           },
         }
       );

@@ -234,12 +234,7 @@ function page() {
         </p>
       </form>
       <VidCard
-        country="USA"
-        title="Let Me Down Slowly"
-        artist="Farooq"
-        isVerified
-        avatarUrl="/singre-image.png"
-        videoUrl=""
+        video={data[0]}
         setDisplayVid={() => true}
       />
     </div>

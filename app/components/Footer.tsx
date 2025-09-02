@@ -1,3 +1,4 @@
+import { useVoteContext } from "@/lib/context/vote context";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -16,6 +17,8 @@ const endCol = [
   { name: "Contact Us", href: "/contact-us" },
 ];
 function Footer() {
+  const { isVoteOpen } = useVoteContext();
+  if (isVoteOpen) return null;
   return (
     <div className="bg-gray-bg px-[10px] md:px-[150px] pt-14 pb-10 text-white">
       <div className="flex flex-col md:flex-row justify-start border-b gap-x-[150px] pb-9">

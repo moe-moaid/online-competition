@@ -6,6 +6,7 @@ import {
   useContext,
   useState,
 } from "react";
+import { videoType } from "../types/videoType";
 
 type ContextType = {
   isVoteOpen: boolean;
