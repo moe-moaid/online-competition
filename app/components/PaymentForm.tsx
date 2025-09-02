@@ -5,6 +5,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useGetListVideos } from "@/lib/getListService";
 import { videoType } from "@/lib/types/videoType";
 import VotePreview from "../vote/components/VotePreview";
+import { useForm } from "react-hook-form";
 
 function PaymentForm() {
   const { isVoteOpen, setIsVoteOpen, currentVoteVideoId } = useVoteContext();
@@ -172,6 +173,11 @@ const CardView = ({
   const { data: videos } = useGetListVideos();
   const video = videos?.find((video: videoType) => video.id === currentVideoId);
   const { setIsChangeVoteOpen } = useVoteContext();
+  const { register, handleSubmit } = useForm();
+
+  const castVote = handleSubmit((values) => {
+    return values;
+  })
 
   return (
     <div className="flex flex-col items-start justify-center px-6 mt-6">
@@ -192,7 +198,7 @@ const CardView = ({
         </button>
         <p className="text-[24px] font-semibold">Debit Card</p>
       </div>
-      <form className="flex flex-col gap-y-6 mt-6 w-full" action="">
+      <form className="flex flex-col gap-y-6 mt-6 w-full" onSubmit={castVote}>
         {PaymentInputs.map((input, index) => (
           <div
             key={`${input.name} - ${index}`}
@@ -203,8 +209,9 @@ const CardView = ({
             </label>
             <input
               className="bg-transparent border border-white rounded-sm text-gray-text px-2 py-4 focus:text-white focus:border-legendary-500 outline-none stroke-none w-full"
-              name={input.name}
+              // name={input.name}
               type="text"
+              {...register(input.name)}
               placeholder={input.placeHolder}
             />
           </div>

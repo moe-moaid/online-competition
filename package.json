@@ -27,7 +27,7 @@
     "next-themes": "^0.4.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-hook-form": "^7.58.1",
+    "react-hook-form": "^7.62.0",
     "react-social-icons": "^6.24.0",
     "shadcn": "^2.6.3",
     "tailwind-merge": "^3.3.1",
