@@ -2,10 +2,12 @@
 import { useVoteContext } from "@/lib/context/vote context";
 import clsx from "clsx";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useGetListVideos } from "@/lib/getListService";
+import { useGetListVideos } from "@/lib/api/getListService";
 import { videoType } from "@/lib/types/videoType";
 import VotePreview from "../vote/components/VotePreview";
 import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { castVote } from "@/lib/services/vote";
 
 function PaymentForm() {
   const { isVoteOpen, setIsVoteOpen, currentVoteVideoId } = useVoteContext();
@@ -174,10 +176,14 @@ const CardView = ({
   const video = videos?.find((video: videoType) => video.id === currentVideoId);
   const { setIsChangeVoteOpen } = useVoteContext();
   const { register, handleSubmit } = useForm();
-
-  const castVote = handleSubmit((values) => {
-    return values;
-  })
+  const mutaion = useMutation({
+    mutationFn: (videoId: number) => castVote(videoId),
+  });
+  const onSubmit = handleSubmit(async (values) => {
+    if (video) {
+      mutaion.mutate(video.id);
+    }
+  });
 
   return (
     <div className="flex flex-col items-start justify-center px-6 mt-6">
@@ -198,7 +204,7 @@ const CardView = ({
         </button>
         <p className="text-[24px] font-semibold">Debit Card</p>
       </div>
-      <form className="flex flex-col gap-y-6 mt-6 w-full" onSubmit={castVote}>
+      <form className="flex flex-col gap-y-6 mt-6 w-full" onSubmit={onSubmit}>
         {PaymentInputs.map((input, index) => (
           <div
             key={`${input.name} - ${index}`}
@@ -209,7 +215,6 @@ const CardView = ({
             </label>
             <input
               className="bg-transparent border border-white rounded-sm text-gray-text px-2 py-4 focus:text-white focus:border-legendary-500 outline-none stroke-none w-full"
-              // name={input.name}
               type="text"
               {...register(input.name)}
               placeholder={input.placeHolder}

@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { videoType } from "./types/videoType";
+import { videoType } from "../types/videoType";
 
 export function useGetListVideos() {
-  return useQuery<videoType []>({
+  return useQuery<videoType[]>({
     staleTime: 1000 * 60 * 5,
     refetchOnMount: false,
     refetchOnWindowFocus: false,

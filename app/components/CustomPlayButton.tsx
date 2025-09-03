@@ -1,4 +1,4 @@
-import React, { SetStateAction } from "react";
+import React from "react";
 
 type Props = {
   videoRef: React.RefObject<HTMLVideoElement | null>;

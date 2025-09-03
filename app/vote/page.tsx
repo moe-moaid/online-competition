@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { useGetListVideos } from "@/lib/getListService";
+import { useGetListVideos } from "@/lib/api/getListService";
 import { videoType } from "@/lib/types/videoType";
 import Image from "next/image";
 import CustomControls from "./components/CustomControls";
@@ -10,7 +10,7 @@ import CArdsFilterView from "../components/CardsFilterView";
 function Vote() {
   const { data: videos } = useGetListVideos();
   const [displayVid, setDisplayVid] = useState<string | undefined>();
-  const { isVoteOpen, setIsVoteOpen, currentVoteVideoId } = useVoteContext();
+  const { isVoteOpen, setIsVoteOpen } = useVoteContext();
 
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
