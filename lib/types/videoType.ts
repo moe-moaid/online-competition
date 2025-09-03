@@ -1,13 +1,10 @@
 import { Category } from "./videoUploadFormType";
+import { ArtistType } from "./artistType";
 
 export type videoType = {
   id: number;
   artistId: number;
-  artist: {
-    name: string;
-    location: { country: string };
-    avatar: { url: string };
-  };
+  artist: ArtistType;
   category: Category;
   description: string;
   title: string;

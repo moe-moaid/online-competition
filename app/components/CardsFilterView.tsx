@@ -1,6 +1,6 @@
 "use client";
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
-import { useGetListVideos } from "@/lib/getListService";
+import { useGetListVideos } from "@/lib/api/getListService";
 import { videoType } from "@/lib/types/videoType";
 import Filter from "../vote/components/Filters";
 import MciContainer from "./MciContainer";

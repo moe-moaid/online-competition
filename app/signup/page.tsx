@@ -1,38 +1,6 @@
-"use client";
 import MciInput from "../components/MciInput";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import VidCard from "../components/VidCard";
-// import { gql } from "@apollo/client";
-
-// const GET_VIDEOS = gql`
-//   query GetVideos {
-//     videos {
-//       id
-//       title
-//       url
-//       createdAt
-//     }
-//   }
-// `;
-
-// const GET_ARTIST = gql`
-//   query GetArtists {
-//     artists {
-//       name
-//       age
-//       email
-//       phone
-//       locationId
-//       videos {
-//         id
-//         title
-//         url
-//         createdAt
-//       }
-//     }
-//   }
-// `;
 
 function page() {
   return (
@@ -233,10 +201,6 @@ function page() {
           </Link>
         </p>
       </form>
-      <VidCard
-        video={data[0]}
-        setDisplayVid={() => true}
-      />
     </div>
   );
 }

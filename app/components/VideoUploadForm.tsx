@@ -1,5 +1,5 @@
 import { Category, VideoUploadFormType } from "@/lib/types/videoUploadFormType";
-import { useUploadVideo } from "@/lib/uploadService";
+import { useUploadVideo } from "@/lib/api/uploadService";
 import MciInput from "./MciInput";
 import {
   DropdownMenu,

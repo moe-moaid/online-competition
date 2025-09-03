@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { useGetListVideos } from "@/lib/getListService";
+import { useGetListVideos } from "@/lib/api/getListService";
 import MciContainer from "./components/MciContainer";
 import Image from "next/image";
 import PlayVideo from "./components/PlayVideo";
@@ -72,7 +72,10 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <CArdsFilterView showFilters={isChangeVoteOpen} setDisplayVid={setDisplayVid} />
+        <CArdsFilterView
+          showFilters={isChangeVoteOpen}
+          setDisplayVid={setDisplayVid}
+        />
         {displayVid && (
           <PlayVideo video={displayVid} setDisplayVid={setDisplayVid} />
         )}
