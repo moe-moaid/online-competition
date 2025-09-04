@@ -12,7 +12,6 @@ function page() {
           log<span className="text-legendary-500">in</span>
         </h1>
         <form className="flex flex-col gap-y-6 justify-center items-center w-full">
-          {/*  className, name, required, label, placeholder  */}
           <MciInput
             name="email"
             required

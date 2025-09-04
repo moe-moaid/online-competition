@@ -1,6 +1,5 @@
 "use client";
 import { useVoteContext } from "@/lib/context/vote context";
-import { videoType } from "@/lib/types/videoType";
 import React from "react";
 
 type Props = {
