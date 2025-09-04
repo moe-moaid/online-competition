@@ -176,14 +176,32 @@ const CardView = ({
   const video = videos?.find((video: videoType) => video.id === currentVideoId);
   const { setIsChangeVoteOpen } = useVoteContext();
   const { register, handleSubmit } = useForm();
-  const mutaion = useMutation({
+  const mutation = useMutation({
     mutationFn: (videoId: number) => castVote(videoId),
   });
+
   const onSubmit = handleSubmit(async (values) => {
     if (video) {
-      mutaion.mutate(video.id);
+      mutation.mutate(3200);
     }
   });
+
+  if (mutation.isError) {
+    const err: any = mutation.error; // graphql-request ClientError
+    const graphQLError = err.response?.errors?.[0];
+  
+    // Try both formats, depending on how NestJS packaged it
+    const statusCode =
+      graphQLError?.extensions?.originalError?.statusCode ??
+      graphQLError?.extensions?.status;
+  
+    let message = "Something went wrong";
+    if (statusCode === 400) message = "Please provide a valid video ID";
+    if (statusCode === 404) message = "This video doesn’t exist";
+    console.log('err ===', err);
+    console.log('message ===', message);
+  }
+  
 
   return (
     <div className="flex flex-col items-start justify-center px-6 mt-6">
@@ -236,6 +254,7 @@ const CardView = ({
             <VotePreview video={video} />
           </div>
         </div>
+        {mutation.error && <p className="text-red-600">{mutation.error.message}</p>}
         <button
           type="submit"
           className="w-full bg-white rounded-md py-4 text-center text-[#333333] text-[20px] font-semibold"

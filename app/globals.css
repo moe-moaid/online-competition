@@ -282,3 +282,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
