@@ -1,10 +1,5 @@
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
-import { VideoUploadFormType } from "../types/videoUploadFormType";
-
-type Params = {
-  data: VideoUploadFormType;
-};
 
 export function useUploadVideo() {
   return useMutation({
@@ -15,11 +10,6 @@ export function useUploadVideo() {
         {
           headers: {
             "Content-Type": "multipart/form-data",
-          },
-          onUploadProgress: (progressEvent) => {
-            const percentCompleted = Math.round(
-              (progressEvent.loaded * 100) / (progressEvent.total || 1)
-            );
           },
         }
       );
