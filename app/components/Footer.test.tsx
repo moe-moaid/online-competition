@@ -17,10 +17,6 @@ How the role is determined?
   --Provided by text content, aria-label, aria-labelledby, etc.
  */
 
-  jest.mock('react-social-icons', () => ({
-  SocialIcon: () => <div data-testid="social-icon" />,
-}));
-
 describe("Footer Component", () => {
   beforeEach(() => {
     render(
