@@ -59,7 +59,7 @@ function Footer() {
       </div>
       <div className="flex flex-col md:flex-row md:justify-between items-center mt-4">
         <p className="text-[12px] md:text-[16px]">info@showitwithmackie.com</p>
-        <p className="text-[12px] md:text-[16px]">ShowWithMackie © 2022 All Rights Reserved</p>
+        <p className="text-[12px] md:text-[16px]" data-testid="date">ShowWithMackie © {new Date().getFullYear()} All Rights Reserved</p>
         <div className="flex flex-row justify-between items-center gap-x-4 mt-4 md:mt-0">
           <SocialIcon
             url="https://www.instagram.com"
