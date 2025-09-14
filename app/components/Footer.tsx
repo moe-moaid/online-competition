@@ -20,7 +20,7 @@ function Footer() {
   const { isVoteOpen } = useVoteContext();
   if (isVoteOpen) return null;
   return (
-    <div className="bg-gray-bg px-[10px] md:px-[150px] pt-14 pb-10 text-white">
+    <footer className="bg-gray-bg px-[10px] md:px-[150px] pt-14 pb-10 text-white">
       <div className="flex flex-col md:flex-row justify-start border-b gap-x-[150px] pb-9">
         <div className="w-full md:w-1/3 mb-4 md:mb-0">
           <div className="w-[250px] h-[65px]">
@@ -59,7 +59,7 @@ function Footer() {
       </div>
       <div className="flex flex-col md:flex-row md:justify-between items-center mt-4">
         <p className="text-[12px] md:text-[16px]">info@showitwithmackie.com</p>
-        <p className="text-[12px] md:text-[16px]">ShowWithMackie © 2022 All Rights Reserved</p>
+        <p className="text-[12px] md:text-[16px]" data-testid="date">ShowWithMackie © {new Date().getFullYear()} All Rights Reserved</p>
         <div className="flex flex-row justify-between items-center gap-x-4 mt-4 md:mt-0">
           <SocialIcon
             url="https://www.instagram.com"
@@ -83,7 +83,7 @@ function Footer() {
           />
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
 export default Footer;

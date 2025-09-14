@@ -6,6 +6,7 @@ import Image from "next/image";
 import CustomControls from "./components/CustomControls";
 import { useVoteContext } from "@/lib/context/vote context";
 import CArdsFilterView from "../components/CardsFilterView";
+import PlayVideo from "../components/PlayVideo";
 
 function Vote() {
   const { data: videos } = useGetListVideos();
@@ -43,6 +44,10 @@ function Vote() {
             onClick={() => setIsVoteOpen(false)}
           />
         </>
+      )}
+
+      {displayVid && (
+          <PlayVideo video={displayVid} setDisplayVid={setDisplayVid} />
       )}
 
       {/* top videos seciton */}

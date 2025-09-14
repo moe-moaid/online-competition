@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 function Navbar() {
   return (
-    <div className="flex flex-row items-center flex-shrink justify-between">
+    <nav className="flex flex-row items-center flex-shrink justify-between" role="navrole">
       <div className="w-[250px] h-[65px] relative">
         <Image src={"/logo.png"} fill alt="logo" />
       </div>
@@ -33,11 +33,11 @@ function Navbar() {
       </div>
       <div className="hidden lg:flex items-center justify-between gap-x-14">
         <div className="flex text-white flex-row items-center justify-center gap-x-4">
-          <Link href="/">Home</Link>
-          <Link href="/about">About Us</Link>
-          <Link href="/vote">Vote</Link>
-          <Link href="/finals">Finals</Link>
-          <Link href="/contact-us">Contact Us</Link>
+          <Link href="/" data-testid="navigation-link">Home</Link>
+          <Link href="/about" data-testid="navigation-link">About Us</Link>
+          <Link href="/vote" data-testid="navigation-link">Vote</Link>
+          <Link href="/finals" data-testid="navigation-link">Finals</Link>
+          <Link href="/contact-us" data-testid="navigation-link">Contact Us</Link>
         </div>
         <div className="flex gap-x-8">
           <Button
@@ -54,7 +54,7 @@ function Navbar() {
           </Button>
         </div>
       </div>
-    </div>
+    </nav>
   );
 }
 

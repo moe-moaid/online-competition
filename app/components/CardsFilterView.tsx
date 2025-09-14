@@ -46,7 +46,7 @@ function CArdsFilterView({ showFilters, setDisplayVid }: Props) {
       >
         <MciContainer className="flex flex-col md:flex-row items-start gap-x-9 justify-start mt-16">
           {showFilters && (
-            <div className="flex flex-col gap-y-6">
+            <div className="flex flex-col gap-y-6" data-testid="filters-section">
               <Filter />
               {isChangeVoteOpen && (
                 <div className="bg-gray-bg p-5 rounded-xl">
