@@ -5,7 +5,7 @@ import { VoteProvider } from "@/lib/context/vote context";
 
 describe("Test card display view component", () => {
   const setDisplayVid = jest.fn();
-  test("filters shouldn't render", async () => {
+  it("filters shouldn't render", async () => {
     const queryClient = new QueryClient();
     render(
       <VoteProvider>
@@ -14,12 +14,15 @@ describe("Test card display view component", () => {
         </QueryClientProvider>
       </VoteProvider>
     );
+    // waitFor keeps running queryByTestId untill it's true, or it timesout, 
+    // currently it is expected to be Null which is the immidiat case that's why it returns true
     await waitFor(() => {
+        // queryBy looks into the DOM immedietly, it doesn't wait, it is not async
       expect(screen.queryByTestId("filters-section")).toBeNull();
     });
   });
 
-  test("filters shouldn render", async () => {
+  it("filters shouldn render", async () => {
     const queryClient = new QueryClient();
     render(
       <VoteProvider>
@@ -28,7 +31,8 @@ describe("Test card display view component", () => {
         </QueryClientProvider>
       </VoteProvider>
     );
-    const filters = await screen.findByTestId("filters-section");
-    expect(filters).toBeInTheDocument();
+    // use findBy if you expect something to eventually show-up, it waits, it's async
+    expect(await screen.findByTestId("filters-section")).toBeInTheDocument();
   });
+
 });
