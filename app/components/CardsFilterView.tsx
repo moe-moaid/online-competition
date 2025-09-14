@@ -22,8 +22,6 @@ function CArdsFilterView({ showFilters, setDisplayVid }: Props) {
     isChangeVoteOpen,
     setIsChangeVoteOpen,
   } = useVoteContext();
-  console.log(videos);
-  
 
   const currentlyVotingFor = videos?.find(
     (video) => video.id === currentVoteVideoId
