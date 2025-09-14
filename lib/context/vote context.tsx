@@ -15,7 +15,7 @@ type ContextType = {
   currentVoteVideoId?: number;
   setCurrentVoteVideoId?: Dispatch<SetStateAction<number | undefined>>;
 };
-const VoteContext = createContext<ContextType | null>(null);
+export const VoteContext = createContext<ContextType | null>(null);
 
 export const VoteProvider = ({ children }: PropsWithChildren) => {
   const [isVoteOpen, setIsVoteOpen] = useState<boolean>(false);

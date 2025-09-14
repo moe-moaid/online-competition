@@ -4,7 +4,7 @@ import React from "react";
 
 function VotePreview({ video }: { video?: videoType }) {
   return (
-    <>
+    <div data-testid= "vote-preview">
       <div className="relative w-full h-full rounded-lg overflow-clip">
         <div className={`absolute inset-0 bg-black/65`} />
         <video
@@ -77,7 +77,7 @@ function VotePreview({ video }: { video?: videoType }) {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
