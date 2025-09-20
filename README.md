@@ -34,3 +34,14 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Test Query Families:
+
+| Variant          | Return type                            | Throws if none found?       | Throws if >1 found?      |
+| ---------------- | -------------------------------------- | --------------------------- | ------------------------ |
+| **getBy\***      | Single element                         | ✅ Yes (if none)             | ✅ Yes (if more than one) |
+| **getAllBy\***   | Array of elements                      | ✅ Yes (if none)             | ❌ No (returns all)       |
+| **queryBy\***    | Single element or `null`               | ❌ No (returns null)         | ✅ Yes (if more than one) |
+| **queryAllBy\*** | Array of elements (empty if none)      | ❌ No (empty array)          | ❌ No                     |
+| **findBy\***     | Promise resolving to element           | ✅ Yes after timeout         | ✅ Yes (if more than one) |
+| **findAllBy\***  | Promise resolving to array of elements | ✅ Yes after timeout if none | ❌ No (returns all)       |
