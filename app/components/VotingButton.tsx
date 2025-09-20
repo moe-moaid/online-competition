@@ -14,6 +14,7 @@ function VotingButton({ currentVideoId }: Props) {
   } = useVoteContext();
   return (
     <button
+    data-testid="vote-button"
       className="w-14 h-14"
       onClick={() => {
         if (isChangeVoteOpen) {

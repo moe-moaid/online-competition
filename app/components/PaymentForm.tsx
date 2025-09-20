@@ -20,6 +20,7 @@ function PaymentForm() {
 
   return (
     <div
+      data-testid='payment-dialog'
       className={clsx(
         "origin-right fixed top-0 right-0 bottom-0 text-white z-30 scale-x-0 transition-transform duration-300 ease-in-out h-100 bg-black w-1/4 border-s border-gray-text h-screen overflow-y-scroll",
         isVoteOpen && "scale-x-100"

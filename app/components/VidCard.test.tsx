@@ -1,8 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import VidCard from "./VidCard";
 import { videoType } from "@/lib/types/videoType";
-import { VoteContext } from "@/lib/context/vote context";
-import { PropsWithChildren } from "react";
 import { VoteProvider } from "@/lib/context/vote context";
 
 describe("test video cards for rendering the right things", () => {
@@ -37,4 +35,9 @@ describe("test video cards for rendering the right things", () => {
     expect(screen.queryByRole('img')).toBeInTheDocument(); // artist avatar
     expect(screen.queryAllByRole('button')).toBeDefined(); // play button and vote button
   });
+
+  it("makes sure there are two buttons", () => {
+    const buttons = screen.queryAllByRole('button');
+    expect(buttons).toHaveLength(2);
+  })
 });

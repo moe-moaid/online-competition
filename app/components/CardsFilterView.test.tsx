@@ -24,12 +24,12 @@ describe("Test card display view component", () => {
     });
   });
 
-  it("filters shouldn render", async () => {
+  it("filters shouldn render", () => {
     renderWithProviders(
       <CArdsFilterView showFilters={true} setDisplayVid={setDisplayVid} />
     );
     // use findBy if you expect something to eventually show-up, it waits, it's async
-    expect(await screen.findByTestId("filters-section")).toBeInTheDocument();
+    expect(screen.getByTestId("filters-section")).toBeInTheDocument();
   });
 
   it("tests for change vote is open", () => {

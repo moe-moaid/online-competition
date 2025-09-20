@@ -30,3 +30,5 @@ jest.mock("@/lib/api/getListService", () => ({
     ],
   }),
 }));
+
+jest.mock('graphql-request');
