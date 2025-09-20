@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-type ContextType = {
+export type ContextType = {
   isVoteOpen: boolean;
   setIsVoteOpen: Dispatch<SetStateAction<boolean>>;
   isChangeVoteOpen: boolean;

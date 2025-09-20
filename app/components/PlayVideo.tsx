@@ -29,7 +29,7 @@ function PlayVideo({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
-        className="absolute top-0 bottom-0 start-0 end-0 bg-black/65"
+        className="absolute inset bg-black/65"
         onClick={() => {
           setDisplayVid(undefined);
         }}
