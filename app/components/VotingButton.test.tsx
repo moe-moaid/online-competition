@@ -11,7 +11,6 @@ describe("make sure voting button opens voting dialog", () => {
 
   it("tests dom change when the button is clicked", async () => {
     const votingButton = screen.queryByTestId("vote-button");
-    // const votingDialog = screen.queryByTestId('payment-dialog');
     if(votingButton)
     fireEvent.click(votingButton);
     await waitFor(() => {

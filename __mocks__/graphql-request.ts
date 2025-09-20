@@ -8,7 +8,6 @@ export class GraphQLClient {
   }
 }
 
-// optional if you call request() directly
 export const request = jest.fn();
 
 // mock gql tag
