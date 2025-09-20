@@ -1,12 +1,14 @@
-import { useState } from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import VotingButton from "./VotingButton";
-import { VoteContext } from "@/lib/context/vote context";
+import { VoteProvider } from "@/lib/context/vote context";
 import PaymentForm from "./PaymentForm";
 
 describe("make sure voting button opens voting dialog", () => {
   beforeAll(() => {
-    render(<VoteWrapper currentVideoId={7} />);
+    render(<VoteProvider >
+      <PaymentForm />
+      <VotingButton currentVideoId={7} />
+    </VoteProvider>);
   });
 
   it("tests dom change when the button is clicked", async () => {
@@ -18,27 +20,3 @@ describe("make sure voting button opens voting dialog", () => {
    });
   });
 });
-
-const VoteWrapper = ({ currentVideoId }: { currentVideoId: number }) => {
-  const [isVoteOpen, setIsVoteOpen] = useState<boolean>(false);
-  const [currentVoteVideoId, setCurrentVoteVideoId] = useState<
-    number | undefined
-  >(undefined);
-  const [isChangeVoteOpen, setIsChangeVoteOpen] = useState<boolean>(false);
-
-  const voteContext = {
-    isVoteOpen,
-    currentVoteVideoId,
-    setIsVoteOpen,
-    setCurrentVoteVideoId,
-    isChangeVoteOpen,
-    setIsChangeVoteOpen,
-  };
-
-  return (
-    <VoteContext.Provider value={voteContext}>
-      <PaymentForm />
-      <VotingButton currentVideoId={currentVideoId} />
-    </VoteContext.Provider>
-  );
-};
