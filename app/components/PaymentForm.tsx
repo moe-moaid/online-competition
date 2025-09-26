@@ -8,9 +8,20 @@ import VotePreview from "../vote/components/VotePreview";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { castVote } from "@/lib/services/vote";
+import { createPaymentIntent } from "@/lib/services/vote";
+import StripeWrapper from "./StripeWrapper";
+import {
+  PaymentElement,
+  useStripe,
+  useElements,
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
+} from "@stripe/react-stripe-js";
 
 function PaymentForm() {
-  const { isVoteOpen, setIsVoteOpen, currentVoteVideoId } = useVoteContext();
+  const { isVoteOpen, setIsVoteOpen, currentVoteVideoId, clientSecret } =
+    useVoteContext();
   const [method, setMethod] = useState<"paypal" | "card" | null>(null);
   useEffect(() => {
     if (!isVoteOpen) {
@@ -174,10 +185,13 @@ const CardView = ({
 }) => {
   const { data: videos } = useGetListVideos();
   const video = videos?.find((video: videoType) => video.id === currentVideoId);
-  const { setIsChangeVoteOpen } = useVoteContext();
+  const { setIsChangeVoteOpen, clientSecret } = useVoteContext();
   const { register, handleSubmit } = useForm();
   const mutaion = useMutation({
     mutationFn: (videoId: number) => castVote(videoId),
+  });
+  const paymentIntent = useMutation({
+    mutationFn: (videoId: number) => createPaymentIntent(videoId),
   });
   const onSubmit = handleSubmit(async (values) => {
     if (video) {
@@ -185,6 +199,43 @@ const CardView = ({
     }
   });
 
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleVote = async (e: any) => {
+    e.preventDefault();
+    if (!stripe || !elements) return;
+
+    // Confirm payment intent on frontend
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        // Return URL only needed for redirects (SCA), but can still set it:
+        return_url: "https://your-site.com/return",
+      },
+    });
+
+    if (error) {
+      console.error(error);
+    }
+  };
+  // if (!clientSecret)
+  //   return (
+  //     <p className="text-white font-semibold text-[20px] text-center">
+  //       Loading form...
+  //     </p>
+  //   );
+  const elementOptions = {
+    style: {
+      base: {
+        backgroundColor: 'transparent',
+        color: '#9CA3AF', // your text-gray-text color
+        fontSize: '16px',
+        padding: '1rem 0.5rem', // py-4 px-2
+      },
+      
+    },
+  };
   return (
     <div className="flex flex-col items-start justify-center px-6 mt-6">
       <div className="flex flex-row justify-start items-center gap-x-4">
@@ -205,7 +256,7 @@ const CardView = ({
         <p className="text-[24px] font-semibold">Debit Card</p>
       </div>
       <form className="flex flex-col gap-y-6 mt-6 w-full" onSubmit={onSubmit}>
-        {PaymentInputs.map((input, index) => (
+        {/* {PaymentInputs.map((input, index) => (
           <div
             key={`${input.name} - ${index}`}
             className="flex flex-col items-start gap-y-2"
@@ -220,7 +271,37 @@ const CardView = ({
               placeholder={input.placeHolder}
             />
           </div>
-        ))}
+        ))} */}
+        {/* <PaymentElement id="payment-element" /> */}
+        {/* <CardNumberElement id="payment-element" />
+        <CardExpiryElement id="payment-element" />
+        <CardCvcElement id="payment-element" /> */}
+        <div className="w-full">
+        <label className="block text-sm font-medium text-gray-400 mb-1">
+          Card number
+        </label>
+        <div className="bg-transparent border border-white rounded-sm px-2 py-4 focus-within:border-legendary-500 focus-within:text-white">
+          <CardNumberElement options={elementOptions} />
+        </div>
+      </div>
+
+      <div className="w-full">
+        <label className="block text-sm font-medium text-gray-400 mb-1">
+          Expiration date
+        </label>
+        <div className="bg-transparent border border-white rounded-sm px-2 py-4 focus-within:border-legendary-500 focus-within:text-white">
+          <CardExpiryElement options={elementOptions} />
+        </div>
+      </div>
+
+      <div className="w-full">
+        <label className="block text-sm font-medium text-gray-400 mb-1">
+          CVC
+        </label>
+        <div className="bg-transparent border border-white rounded-sm px-2 py-4 focus-within:border-legendary-500 focus-within:text-white">
+          <CardCvcElement options={elementOptions} />
+        </div>
+      </div>
         <div className="w-full">
           <div className="flex flex-row justify-between items-center ">
             <p className="text-gray-text text-[16px]">you are voting for</p>
@@ -238,7 +319,8 @@ const CardView = ({
         </div>
         <button
           type="submit"
-          className="w-full bg-white rounded-md py-4 text-center text-[#333333] text-[20px] font-semibold"
+          className="w-full bg-white rounded-md py-4 text-center text-[#333333] text-[20px] font-semibold disabled:bg-gray-bg disabled:hover:cursor-not-allowed"
+          disabled={!stripe}
         >
           Confirm Payment and Vote
         </button>

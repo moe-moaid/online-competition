@@ -1,11 +1,10 @@
-'use client';
+"use client";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { VoteProvider } from "@/lib/context/vote context";
-import PaymentForm from "./components/PaymentForm";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,11 +27,10 @@ export default function RootLayout({
         <QueryClientProvider client={queryClient}>
           <VoteProvider>
             {children}
-            <PaymentForm />
+            {/* <PaymentForm /> */}
             <Footer />
           </VoteProvider>
         </QueryClientProvider>
-
       </body>
     </html>
   );

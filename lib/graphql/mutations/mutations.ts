@@ -8,3 +8,9 @@ export const CAST_VOTE = gql`
     }
   }
 `;
+
+export const CREATE_PAYMENT_INTENT = `
+  mutation CreatePaymentIntent($videoId: Int!) {
+  createPaymentIntent(videoId: $videoId)
+}
+`;
