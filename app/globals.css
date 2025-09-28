@@ -216,6 +216,18 @@
   .no-underline {
     text-decoration: none !important;
   }
+
+  .custom-payment-field {
+    border: 1px solid #FFFFFF;
+    border-radius: 12px;
+    background-color: transparent;
+    padding: 15px 12px;
+    transition: all 0.32s ease-in-out;
+
+    &.focused {
+      border: 1px solid #18aebf;
+    }
+  }
 }
 
 @layer base {

@@ -9,9 +9,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { castVote } from "@/lib/services/vote";
 import { createPaymentIntent } from "@/lib/services/vote";
-import StripeWrapper from "./StripeWrapper";
 import {
-  PaymentElement,
   useStripe,
   useElements,
   CardNumberElement,
@@ -20,8 +18,7 @@ import {
 } from "@stripe/react-stripe-js";
 
 function PaymentForm() {
-  const { isVoteOpen, setIsVoteOpen, currentVoteVideoId, clientSecret } =
-    useVoteContext();
+  const { isVoteOpen, setIsVoteOpen, currentVoteVideoId } = useVoteContext();
   const [method, setMethod] = useState<"paypal" | "card" | null>(null);
   useEffect(() => {
     if (!isVoteOpen) {
@@ -176,10 +173,15 @@ const CardView = ({
   setMethod: Dispatch<SetStateAction<"paypal" | "card" | null>>;
   currentVideoId?: number;
 }) => {
+  const [isFocused, setIsFocused] = useState<{
+    card: boolean;
+    expiry: boolean;
+    cvc: boolean;
+  }>({ card: false, expiry: false, cvc: false });
   const { data: videos } = useGetListVideos();
   const video = videos?.find((video: videoType) => video.id === currentVideoId);
-  const { setIsChangeVoteOpen, clientSecret } = useVoteContext();
-  const { register, handleSubmit } = useForm();
+  const { setIsChangeVoteOpen } = useVoteContext();
+  const { handleSubmit } = useForm();
   const mutaion = useMutation({
     mutationFn: (videoId: number) => castVote(videoId),
   });
@@ -211,17 +213,37 @@ const CardView = ({
     if (error) {
     }
   };
+
   const elementOptions = {
     style: {
       base: {
-        backgroundColor: 'transparent',
-        color: '#9CA3AF', // your text-gray-text color
-        fontSize: '16px',
-        padding: '1rem 0.5rem', // py-4 px-2
+        backgroundColor: "transparent",
+        color: "#FFFFFF",
+        fontSize: "16px",
+        fontFamily: "'Helvetica Neue', Helvetica, sans-serif",
+        fontSmoothing: "antialiased",
+        "::placeholder": {
+          color: "#FFFFFF",
+        },
+        ":focus": {
+          color: "#18aebf",
+        },
       },
-      
+      invalid: {
+        color: "#9e2146",
+        ":focus": {
+          color: "#fa755a",
+        },
+      },
     },
   };
+  const handlePaymentFieldFocus = (fieldNam: string) => {
+    setIsFocused((prev) => ({ ...prev, [fieldNam]: true }));
+  };
+  const handlePaymentFieldBlur = (fieldNam: string) => {
+    setIsFocused((prev) => ({ ...prev, [fieldNam]: false }));
+  };
+
   return (
     <div className="flex flex-col items-start justify-center px-6 mt-6">
       <div className="flex flex-row justify-start items-center gap-x-4">
@@ -243,31 +265,53 @@ const CardView = ({
       </div>
       <form className="flex flex-col gap-y-6 mt-6 w-full" onSubmit={onSubmit}>
         <div className="w-full">
-        <label className="block text-sm font-medium text-gray-400 mb-1">
-          Card number
-        </label>
-        <div className="bg-transparent border border-white rounded-sm px-2 py-4 focus-within:border-legendary-500 focus-within:text-white">
-          <CardNumberElement options={elementOptions} />
+          <label className="block text-sm font-medium text-gray-400 mb-1">
+            Card number
+          </label>
+          <div
+            className={`custom-payment-field ${
+              isFocused.card ? "focused" : ""
+            }`}
+          >
+            <CardNumberElement
+              options={elementOptions}
+              onFocus={() => handlePaymentFieldFocus("card")}
+              onBlur={() => handlePaymentFieldBlur("card")}
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="w-full">
-        <label className="block text-sm font-medium text-gray-400 mb-1">
-          Expiration date
-        </label>
-        <div className="bg-transparent border border-white rounded-sm px-2 py-4 focus-within:border-legendary-500 focus-within:text-white">
-          <CardExpiryElement options={elementOptions} />
+        <div className="w-full">
+          <label className="block text-sm font-medium text-gray-400 mb-1">
+            Expiration date
+          </label>
+          <div
+            className={`custom-payment-field ${
+              isFocused.expiry ? "focused" : ""
+            }`}
+          >
+            <CardExpiryElement
+              options={elementOptions}
+              onFocus={() => handlePaymentFieldFocus("expiry")}
+              onBlur={() => handlePaymentFieldBlur("expiry")}
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="w-full">
-        <label className="block text-sm font-medium text-gray-400 mb-1">
-          CVC
-        </label>
-        <div className="bg-transparent border border-white rounded-sm px-2 py-4 focus-within:border-legendary-500 focus-within:text-white">
-          <CardCvcElement options={elementOptions} />
+        <div className="w-full">
+          <label className="block text-sm font-medium text-gray-400 mb-1">
+            CVC
+          </label>
+          <div
+            className={`custom-payment-field ${isFocused.cvc ? "focused" : ""}`}
+          >
+            <CardCvcElement
+              options={elementOptions}
+              onFocus={() => handlePaymentFieldFocus("cvc")}
+              onBlur={() => handlePaymentFieldBlur("cvc")}
+            />
+          </div>
         </div>
-      </div>
         <div className="w-full">
           <div className="flex flex-row justify-between items-center ">
             <p className="text-gray-text text-[16px]">you are voting for</p>
