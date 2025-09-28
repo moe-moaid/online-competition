@@ -169,13 +169,6 @@ const InitView = ({
   );
 };
 
-const PaymentInputs = [
-  { lable: "Name on card", placeHolder: "Name on card", name: "name" },
-  { lable: "Email address", placeHolder: "example@mail.com", name: "email" },
-  { lable: "Card number", placeHolder: "Card number", name: "number" },
-  { lable: "Expiry date", placeHolder: "MM/YY", name: "expiry" },
-  { lable: "CVC/CVV", placeHolder: "CVC/CVV", name: "cvc" },
-];
 const CardView = ({
   setMethod,
   currentVideoId,
@@ -216,15 +209,8 @@ const CardView = ({
     });
 
     if (error) {
-      console.error(error);
     }
   };
-  // if (!clientSecret)
-  //   return (
-  //     <p className="text-white font-semibold text-[20px] text-center">
-  //       Loading form...
-  //     </p>
-  //   );
   const elementOptions = {
     style: {
       base: {
@@ -256,26 +242,6 @@ const CardView = ({
         <p className="text-[24px] font-semibold">Debit Card</p>
       </div>
       <form className="flex flex-col gap-y-6 mt-6 w-full" onSubmit={onSubmit}>
-        {/* {PaymentInputs.map((input, index) => (
-          <div
-            key={`${input.name} - ${index}`}
-            className="flex flex-col items-start gap-y-2"
-          >
-            <label className="text-white text-[20px]" htmlFor={input.name}>
-              {input.lable}
-            </label>
-            <input
-              className="bg-transparent border border-white rounded-sm text-gray-text px-2 py-4 focus:text-white focus:border-legendary-500 outline-none stroke-none w-full"
-              type="text"
-              {...register(input.name)}
-              placeholder={input.placeHolder}
-            />
-          </div>
-        ))} */}
-        {/* <PaymentElement id="payment-element" /> */}
-        {/* <CardNumberElement id="payment-element" />
-        <CardExpiryElement id="payment-element" />
-        <CardCvcElement id="payment-element" /> */}
         <div className="w-full">
         <label className="block text-sm font-medium text-gray-400 mb-1">
           Card number
