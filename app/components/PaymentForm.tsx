@@ -5,9 +5,19 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useGetListVideos } from "@/lib/api/getListService";
 import { videoType } from "@/lib/types/videoType";
 import VotePreview from "../vote/components/VotePreview";
+<<<<<<< Updated upstream
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { castVote } from "@/lib/services/vote";
+=======
+import {
+  useStripe,
+  useElements,
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
+} from "@stripe/react-stripe-js";
+>>>>>>> Stashed changes
 
 function PaymentForm() {
   const { isVoteOpen, setIsVoteOpen, currentVoteVideoId } = useVoteContext();
@@ -175,6 +185,7 @@ const CardView = ({
 }) => {
   const { data: videos } = useGetListVideos();
   const video = videos?.find((video: videoType) => video.id === currentVideoId);
+<<<<<<< Updated upstream
   const { setIsChangeVoteOpen } = useVoteContext();
   const { register, handleSubmit } = useForm();
   const mutaion = useMutation({
@@ -185,6 +196,65 @@ const CardView = ({
       mutaion.mutate(video.id);
     }
   });
+=======
+  const { setIsChangeVoteOpen, clientSecret } = useVoteContext();
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleVote = async (e: any) => {
+    e.preventDefault();
+    if (!stripe || !elements || !clientSecret) return;
+    const customCardElement = elements.getElement(CardNumberElement);
+    if (!customCardElement) {
+      console.log('card element is not mounted yet');
+      return;
+    };
+
+    const payemnt = await stripe.confirmCardPayment(
+      clientSecret, {
+        payment_method: {
+          card: customCardElement,
+        },
+      }
+    );
+    if (payemnt.error) {
+      console.log('error occured while your payment was being processed', payemnt.error);
+    }
+    if (payemnt.paymentIntent) {
+      console.log('payment is susccessful', payemnt.paymentIntent);
+    }
+  };
+
+  const elementOptions = {
+    style: {
+      base: {
+        backgroundColor: "transparent",
+        color: "#FFFFFF",
+        fontSize: "16px",
+        fontFamily: "'Helvetica Neue', Helvetica, sans-serif",
+        fontSmoothing: "antialiased",
+        "::placeholder": {
+          color: "#FFFFFF",
+        },
+        ":focus": {
+          color: "#18aebf",
+        },
+      },
+      invalid: {
+        color: "#9e2146",
+        ":focus": {
+          color: "#fa755a",
+        },
+      },
+    },
+  };
+  const handlePaymentFieldFocus = (fieldNam: string) => {
+    setIsFocused((prev) => ({ ...prev, [fieldNam]: true }));
+  };
+  const handlePaymentFieldBlur = (fieldNam: string) => {
+    setIsFocused((prev) => ({ ...prev, [fieldNam]: false }));
+  };
+>>>>>>> Stashed changes
 
   return (
     <div className="flex flex-col items-start justify-center px-6 mt-6">
@@ -205,8 +275,16 @@ const CardView = ({
         </button>
         <p className="text-[24px] font-semibold">Debit Card</p>
       </div>
+<<<<<<< Updated upstream
       <form className="flex flex-col gap-y-6 mt-6 w-full" onSubmit={onSubmit}>
         {PaymentInputs.map((input, index) => (
+=======
+      <form className="flex flex-col gap-y-6 mt-6 w-full" onSubmit={handleVote}>
+        <div className="w-full">
+          <label className="block text-sm font-medium text-gray-400 mb-1">
+            Card number
+          </label>
+>>>>>>> Stashed changes
           <div
             key={`${input.name} - ${index}`}
             className="flex flex-col items-start gap-y-2"
