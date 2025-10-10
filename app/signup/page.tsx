@@ -1,21 +1,21 @@
-import MciInput from "../components/MciInput";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import MciInput from '../components/MciInput';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 function page() {
   return (
-    <div className="py-[120px] flex flex-col justify-center items-center">
+    <div className="flex flex-col items-center justify-center py-[120px]">
       <form
         action=""
-        className="flex flex-col items-center w-full px-4 lg:px-10 md:w-2/3 lg:w-1/2 justify-center py-12 bg-gray-bg rounded-lg gap-y-8 md:gap-y-12"
+        className="flex w-full flex-col items-center justify-center gap-y-8 rounded-lg bg-gray-bg px-4 py-12 md:w-2/3 md:gap-y-12 lg:w-1/2 lg:px-10"
       >
-        <h1 className="text-white font-semibold text-[48px]">
+        <h1 className="text-[48px] font-semibold text-white">
           Sign <span className="text-legendary-500">up</span>
         </h1>
-        <div className="flex flex-row justify-start items-center w-full gap-x-6">
-          <div className="relative bg-lightGray-bg w-[80px] h-[80px] rounded-full">
+        <div className="flex w-full flex-row items-center justify-start gap-x-6">
+          <div className="relative h-[80px] w-[80px] rounded-full bg-lightGray-bg">
             <svg
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform"
               width="32"
               height="32"
               viewBox="0 0 32 32"
@@ -30,7 +30,7 @@ function page() {
           </div>
           <p className="text-white">Upload Profile Picture</p>
         </div>
-        <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-x-8 gap-y-8 sm:gap-y-0">
+        <div className="flex w-full flex-col items-center justify-between gap-x-8 gap-y-8 sm:flex-row sm:gap-y-0">
           <MciInput
             name="name"
             label="Full Name"
@@ -40,7 +40,7 @@ function page() {
           />
           <MciInput name="age" label="Age" placeholder="Age" fullWidth />
         </div>
-        <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-x-8 gap-y-8 sm:gap-y-0">
+        <div className="flex w-full flex-col items-center justify-between gap-x-8 gap-y-8 sm:flex-row sm:gap-y-0">
           <MciInput
             name="email"
             label="Email"
@@ -56,7 +56,7 @@ function page() {
             fullWidth
           />
         </div>
-        <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-x-8 gap-y-8 sm:gap-y-0">
+        <div className="flex w-full flex-col items-center justify-between gap-x-8 gap-y-8 sm:flex-row sm:gap-y-0">
           <MciInput
             name="password"
             label="Password"
@@ -72,7 +72,7 @@ function page() {
             fullWidth
           />
         </div>
-        <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-x-8 gap-y-8 sm:gap-y-0">
+        <div className="flex w-full flex-col items-center justify-between gap-x-8 gap-y-8 sm:flex-row sm:gap-y-0">
           <MciInput
             name="country"
             label="Country"
@@ -87,18 +87,18 @@ function page() {
           />
         </div>
         <Button
-          className="bg-legendary-500 text-white text-[20px] rounded-lg py-6 w-full sm:w-[320px]"
+          className="w-full rounded-lg bg-legendary-500 py-6 text-[20px] text-white sm:w-[320px]"
           variant="default"
           size="lg"
         >
           Signup
         </Button>
-        <p className="text-white w-[318px] text-center relative mci-separator">
+        <p className="mci-separator relative w-[318px] text-center text-white">
           Or sign up with
         </p>
-        <div className="flex flex-row justify-between w-[320px] gap-x-6">
+        <div className="flex w-[320px] flex-row justify-between gap-x-6">
           <Button
-            className="bg-lightGray-bg flex-1"
+            className="flex-1 bg-lightGray-bg"
             variant="default"
             size="lg"
           >
@@ -143,7 +143,7 @@ function page() {
             </svg>
           </Button>
           <Button
-            className="bg-lightGray-bg flex-1"
+            className="flex-1 bg-lightGray-bg"
             variant="default"
             size="lg"
           >
@@ -174,7 +174,7 @@ function page() {
             </svg>
           </Button>
           <Button
-            className="bg-lightGray-bg flex-1"
+            className="flex-1 bg-lightGray-bg"
             variant="default"
             size="lg"
           >
@@ -195,7 +195,7 @@ function page() {
           </Button>
         </div>
         <p className="text-white">
-          Already have an account?{" "}
+          Already have an account?{' '}
           <Link href="/login" className="text-legendary-500">
             Log in
           </Link>

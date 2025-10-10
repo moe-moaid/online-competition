@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation } from '@tanstack/react-query';
 import {
   createContext,
   Dispatch,
@@ -7,8 +7,8 @@ import {
   useContext,
   useEffect,
   useState,
-} from "react";
-import { createPaymentIntent } from "../services/vote";
+} from 'react';
+import { createPaymentIntent } from '../services/vote';
 
 export type ContextType = {
   isVoteOpen: boolean;
@@ -28,9 +28,9 @@ export const VoteProvider = ({ children }: PropsWithChildren) => {
   const [currentVoteVideoId, setCurrentVoteVideoId] = useState<number>();
   const [clientSecret, setClientSecret] = useState<string | undefined>();
   const paymentIntent = useMutation<
-    { createPaymentIntent: string }, 
-    Error, 
-    number 
+    { createPaymentIntent: string },
+    Error,
+    number
   >({
     mutationFn: (videoId: number) => createPaymentIntent(videoId),
     onSuccess: (data: any) => {
@@ -38,17 +38,26 @@ export const VoteProvider = ({ children }: PropsWithChildren) => {
     },
     onError: (err: any) => {
       console.log('error occured while fetching', err);
-    }
+    },
   });
   useEffect(() => {
-  if (isVoteOpen && currentVoteVideoId) {
-  console.log('triggered mutation', currentVoteVideoId);
-    paymentIntent.mutate(currentVoteVideoId);
-  }
-  }, [isVoteOpen, currentVoteVideoId])
+    if (isVoteOpen && currentVoteVideoId) {
+      console.log('triggered mutation', currentVoteVideoId);
+      paymentIntent.mutate(currentVoteVideoId);
+    }
+  }, [isVoteOpen, currentVoteVideoId]);
   return (
     <VoteContext.Provider
-      value={{ isVoteOpen, setIsVoteOpen, currentVoteVideoId, setCurrentVoteVideoId, isChangeVoteOpen, setIsChangeVoteOpen, setClientSecret, clientSecret }}
+      value={{
+        isVoteOpen,
+        setIsVoteOpen,
+        currentVoteVideoId,
+        setCurrentVoteVideoId,
+        isChangeVoteOpen,
+        setIsChangeVoteOpen,
+        setClientSecret,
+        clientSecret,
+      }}
     >
       {children}
     </VoteContext.Provider>
@@ -58,7 +67,7 @@ export const VoteProvider = ({ children }: PropsWithChildren) => {
 export const useVoteContext = () => {
   const context = useContext(VoteContext);
   if (!context) {
-    throw new Error("useVoteContext should be used within VoteProvider");
+    throw new Error('useVoteContext should be used within VoteProvider');
   }
   return context;
 };

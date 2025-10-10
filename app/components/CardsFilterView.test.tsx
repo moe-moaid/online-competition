@@ -1,10 +1,10 @@
-import { screen, render, waitFor, RenderOptions } from "@testing-library/react";
-import CArdsFilterView from "./CardsFilterView";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { VoteContext, ContextType } from "@/lib/context/vote context";
-import { ReactElement } from "react";
+import { screen, render, waitFor, RenderOptions } from '@testing-library/react';
+import CArdsFilterView from './CardsFilterView';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { VoteContext, ContextType } from '@/lib/context/vote context';
+import { ReactElement } from 'react';
 
-describe("Test card display view component", () => {
+describe('Test card display view component', () => {
   const setDisplayVid = jest.fn();
   const queryClient = new QueryClient();
   // Reset QueryClient between tests
@@ -14,7 +14,7 @@ describe("Test card display view component", () => {
 
   it("filters shouldn't render", async () => {
     renderWithProviders(
-      <CArdsFilterView showFilters={false} setDisplayVid={setDisplayVid} />
+      <CArdsFilterView showFilters={false} setDisplayVid={setDisplayVid} />,
     );
     // waitFor keeps running queryByTestId untill it's true, or it timesout,
     // currently it is expected to be Null which is the immidiat case that's why it returns true
@@ -24,15 +24,15 @@ describe("Test card display view component", () => {
     });
   });
 
-  it("filters shouldn render", () => {
+  it('filters shouldn render', () => {
     renderWithProviders(
-      <CArdsFilterView showFilters={true} setDisplayVid={setDisplayVid} />
+      <CArdsFilterView showFilters={true} setDisplayVid={setDisplayVid} />,
     );
     // use findBy if you expect something to eventually show-up, it waits, it's async
-    expect(screen.getByTestId("filters-section")).toBeInTheDocument();
+    expect(screen.getByTestId('filters-section')).toBeInTheDocument();
   });
 
-  it("tests for change vote is open", () => {
+  it('tests for change vote is open', () => {
     const mockSetterFn = jest.fn();
     const mockVoteContextValue = {
       isVoteOpen: true,
@@ -41,26 +41,26 @@ describe("Test card display view component", () => {
       setIsChangeVoteOpen: mockSetterFn,
       setIsVoteOpen: mockSetterFn,
       setClientSecret: mockSetterFn,
-      clientSecret: 'test'
+      clientSecret: 'test',
     };
     render(
       <VoteContext.Provider value={mockVoteContextValue}>
         <QueryClientProvider client={queryClient}>
           <CArdsFilterView showFilters={true} setDisplayVid={setDisplayVid} />
         </QueryClientProvider>
-      </VoteContext.Provider>
+      </VoteContext.Provider>,
     );
-    expect(screen.getByTestId("vote-preview")).toBeInTheDocument();
+    expect(screen.getByTestId('vote-preview')).toBeInTheDocument();
   });
 });
 
-interface CustomRenderOptions extends Omit<RenderOptions, "wrapper"> {
+interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   voteContextValue?: Partial<ContextType>;
 }
 
 function renderWithProviders(
   ui: ReactElement,
-  { voteContextValue, ...renderOptions }: CustomRenderOptions = {}
+  { voteContextValue, ...renderOptions }: CustomRenderOptions = {},
 ) {
   const queryClient = new QueryClient();
   const defaultVoteContext: ContextType = {
@@ -78,6 +78,6 @@ function renderWithProviders(
     >
       <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
     </VoteContext.Provider>,
-    renderOptions
+    renderOptions,
   );
 }

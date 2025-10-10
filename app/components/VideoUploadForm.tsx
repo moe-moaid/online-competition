@@ -1,38 +1,38 @@
-import { Category, VideoUploadFormType } from "@/lib/types/videoUploadFormType";
-import { useUploadVideo } from "@/lib/api/uploadService";
-import MciInput from "./MciInput";
+import { Category, VideoUploadFormType } from '@/lib/types/videoUploadFormType';
+import { useUploadVideo } from '@/lib/api/uploadService';
+import MciInput from './MciInput';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import { ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
+} from '@/components/ui/dropdown-menu';
+import { ChevronDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useForm } from 'react-hook-form';
 function VideoUploadForm() {
   const { mutate, data, error } = useUploadVideo();
   const { register, handleSubmit, watch, setValue } =
     useForm<VideoUploadFormType>();
-  const selectedGener = watch("category");
+  const selectedGener = watch('category');
   const categories: Category[] = [
-    "Hip Pop",
-    "Rap",
-    "RNB",
-    "Afrobeat",
-    "Raggae",
-    "Dancehall",
-    "Reggarton",
-    "Others",
+    'Hip Pop',
+    'Rap',
+    'RNB',
+    'Afrobeat',
+    'Raggae',
+    'Dancehall',
+    'Reggarton',
+    'Others',
   ];
   const handleFormSubmission = (values: VideoUploadFormType) => {
     const req_body = new FormData();
     const file = values.video?.[0];
-    req_body.append("video", file);
-    req_body.append("tittle", values.title);
-    req_body.append("decrtiption", values.description);
-    req_body.append("category", values.category);
-    req_body.append("artistId", "1");
+    req_body.append('video', file);
+    req_body.append('tittle', values.title);
+    req_body.append('decrtiption', values.description);
+    req_body.append('category', values.category);
+    req_body.append('artistId', '1');
 
     mutate({
       data: req_body,
@@ -40,12 +40,12 @@ function VideoUploadForm() {
   };
   return (
     <form
-      className="flex flex-row justify-center items-stretch px-14 gap-x-4"
+      className="flex flex-row items-stretch justify-center gap-x-4 px-14"
       onSubmit={handleSubmit(handleFormSubmission)}
     >
       <div className="flex flex-col gap-y-4">
         <MciInput
-          {...register("title")}
+          {...register('title')}
           name="title"
           label="Song Name"
           placeholder="Enter sont name"
@@ -57,8 +57,8 @@ function VideoUploadForm() {
             Description<span className="text-red-600">*</span>
           </p>
           <textarea
-            {...register("description")}
-            className="outline-none resize-none bg-transparent border rounded-lg border-white hover:border-legendary-500 focus:border-legendary-500 text-white p-4"
+            {...register('description')}
+            className="resize-none rounded-lg border border-white bg-transparent p-4 text-white outline-none hover:border-legendary-500 focus:border-legendary-500"
             cols={5}
             rows={7}
             placeholder="Add Desctiption"
@@ -68,27 +68,27 @@ function VideoUploadForm() {
           <p className="text-white">
             Category<span className="text-red-600">*</span>
           </p>
-          <DropdownMenu {...register("category")}>
+          <DropdownMenu {...register('category')}>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
-                className="flex flex-row justify-between items-center hover:bg-white"
+                className="flex flex-row items-center justify-between hover:bg-white"
               >
-                {selectedGener || "Select Category"}
-                <ChevronDown className="w-4 h-4" />
+                {selectedGener || 'Select Category'}
+                <ChevronDown className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
               side="bottom"
               align="start"
-              className="bg-white min-w-full w-[--radix-dropdown-menu-trigger-width]"
+              className="w-[--radix-dropdown-menu-trigger-width] min-w-full bg-white"
             >
               {categories.map((category, i) => (
                 <DropdownMenuItem
-                  className="focus:bg-lightGray-bg focus:text-white focus:cursor-pointer"
+                  className="focus:cursor-pointer focus:bg-lightGray-bg focus:text-white"
                   key={`${category} - ${i}`}
                   onSelect={() => {
-                    setValue("category", category);
+                    setValue('category', category);
                   }}
                 >
                   {category}
@@ -99,10 +99,10 @@ function VideoUploadForm() {
         </div>
       </div>
       <div className="flex flex-col self-stretch">
-        <div className="border border-white h-full rounded-lg flex flex-col items-center justify-center px-4">
+        <div className="flex h-full flex-col items-center justify-center rounded-lg border border-white px-4">
           <input
             id="video"
-            {...register("video")}
+            {...register('video')}
             type="file"
             accept=".mp4"
             required
@@ -136,7 +136,7 @@ function VideoUploadForm() {
         </button>
         <button
           type="submit"
-          className="text-white py-2 bg-legendary-500 hover:bg-transparent hover:outline-solid  hover:outline-1 hover:outline-legendary-500  hover:text-legendary-500 rounded-lg transition-all duration-300 ease-in-out"
+          className="hover:outline-solid rounded-lg bg-legendary-500 py-2 text-white  transition-all duration-300  ease-in-out hover:bg-transparent hover:text-legendary-500 hover:outline-1 hover:outline-legendary-500"
         >
           Upload
         </button>

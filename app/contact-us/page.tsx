@@ -1,20 +1,20 @@
-import React from "react";
-import MciContainer from "../components/MciContainer";
-import { SocialIcon } from "react-social-icons";
-import { Button } from "@/components/ui/button";
+import React from 'react';
+import MciContainer from '../components/MciContainer';
+import { SocialIcon } from 'react-social-icons';
+import { Button } from '@/components/ui/button';
 
 function page() {
   return (
-    <MciContainer className="py-[120px] bg-cover bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative z-0">
-      <div className="bg-black/80 inset-0 absolute -z-10" />
-      <div className="flex flex-col gap-y-8 md:gap-y-0 md:flex-row xl:px-28 md:gap-x-8 items-start ">
+    <MciContainer className="relative z-0 bg-[url('/how-it-works.png')] bg-cover bg-center bg-no-repeat py-[120px]">
+      <div className="absolute inset-0 -z-10 bg-black/80" />
+      <div className="flex flex-col items-start gap-y-8 md:flex-row md:gap-x-8 md:gap-y-0 xl:px-28 ">
         {/* left col */}
-        <div className="flex flex-col w-full md:w-1/2 text-white gap-y-5">
-          <h1 className="font-bold text-[42px]">
+        <div className="flex w-full flex-col gap-y-5 text-white md:w-1/2">
+          <h1 className="text-[42px] font-bold">
             Get in <span className="text-legendary-500">Touch</span>
           </h1>
           <p>We Are Here For You 24/7 Hours Support..</p>
-          <div className="flex flex-row justify-start items-center gap-x-4">
+          <div className="flex flex-row items-center justify-start gap-x-4">
             <svg
               width="48"
               height="48"
@@ -30,7 +30,7 @@ function page() {
             </svg>
             <p>Support@mackie.com</p>
           </div>
-          <div className="flex flex-row justify-start items-center gap-x-4">
+          <div className="flex flex-row items-center justify-start gap-x-4">
             <svg
               width="48"
               height="48"
@@ -79,9 +79,9 @@ function page() {
           </div>
         </div>
         {/* right col */}
-        <div className="bg-gray-bg text-white w-full md:w-1/2 px-4 md:px-8 xl:px-16 py-8 md:py-12 lg:py-20 rounded-lg">
+        <div className="w-full rounded-lg bg-gray-bg px-4 py-8 text-white md:w-1/2 md:px-8 md:py-12 lg:py-20 xl:px-16">
           <form className="flex flex-col justify-between gap-y-8">
-            <div className="flex flex-col space-y-2 w-full">
+            <div className="flex w-full flex-col space-y-2">
               <label htmlFor="name">
                 Name<span className="text-red-600">*</span>
               </label>
@@ -89,10 +89,10 @@ function page() {
                 type="text"
                 name="name"
                 placeholder="Enter Full Name"
-                className="outline-none border border-white rounded-md px-3 py-1 bg-transparent text-[#838383] hover:border-legendary-500 hover:text-white focus:border-legendary-500 focus:text-white w-full"
+                className="w-full rounded-md border border-white bg-transparent px-3 py-1 text-[#838383] outline-none hover:border-legendary-500 hover:text-white focus:border-legendary-500 focus:text-white"
               />
             </div>
-            <div className="flex flex-col space-y-2 w-full">
+            <div className="flex w-full flex-col space-y-2">
               <label htmlFor="email">
                 Email Address<span className="text-red-600">*</span>
               </label>
@@ -100,24 +100,24 @@ function page() {
                 type="text"
                 name="email"
                 placeholder="Enter Email Address"
-                className="outline-none border border-white rounded-md px-3 py-1 bg-transparent text-[#838383] hover:border-legendary-500 hover:text-white focus:border-legendary-500 focus:text-white"
+                className="rounded-md border border-white bg-transparent px-3 py-1 text-[#838383] outline-none hover:border-legendary-500 hover:text-white focus:border-legendary-500 focus:text-white"
               />
             </div>
-            <div className="flex flex-col space-y-2 w-full">
+            <div className="flex w-full flex-col space-y-2">
               <label htmlFor="message">
                 Message<span className="text-red-600">*</span>
               </label>
               <textarea
                 name="message"
                 placeholder="Your Message..."
-                className="outline-none border border-white rounded-md px-3 py-1 bg-transparent text-[#838383] hover:border-legendary-500 hover:text-white focus:border-legendary-500 focus:text-white"
+                className="rounded-md border border-white bg-transparent px-3 py-1 text-[#838383] outline-none hover:border-legendary-500 hover:text-white focus:border-legendary-500 focus:text-white"
                 rows={8}
               />
             </div>
             <Button
               type="submit"
               variant="default"
-              className="bg-legendary-500 rounded-lg py-6"
+              className="rounded-lg bg-legendary-500 py-6"
               size="lg"
             >
               Send

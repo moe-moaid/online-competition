@@ -1,8 +1,8 @@
-import Image from "next/image";
-import React, { Dispatch, SetStateAction, useRef, useState } from "react";
-import VotingButton from "./VotingButton";
-import { videoType } from "@/lib/types/videoType";
-import { useVoteContext } from "@/lib/context/vote context";
+import Image from 'next/image';
+import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
+import VotingButton from './VotingButton';
+import { videoType } from '@/lib/types/videoType';
+import { useVoteContext } from '@/lib/context/vote context';
 
 type Props = {
   video: videoType;
@@ -12,8 +12,18 @@ type Props = {
 function VidCard({ video, setDisplayVid }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const [overlay, setOverlay] = useState<boolean>(false);
-  const {id, title, artist:{name, location:{country}, avatar: {url}}, url:videoUrl, } = video;
-  const {isChangeVoteOpen, setCurrentVoteVideoId, setIsChangeVoteOpen} = useVoteContext();
+  const {
+    id,
+    title,
+    artist: {
+      name,
+      location: { country },
+      avatar: { url },
+    },
+    url: videoUrl,
+  } = video;
+  const { isChangeVoteOpen, setCurrentVoteVideoId, setIsChangeVoteOpen } =
+    useVoteContext();
   const isVerified = true;
   function playPauseController() {
     if (ref.current && !isChangeVoteOpen) {
@@ -28,27 +38,27 @@ function VidCard({ video, setDisplayVid }: Props) {
   }
 
   return (
-    <div className="p-5 text-white bg-gray-bg w-[380px] h-[480px] rounded-[20px]">
-      <div className="relative w-full h-[360px] rounded-[20px] mb-6 overflow-clip">
+    <div className="h-[480px] w-[380px] rounded-[20px] bg-gray-bg p-5 text-white">
+      <div className="relative mb-6 h-[360px] w-full overflow-clip rounded-[20px]">
         <div
-          className="relative w-full h-full"
+          className="relative h-full w-full"
           onMouseEnter={handleHover}
           onMouseLeave={handleHover}
         >
           <div
             className={`absolute left-0 right-0 top-0 origin-bottom ${
-              overlay && "opacity-100" 
-            } bottom-0 bg-black/65 ease-in-out duration-300`}
+              overlay && 'opacity-100'
+            } bottom-0 bg-black/65 duration-300 ease-in-out`}
           />
           <video
             ref={ref}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${videoUrl}`}
           />
           <button
-            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
-              overlay && "scale-125"
-            } ease-in-out duration-300`}
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform ${
+              overlay && 'scale-125'
+            } duration-300 ease-in-out`}
             onClick={playPauseController}
           >
             <svg
@@ -69,13 +79,13 @@ function VidCard({ video, setDisplayVid }: Props) {
             </svg>
           </button>
         </div>
-        <p className="absolute top-0 left-1/2 -translate-x-1/2 px-6 py-1 rounded-bl-lg rounded-br-lg bg-legendary-500 font-semibold text-[20px]">
+        <p className="absolute left-1/2 top-0 -translate-x-1/2 rounded-bl-lg rounded-br-lg bg-legendary-500 px-6 py-1 text-[20px] font-semibold">
           {country}
         </p>
       </div>
-      <div className="flex flex-row justify-between items-center w-full">
-        <div className="flex flex-row justify-start items-start gap-x-4">
-          <div className="relative rounded-full w-10 h-10 overflow-clip">
+      <div className="flex w-full flex-row items-center justify-between">
+        <div className="flex flex-row items-start justify-start gap-x-4">
+          <div className="relative h-10 w-10 overflow-clip rounded-full">
             <Image
               src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`}
               fill
@@ -84,7 +94,7 @@ function VidCard({ video, setDisplayVid }: Props) {
             />
           </div>
           <div className="flex-flex-col gap-y-4">
-            <p className="font-medium text-[18px]">{title}</p>
+            <p className="text-[18px] font-medium">{title}</p>
             <p className="flex flex-row items-center gap-x-2 font-medium text-white-text">
               By {`${name} `}
               {isVerified && (

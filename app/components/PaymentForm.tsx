@@ -1,21 +1,21 @@
-"use client";
-import { useVoteContext } from "@/lib/context/vote context";
-import clsx from "clsx";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useGetListVideos } from "@/lib/api/getListService";
-import { videoType } from "@/lib/types/videoType";
-import VotePreview from "../vote/components/VotePreview";
+'use client';
+import { useVoteContext } from '@/lib/context/vote context';
+import clsx from 'clsx';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useGetListVideos } from '@/lib/api/getListService';
+import { videoType } from '@/lib/types/videoType';
+import VotePreview from '../vote/components/VotePreview';
 import {
   CardCvcElement,
   CardExpiryElement,
   CardNumberElement,
   useElements,
   useStripe,
-} from "@stripe/react-stripe-js";
+} from '@stripe/react-stripe-js';
 
 function PaymentForm() {
   const { isVoteOpen, setIsVoteOpen, currentVoteVideoId } = useVoteContext();
-  const [method, setMethod] = useState<"paypal" | "card" | null>(null);
+  const [method, setMethod] = useState<'paypal' | 'card' | null>(null);
   useEffect(() => {
     if (!isVoteOpen) {
       setMethod(null);
@@ -24,15 +24,15 @@ function PaymentForm() {
 
   return (
     <div
-      data-testid='payment-dialog'
+      data-testid="payment-dialog"
       className={clsx(
-        "origin-right fixed top-0 right-0 bottom-0 text-white z-30 scale-x-0 transition-transform duration-300 ease-in-out h-100 bg-black w-1/4 border-s border-gray-text h-screen overflow-y-scroll",
-        isVoteOpen && "scale-x-100"
+        'h-100 fixed bottom-0 right-0 top-0 z-30 h-screen w-1/4 origin-right scale-x-0 overflow-y-scroll border-s border-gray-text bg-black text-white transition-transform duration-300 ease-in-out',
+        isVoteOpen && 'scale-x-100',
       )}
     >
       <div
         className={clsx(
-          "flex flex-row justify-between items-center border-b border-gray-text pt-12 pb-4 px-6"
+          'flex flex-row items-center justify-between border-b border-gray-text px-6 pb-4 pt-12',
         )}
       >
         <h1 className="text-[22px]">Payment</h1>
@@ -52,7 +52,7 @@ function PaymentForm() {
         </button>
       </div>
       {!method && <InitView setMethod={setMethod} />}
-      {method === "card" && (
+      {method === 'card' && (
         <CardView setMethod={setMethod} currentVideoId={currentVoteVideoId} />
       )}
     </div>
@@ -64,19 +64,19 @@ export default PaymentForm;
 const InitView = ({
   setMethod,
 }: {
-  setMethod: Dispatch<SetStateAction<"paypal" | "card" | null>>;
+  setMethod: Dispatch<SetStateAction<'paypal' | 'card' | null>>;
 }) => {
   return (
-    <div className="px-6 flex flex-col gap-y-6 items-start justify-center">
-      <p className="text-[22px] font-semibold mt-6 mb-4">
-        For casting vote you have to submit{" "}
-        <span className="text-legendary-500 font-bold inline-block">$3</span>
+    <div className="flex flex-col items-start justify-center gap-y-6 px-6">
+      <p className="mb-4 mt-6 text-[22px] font-semibold">
+        For casting vote you have to submit{' '}
+        <span className="inline-block font-bold text-legendary-500">$3</span>
       </p>
       Select a Payment Method
       {/* Paypal */}
       <button
-        className="bg-white rounded-lg w-full py-4 flex justify-center"
-        onClick={() => setMethod("paypal")}
+        className="flex w-full justify-center rounded-lg bg-white py-4"
+        onClick={() => setMethod('paypal')}
       >
         <svg
           width="76"
@@ -120,8 +120,8 @@ const InitView = ({
       </button>
       {/* Debit card */}
       <button
-        className="bg-white rounded-lg w-full py-4 flex flex-row justify-center gap-x-2"
-        onClick={() => setMethod("card")}
+        className="flex w-full flex-row justify-center gap-x-2 rounded-lg bg-white py-4"
+        onClick={() => setMethod('card')}
       >
         <span>
           <svg
@@ -155,7 +155,7 @@ const InitView = ({
             </defs>
           </svg>
         </span>
-        <p className="text-[#333333] text-[20px] font-semibold">
+        <p className="text-[20px] font-semibold text-[#333333]">
           Debit or Credit Card
         </p>
       </button>
@@ -167,7 +167,7 @@ const CardView = ({
   setMethod,
   currentVideoId,
 }: {
-  setMethod: Dispatch<SetStateAction<"paypal" | "card" | null>>;
+  setMethod: Dispatch<SetStateAction<'paypal' | 'card' | null>>;
   currentVideoId?: number;
 }) => {
   const [isFocused, setIsFocused] = useState<{
@@ -186,7 +186,7 @@ const CardView = ({
     if (!stripe || !elements || !clientSecret) return;
     const cardElement = elements.getElement(CardNumberElement);
     if (!cardElement) {
-      console.error("no card element found");
+      console.error('no card element found');
       return;
     }
 
@@ -197,45 +197,45 @@ const CardView = ({
     });
 
     if (payment.error) {
-      console.error("An Error occured while processing the payemtn");
+      console.error('An Error occured while processing the payemtn');
     } else if (payment.paymentIntent) {
-      console.log("successful payment process", payment.paymentIntent);
+      console.log('successful payment process', payment.paymentIntent);
     }
   };
 
   const elementOptions = {
     style: {
       base: {
-        backgroundColor: "transparent",
-        color: "#FFFFFF",
-        fontSize: "16px",
+        backgroundColor: 'transparent',
+        color: '#FFFFFF',
+        fontSize: '16px',
         fontFamily: "'Helvetica Neue', Helvetica, sans-serif",
-        fontSmoothing: "antialiased",
-        "::placeholder": {
-          color: "#FFFFFF",
+        fontSmoothing: 'antialiased',
+        '::placeholder': {
+          color: '#FFFFFF',
         },
-        ":focus": {
-          color: "#18aebf",
+        ':focus': {
+          color: '#18aebf',
         },
       },
       invalid: {
-        color: "#9e2146",
-        ":focus": {
-          color: "#fa755a",
+        color: '#9e2146',
+        ':focus': {
+          color: '#fa755a',
         },
       },
     },
   };
   const handlePaymentFieldFocus = (fieldNam: string) => {
-    setIsFocused((prev) => ({ ...prev, [fieldNam]: true }));
+    setIsFocused(prev => ({ ...prev, [fieldNam]: true }));
   };
   const handlePaymentFieldBlur = (fieldNam: string) => {
-    setIsFocused((prev) => ({ ...prev, [fieldNam]: false }));
+    setIsFocused(prev => ({ ...prev, [fieldNam]: false }));
   };
 
   return (
-    <div className="flex flex-col items-start justify-center px-6 mt-6">
-      <div className="flex flex-row justify-start items-center gap-x-4">
+    <div className="mt-6 flex flex-col items-start justify-center px-6">
+      <div className="flex flex-row items-center justify-start gap-x-4">
         <button onClick={() => setMethod(null)}>
           <svg
             width="16"
@@ -252,73 +252,73 @@ const CardView = ({
         </button>
         <p className="text-[24px] font-semibold">Debit Card</p>
       </div>
-      <form className="flex flex-col gap-y-6 mt-6 w-full" onSubmit={handleVote}>
+      <form className="mt-6 flex w-full flex-col gap-y-6" onSubmit={handleVote}>
         <div className="w-full">
-          <label className="block text-sm font-medium text-gray-400 mb-1">
+          <label className="mb-1 block text-sm font-medium text-gray-400">
             Card number
           </label>
           <div
             className={`custom-payment-field ${
-              isFocused.card ? "focused" : ""
+              isFocused.card ? 'focused' : ''
             }`}
           >
             <CardNumberElement
               options={elementOptions}
-              onFocus={() => handlePaymentFieldFocus("card")}
-              onBlur={() => handlePaymentFieldBlur("card")}
+              onFocus={() => handlePaymentFieldFocus('card')}
+              onBlur={() => handlePaymentFieldBlur('card')}
             />
           </div>
         </div>
 
         <div className="w-full">
-          <label className="block text-sm font-medium text-gray-400 mb-1">
+          <label className="mb-1 block text-sm font-medium text-gray-400">
             Expiration date
           </label>
           <div
             className={`custom-payment-field ${
-              isFocused.expiry ? "focused" : ""
+              isFocused.expiry ? 'focused' : ''
             }`}
           >
             <CardExpiryElement
               options={elementOptions}
-              onFocus={() => handlePaymentFieldFocus("expiry")}
-              onBlur={() => handlePaymentFieldBlur("expiry")}
+              onFocus={() => handlePaymentFieldFocus('expiry')}
+              onBlur={() => handlePaymentFieldBlur('expiry')}
             />
           </div>
         </div>
 
         <div className="w-full">
-          <label className="block text-sm font-medium text-gray-400 mb-1">
+          <label className="mb-1 block text-sm font-medium text-gray-400">
             CVC
           </label>
           <div
-            className={`custom-payment-field ${isFocused.cvc ? "focused" : ""}`}
+            className={`custom-payment-field ${isFocused.cvc ? 'focused' : ''}`}
           >
             <CardCvcElement
               options={elementOptions}
-              onFocus={() => handlePaymentFieldFocus("cvc")}
-              onBlur={() => handlePaymentFieldBlur("cvc")}
+              onFocus={() => handlePaymentFieldFocus('cvc')}
+              onBlur={() => handlePaymentFieldBlur('cvc')}
             />
           </div>
         </div>
         <div className="w-full">
-          <div className="flex flex-row justify-between items-center ">
-            <p className="text-gray-text text-[16px]">you are voting for</p>
+          <div className="flex flex-row items-center justify-between ">
+            <p className="text-[16px] text-gray-text">you are voting for</p>
             <button
               type="button"
-              className="text-legendary-500 text-[16px]"
+              className="text-[16px] text-legendary-500"
               onClick={() => setIsChangeVoteOpen(true)}
             >
               change
             </button>
           </div>
-          <div className="bg-gray-bg p-4 mt-4 rounded-md w-full">
+          <div className="mt-4 w-full rounded-md bg-gray-bg p-4">
             <VotePreview video={video} />
           </div>
         </div>
         <button
           type="submit"
-          className="w-full bg-white rounded-md py-4 text-center text-[#333333] text-[20px] font-semibold disabled:bg-gray-bg disabled:hover:cursor-not-allowed"
+          className="w-full rounded-md bg-white py-4 text-center text-[20px] font-semibold text-[#333333] disabled:bg-gray-bg disabled:hover:cursor-not-allowed"
           disabled={!stripe}
         >
           Confirm Payment and Vote

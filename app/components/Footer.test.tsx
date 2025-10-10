@@ -1,6 +1,6 @@
-import { render, screen } from "@testing-library/react";
-import Footer from "./Footer";
-import { VoteProvider } from "@/lib/context/vote context";
+import { render, screen } from '@testing-library/react';
+import Footer from './Footer';
+import { VoteProvider } from '@/lib/context/vote context';
 
 /*
 How the role is determined?
@@ -17,23 +17,23 @@ How the role is determined?
   --Provided by text content, aria-label, aria-labelledby, etc.
  */
 
-describe("Footer Component", () => {
+describe('Footer Component', () => {
   beforeEach(() => {
     render(
       <VoteProvider>
         <Footer />
-      </VoteProvider>
+      </VoteProvider>,
     );
   });
-  it("renders a footer", () => {
-    const footer = screen.getByRole("contentinfo");
+  it('renders a footer', () => {
+    const footer = screen.getByRole('contentinfo');
     expect(footer).toBeInTheDocument();
   });
 
-  it("tests text inside p tag", () => {
-    const currentYear = screen.getByTestId("date");
+  it('tests text inside p tag', () => {
+    const currentYear = screen.getByTestId('date');
     expect(currentYear).toHaveTextContent(
-      `ShowWithMackie © ${new Date().getFullYear()} All Rights Reserved`
+      `ShowWithMackie © ${new Date().getFullYear()} All Rights Reserved`,
     );
   });
 });

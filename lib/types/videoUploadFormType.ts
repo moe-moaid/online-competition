@@ -1,12 +1,12 @@
 export type Category =
-  | "Hip Pop"
-  | "Rap"
-  | "RNB"
-  | "Afrobeat"
-  | "Raggae"
-  | "Dancehall"
-  | "Reggarton"
-  | "Others";
+  | 'Hip Pop'
+  | 'Rap'
+  | 'RNB'
+  | 'Afrobeat'
+  | 'Raggae'
+  | 'Dancehall'
+  | 'Reggarton'
+  | 'Others';
 
 export type VideoUploadFormType = {
   title: string;
