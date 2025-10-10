@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import MciContainer from "../components/MciContainer";
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+import MciContainer from '../components/MciContainer';
 
 const WE_DO = [
   {
@@ -25,9 +25,9 @@ const WE_DO = [
         />
       </svg>
     ),
-    title: "Safe & Secure",
+    title: 'Safe & Secure',
     description:
-      "We provide a safe and secured virtual platform where singers can share their videos.",
+      'We provide a safe and secured virtual platform where singers can share their videos.',
   },
   {
     icon: (
@@ -49,9 +49,9 @@ const WE_DO = [
         />
       </svg>
     ),
-    title: "Encourage Talent",
+    title: 'Encourage Talent',
     description:
-      "We encourage the talents who either lack the courage, resources, or the right connections to promote themselves.",
+      'We encourage the talents who either lack the courage, resources, or the right connections to promote themselves.',
   },
   {
     icon: (
@@ -75,9 +75,9 @@ const WE_DO = [
         <path d="M12 14.2549H10V22.2523H12V14.2549Z" fill="white" />
       </svg>
     ),
-    title: "Promote",
+    title: 'Promote',
     description:
-      "We promote diversity and inclusiveness through our platform and give them the right exposure.",
+      'We promote diversity and inclusiveness through our platform and give them the right exposure.',
   },
   {
     icon: (
@@ -107,66 +107,69 @@ const WE_DO = [
         />
       </svg>
     ),
-    title: "Encourage Visitors",
+    title: 'Encourage Visitors',
     description:
-      "We encourage the visitors to discover, engage and vote for their favorite talents.",
+      'We encourage the visitors to discover, engage and vote for their favorite talents.',
   },
 ];
 const MISSION_VISION = [
   {
-    white: "Our",
-    color: "Mission",
-    text: "We strive to be recognized as a global leader and proffered virtual venue in helping Talents succeed in the world’s fast- paced entertainment market.",
+    white: 'Our',
+    color: 'Mission',
+    text: 'We strive to be recognized as a global leader and proffered virtual venue in helping Talents succeed in the world’s fast- paced entertainment market.',
   },
   {
-    white: "Our",
-    color: "Vision",
-    text: "To build a Global creative and diverse community of talents by making a positive impact in their lives.",
+    white: 'Our',
+    color: 'Vision',
+    text: 'To build a Global creative and diverse community of talents by making a positive impact in their lives.',
   },
 ];
 function AboutPage() {
   return (
     <div className="">
       <div className="relative">
-        <div className="w-full h-[350px] lg:h-[980px] relative">
-          <Image src={"/about-header.png"} fill alt="About Us Header Image" />
+        <div className="relative h-[350px] w-full lg:h-[980px]">
+          <Image src={'/about-header.png'} fill alt="About Us Header Image" />
         </div>
-        <div className="absolute left-[12px] lg:left-[90px] xl:left-[150px] top-[50%] z-50 transform -translate-y-[50%] w-max-full md:w-1/2 tracking-widest text-white">
-          <h1 className="font-semibold text-[18px] lg:text-[40px] xl:text-[72px]">
-            ABOUT <span className="text-legendary-500 font-semibold">US</span>
+        <div className="w-max-full absolute left-[12px] top-[50%] z-50 -translate-y-[50%] transform tracking-widest text-white md:w-1/2 lg:left-[90px] xl:left-[150px]">
+          <h1 className="text-[18px] font-semibold lg:text-[40px] xl:text-[72px]">
+            ABOUT <span className="font-semibold text-legendary-500">US</span>
           </h1>
-          <p className="font-medium text-[12px] sm:text[16px] lg:text-[18px] xl:text-[24px]">
+          <p className="sm:text[16px] text-[12px] font-medium lg:text-[18px] xl:text-[24px]">
             Show it with Mackie is a free virtual singing competition organised
             quarterly which strives to bring people together from all over the
             world, to spark joy and human connection.
           </p>
           <Button
             variant="default"
-            className="bg-legendary-500 mt-4 font-medium sm:text-[20px]  sm:py-[28px] sm:px-[30px] hover:bg-legendary-600 ease-in-out duration-300"
+            className="mt-4 bg-legendary-500 font-medium duration-300  ease-in-out hover:bg-legendary-600 sm:px-[30px] sm:py-[28px] sm:text-[20px]"
           >
             Learn More
           </Button>
         </div>
       </div>
       {/* who we are */}
-      <MciContainer className="flex flex-col lg:flex-row gap-x-[67px] py-[120px] lg:items-center">
-        <div className="w-full w-max-1/2">
-          <div className="relative w-full h-[370px]">
-            <Image src={"/about-who-we-are.png"} fill alt="about-image" />
+      <MciContainer className="flex flex-col gap-x-[67px] py-[120px] lg:flex-row lg:items-center">
+        <div className="w-max-1/2 w-full">
+          <div className="relative h-[370px] w-full">
+            <Image src={'/about-who-we-are.png'} fill alt="about-image" />
           </div>
         </div>
-        <div className="w-full w-max-1/2 text-white">
-          <h1 className="font-semibold text-[40px] tracking-wider mb-4">
+        <div className="w-max-1/2 w-full text-white">
+          <h1 className="mb-4 text-[40px] font-semibold tracking-wider">
             Who <span className="text-legendary-500">We Are</span>
           </h1>
-          <p className="font-medium text-[20px] tracking-wider">
+          <p className="text-[20px] font-medium tracking-wider">
             Show it with Mackie is a free virtual singing competition organised
             quarterly which strives to bring people together from all over the
             world, to spark joy and human connection. Our Innovative Platform
-            has been founded on the basis of our mother company:{" "}
-            <Link href='https://www.mackieentertainment.com' className="text-legendary-500 font-semibold">
+            has been founded on the basis of our mother company:{' '}
+            <Link
+              href="https://www.mackieentertainment.com"
+              className="font-semibold text-legendary-500"
+            >
               Mackie Entertainment
-            </Link>{" "}
+            </Link>{' '}
             as a collaborative and cohesive way of helping talented people
             achieve their dreams
           </p>
@@ -174,8 +177,8 @@ function AboutPage() {
       </MciContainer>
       {/* what we do */}
       <MciContainer className="bg-gray-bg py-[120px] text-white ">
-        <div className="flex flex-col items-center w-full md:w-1/3 mx-auto text-center">
-          <h1 className="text-[30px] lg:text-[40px] font-bold mb-4">
+        <div className="mx-auto flex w-full flex-col items-center text-center md:w-1/3">
+          <h1 className="mb-4 text-[30px] font-bold lg:text-[40px]">
             What <span className="text-legendary-500">we do</span>
           </h1>
           <p className="">
@@ -183,13 +186,13 @@ function AboutPage() {
             amet laboriosam.
           </p>
         </div>
-        <div className="flex flex-col mt-4 md:mt-12 md:flex-row md:justify-between md:items-start">
-          {WE_DO.map((item) => (
+        <div className="mt-4 flex flex-col md:mt-12 md:flex-row md:items-start md:justify-between">
+          {WE_DO.map(item => (
             <div
               key={item.title}
-              className="flex flex-col gap-y-4 items-center justify-between hover:bg-lightGray-bg rounded-md group px-3 xl:px-[32px] py-10 duration-300 ease-in-out"
+              className="group flex flex-col items-center justify-between gap-y-4 rounded-md px-3 py-10 duration-300 ease-in-out hover:bg-lightGray-bg xl:px-[32px]"
             >
-              <div className="bg-lightGray-bg w-[60px] h-[60px] relative rounded-full group-hover:bg-legendary-500 duration-300 ease-in-out">
+              <div className="relative h-[60px] w-[60px] rounded-full bg-lightGray-bg duration-300 ease-in-out group-hover:bg-legendary-500">
                 {item.icon}
               </div>
               <h6 className="text-[20px] font-bold">{item.title}</h6>
@@ -200,14 +203,14 @@ function AboutPage() {
       </MciContainer>
 
       {/* out mission */}
-      <MciContainer className="py-[120px] w-full flex flex-col md:flex-row items-center justify-center text-center gap-y-12 md:gap-y-0 md:gap-x-[150px]">
-        {MISSION_VISION.map((item) => (
-          <div key={item.color} className="w-full md:w-1/2 text-white">
-            <h1 className="font-bold text-[40px] mb-3">
-              {item.white}{" "}
+      <MciContainer className="flex w-full flex-col items-center justify-center gap-y-12 py-[120px] text-center md:flex-row md:gap-x-[150px] md:gap-y-0">
+        {MISSION_VISION.map(item => (
+          <div key={item.color} className="w-full text-white md:w-1/2">
+            <h1 className="mb-3 text-[40px] font-bold">
+              {item.white}{' '}
               <span className="text-legendary-500">{item.color}</span>
             </h1>
-            <p className="font-medium text-[20px] tracking-wider">
+            <p className="text-[20px] font-medium tracking-wider">
               {item.text}
             </p>
           </div>

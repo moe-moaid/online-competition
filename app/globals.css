@@ -123,7 +123,7 @@
   .mci-separator::before {
     position: absolute;
     /* display: block; */
-    content: "";
+    content: '';
     border-left: solid 90px #18aebf;
     height: 2px;
     border-radius: 2px;
@@ -134,7 +134,7 @@
 
   .mci-separator::after {
     position: absolute;
-    content: "";
+    content: '';
     border-right: solid 90px #18aebf;
     height: 2px;
     border-radius: 2px;
@@ -156,7 +156,7 @@
   }
 
   .nested-decimal > li::before {
-    content: counters(section, ".") ". ";
+    content: counters(section, '.') '. ';
     font-weight: bold;
   }
 
@@ -174,7 +174,7 @@
   }
 
   .nested-decimal > li > ol > li::before {
-    content: counters(section, ".") "." counter(subsection) " ";
+    content: counters(section, '.') '.' counter(subsection) ' ';
     font-weight: bold;
   }
 
@@ -191,8 +191,8 @@
   }
 
   .nested-decimal > li > ol > li > ol > li::before {
-    content: counters(section, ".") "." counter(subsection) "."
-      counter(subsubsection) " ";
+    content: counters(section, '.') '.' counter(subsection) '.'
+      counter(subsubsection) ' ';
     font-weight: bold;
   }
 
@@ -209,7 +209,7 @@
 
   .nested-decimal > li > ol.no-numbering > li::before,
   .nested-decimal > li > ol > li > ol.no-numbering > li::before {
-    content: "" !important;
+    content: '' !important;
   }
 
   /* Underline control */

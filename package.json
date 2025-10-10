@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "test": "jest",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write \"{app,components,lib}/**/*.{ts,tsx,js,jsx,css,md,mdx}\""
   },
   "dependencies": {
     "@next/font": "^14.2.15",
@@ -56,6 +57,8 @@
     "jest-environment-jsdom": "^30.1.2",
     "knip": "^5.63.1",
     "postcss": "^8.5.3",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
     "tailwindcss": "3.4.1",
     "tailwindcss-cli": "^0.1.2",
     "ts-node": "^10.9.2",

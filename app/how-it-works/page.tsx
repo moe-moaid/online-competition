@@ -1,5 +1,5 @@
-import React from "react";
-import MciContainer from "../components/MciContainer";
+import React from 'react';
+import MciContainer from '../components/MciContainer';
 const point_icon = (
   <svg
     width="85"
@@ -28,43 +28,43 @@ const point_icon = (
 const Points = [
   {
     title:
-      "Each participant is required to submit a video of themselves singing in any language to participate in the competition.",
+      'Each participant is required to submit a video of themselves singing in any language to participate in the competition.',
   },
   {
     title:
-      "The participant will be asked to create an account where they need to share the following details:",
+      'The participant will be asked to create an account where they need to share the following details:',
     ul: [
-      "Name",
-      "Title",
-      "Contact Information",
-      "Email ID",
-      "Age",
-      "Nationality",
-      "Selection of Music Category",
+      'Name',
+      'Title',
+      'Contact Information',
+      'Email ID',
+      'Age',
+      'Nationality',
+      'Selection of Music Category',
     ],
   },
   {
     title:
-      "Upon creation of the account, which will offer a unique ID, the participant will receive a link within 24 hours.",
+      'Upon creation of the account, which will offer a unique ID, the participant will receive a link within 24 hours.',
   },
   {
-    title: "The first entry is free of charge.",
-  },
-  {
-    title:
-      "People will be encouraged to vote their favorite contestant. Each vote will be charged USD 3.",
+    title: 'The first entry is free of charge.',
   },
   {
     title:
-      "The competition will be in Stages, and the highest number of votes will qualify the best talents to the next stage until the final stage. If the participant will be eliminated from the competition, they will have the chance to re-register, where they will have to pay a fee of:",
-    ul: ["Round 2 will be USD 100", "Round 3 will be USD 250"],
+      'People will be encouraged to vote their favorite contestant. Each vote will be charged USD 3.',
+  },
+  {
+    title:
+      'The competition will be in Stages, and the highest number of votes will qualify the best talents to the next stage until the final stage. If the participant will be eliminated from the competition, they will have the chance to re-register, where they will have to pay a fee of:',
+    ul: ['Round 2 will be USD 100', 'Round 3 will be USD 250'],
   },
 ];
 function page() {
   return (
-    <MciContainer className="bg-cover pb-1 bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative z-0">
-      <div className="absolute inset-0 bg-black/80 -z-10" />
-      <h1 className="text-white font-semibold text-[48px] mb-5 mt-10">
+    <MciContainer className="relative z-0 bg-[url('/how-it-works.png')] bg-cover bg-center bg-no-repeat pb-1">
+      <div className="absolute inset-0 -z-10 bg-black/80" />
+      <h1 className="mb-5 mt-10 text-[48px] font-semibold text-white">
         How it <span className="text-legendary-500">Works</span>
       </h1>
       <div className="text-white">
@@ -72,14 +72,14 @@ function page() {
           <div
             key={`${i} - ${point.title}`}
             className={`flex flex-row ${
-              point.ul ? "items-start" : "items-center"
-            } gap-x-4 mb-6`}
+              point.ul ? 'items-start' : 'items-center'
+            } mb-6 gap-x-4`}
           >
             <div className="">{point_icon}</div>
             <div className="">
-              <p className={`${point.ul ? "mt-4" : "mt-0"}`}>{point.title}</p>
+              <p className={`${point.ul ? 'mt-4' : 'mt-0'}`}>{point.title}</p>
               {point.ul && (
-                <ul className="list-disc ms-4 mt-2">
+                <ul className="ms-4 mt-2 list-disc">
                   {point.ul.map((list, i) => (
                     <li key={`${i} - ${list}`}>{list}</li>
                   ))}

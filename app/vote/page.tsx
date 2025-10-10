@@ -1,13 +1,13 @@
-"use client";
-import React, { useEffect, useRef, useState } from "react";
-import { useGetListVideos } from "@/lib/api/getListService";
-import { videoType } from "@/lib/types/videoType";
-import Image from "next/image";
-import CustomControls from "./components/CustomControls";
-import { useVoteContext } from "@/lib/context/vote context";
-import CArdsFilterView from "../components/CardsFilterView";
-import PlayVideo from "../components/PlayVideo";
-import StripeWrapper from "../components/StripeWrapper";
+'use client';
+import React, { useEffect, useRef, useState } from 'react';
+import { useGetListVideos } from '@/lib/api/getListService';
+import { videoType } from '@/lib/types/videoType';
+import Image from 'next/image';
+import CustomControls from './components/CustomControls';
+import { useVoteContext } from '@/lib/context/vote context';
+import CArdsFilterView from '../components/CardsFilterView';
+import PlayVideo from '../components/PlayVideo';
+import StripeWrapper from '../components/StripeWrapper';
 
 function Vote() {
   const { data: videos } = useGetListVideos();
@@ -31,18 +31,18 @@ function Vote() {
 
   if (!videos || videos.length === 0)
     return (
-      <p className="text-white font-bold text-[42px] text-center">
+      <p className="text-center text-[42px] font-bold text-white">
         No videos found
       </p>
     );
 
   return (
     <StripeWrapper>
-      <div className={`relative ${isVoteOpen && "h-screen overflow-hidden"}`}>
+      <div className={`relative ${isVoteOpen && 'h-screen overflow-hidden'}`}>
         {isVoteOpen && (
           <>
             <div
-              className="bg-black/20 absolute top-0 left-0 bottom-0 right-0 z-20 backdrop-blur-sm hover:cursor-pointer transition-transform duration-1000 ease-in-out"
+              className="absolute bottom-0 left-0 right-0 top-0 z-20 bg-black/20 backdrop-blur-sm transition-transform duration-1000 ease-in-out hover:cursor-pointer"
               onClick={() => setIsVoteOpen(false)}
             />
           </>
@@ -53,13 +53,13 @@ function Vote() {
         )}
 
         {/* top videos seciton */}
-        <section className="h-[580px] relative">
+        <section className="relative h-[580px]">
           {!isVideoPlaying && (
-            <div className="absolute bg-black/70 top-0 bottom-0 start-0 end-0 z-0" />
+            <div className="absolute bottom-0 end-0 start-0 top-0 z-0 bg-black/70" />
           )}
           <video
             ref={videoRef}
-            className="w-full h-full object-cover absolute"
+            className="absolute h-full w-full object-cover"
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${videos?.[0].url}`}
             onEnded={() => setIsVideoPlaying(false)}
             controlsList="nodownload"
@@ -68,9 +68,9 @@ function Vote() {
             disableRemotePlayback
             preload="metadata"
           />
-          <div className="flex flex-row justify-start h-full ms-[160px]">
-            <div className="h-full overflow-y-auto start-[150px] top-0 flex flex-col gap-y-4 items-start text-white">
-              <div className="z-10 pe-10 border-e border-white">
+          <div className="ms-[160px] flex h-full flex-row justify-start">
+            <div className="start-[150px] top-0 flex h-full flex-col items-start gap-y-4 overflow-y-auto text-white">
+              <div className="z-10 border-e border-white pe-10">
                 <h1 className="z-10">Videos</h1>
                 {videos?.map((video: videoType, i: number) => {
                   return (
@@ -79,9 +79,9 @@ function Vote() {
                         className="w-[270px] rounded-sm"
                         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${video.url}`}
                       />
-                      <div className="flex flex-row justify-between items-center">
-                        <div className="flex flex-row justify-start items-center gap-x-4">
-                          <div className="relative w-10 h-10 rounded-full overflow-clip">
+                      <div className="flex flex-row items-center justify-between">
+                        <div className="flex flex-row items-center justify-start gap-x-4">
+                          <div className="relative h-10 w-10 overflow-clip rounded-full">
                             <Image
                               src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${video.artist.avatar.url}`}
                               fill
@@ -101,20 +101,20 @@ function Vote() {
               </div>
             </div>
             <div
-              className={`text-white flex flex-col justify-end ps-10 pb-40 z-10 ${
-                isVideoPlaying && "w-full"
+              className={`z-10 flex flex-col justify-end pb-40 ps-10 text-white ${
+                isVideoPlaying && 'w-full'
               }`}
             >
               {!isVideoPlaying ? (
                 <>
-                  <h1 className="text-[72px] font-bold text-transparent [-webkit-text-stroke:2px_white] capitalize">
+                  <h1 className="text-[72px] font-bold capitalize text-transparent [-webkit-text-stroke:2px_white]">
                     {videos?.[0].title}
                   </h1>
-                  <p className="text-[40px] font-medium underline mb-6">
+                  <p className="mb-6 text-[40px] font-medium underline">
                     by {videos?.[0].artist.name}
                   </p>
                   <button
-                    className="bg-legendary-500 text-white rounded-full px-6 py-3 flex flex-row gap-x-4 w-fit justify-between items-center flex-shrink"
+                    className="flex w-fit flex-shrink flex-row items-center justify-between gap-x-4 rounded-full bg-legendary-500 px-6 py-3 text-white"
                     onClick={playVideo}
                   >
                     <p className="text-[24px]">Play Video</p>

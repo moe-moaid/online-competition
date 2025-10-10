@@ -4,8 +4,8 @@ import React, {
   useEffect,
   SetStateAction,
   Dispatch,
-} from "react";
-import CustomPlayButton from "./CustomPlayButton";
+} from 'react';
+import CustomPlayButton from './CustomPlayButton';
 
 function PlayVideo({
   video,
@@ -29,7 +29,7 @@ function PlayVideo({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
-        className="absolute inset bg-black/65"
+        className="inset absolute bg-black/65"
         onClick={() => {
           setDisplayVid(undefined);
         }}

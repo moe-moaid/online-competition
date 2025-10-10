@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type Props = {
   videoRef: React.RefObject<HTMLVideoElement | null>;
@@ -20,7 +20,7 @@ function CustomPlayButton({ videoRef, isPlaying, setIsPlaying }: Props) {
   }
   return (
     <button
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
+      className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2"
       onClick={play}
     >
       <svg

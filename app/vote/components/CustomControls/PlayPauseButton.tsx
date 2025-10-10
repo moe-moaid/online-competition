@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type Props = {
   currentVideo: HTMLVideoElement | null;
@@ -14,7 +14,7 @@ function PlayPauseButton({
     if (currentVideo) currentVideo.currentTime += value;
   }
   return (
-    <div className="flex flex-row jsutify-center gap-x-8 items-center">
+    <div className="jsutify-center flex flex-row items-center gap-x-8">
       <button onClick={() => skip(-10)}>
         <svg
           width="24"

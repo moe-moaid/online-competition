@@ -1,12 +1,15 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 function Navbar() {
   return (
-    <nav className="flex flex-row items-center flex-shrink justify-between" role="navrole">
-      <div className="w-[250px] h-[65px] relative">
-        <Image src={"/logo.png"} fill alt="logo" />
+    <nav
+      className="flex flex-shrink flex-row items-center justify-between"
+      role="navrole"
+    >
+      <div className="relative h-[65px] w-[250px]">
+        <Image src={'/logo.png'} fill alt="logo" />
       </div>
       <div className="flex lg:hidden">
         <button
@@ -31,23 +34,33 @@ function Navbar() {
           </svg>
         </button>
       </div>
-      <div className="hidden lg:flex items-center justify-between gap-x-14">
-        <div className="flex text-white flex-row items-center justify-center gap-x-4">
-          <Link href="/" data-testid="navigation-link">Home</Link>
-          <Link href="/about" data-testid="navigation-link">About Us</Link>
-          <Link href="/vote" data-testid="navigation-link">Vote</Link>
-          <Link href="/finals" data-testid="navigation-link">Finals</Link>
-          <Link href="/contact-us" data-testid="navigation-link">Contact Us</Link>
+      <div className="hidden items-center justify-between gap-x-14 lg:flex">
+        <div className="flex flex-row items-center justify-center gap-x-4 text-white">
+          <Link href="/" data-testid="navigation-link">
+            Home
+          </Link>
+          <Link href="/about" data-testid="navigation-link">
+            About Us
+          </Link>
+          <Link href="/vote" data-testid="navigation-link">
+            Vote
+          </Link>
+          <Link href="/finals" data-testid="navigation-link">
+            Finals
+          </Link>
+          <Link href="/contact-us" data-testid="navigation-link">
+            Contact Us
+          </Link>
         </div>
         <div className="flex gap-x-8">
           <Button
-            className="bg-transparent border border-legendary rounded-md text-white"
+            className="rounded-md border border-legendary bg-transparent text-white"
             variant="outline"
           >
             Login
           </Button>
           <Button
-            className="bg-legendary rounded-md text-white"
+            className="rounded-md bg-legendary text-white"
             variant="default"
           >
             Signup

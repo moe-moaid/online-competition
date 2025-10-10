@@ -1,4 +1,4 @@
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request';
 
 export const CAST_VOTE = gql`
   mutation CastVote($videoId: Int!) {
@@ -10,7 +10,7 @@ export const CAST_VOTE = gql`
 `;
 
 export const CREATE_PAYMENT_INTENT = gql`
-mutation CreatePaymentIntent($videoId: Int!) {
-  createPaymentIntent(videoId: $videoId)
-}
+  mutation CreatePaymentIntent($videoId: Int!) {
+    createPaymentIntent(videoId: $videoId)
+  }
 `;
