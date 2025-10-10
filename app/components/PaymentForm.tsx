@@ -5,9 +5,13 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useGetListVideos } from "@/lib/api/getListService";
 import { videoType } from "@/lib/types/videoType";
 import VotePreview from "../vote/components/VotePreview";
-import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import { castVote } from "@/lib/services/vote";
+import {
+  CardCvcElement,
+  CardExpiryElement,
+  CardNumberElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 
 function PaymentForm() {
   const { isVoteOpen, setIsVoteOpen, currentVoteVideoId } = useVoteContext();
@@ -159,13 +163,6 @@ const InitView = ({
   );
 };
 
-const PaymentInputs = [
-  { lable: "Name on card", placeHolder: "Name on card", name: "name" },
-  { lable: "Email address", placeHolder: "example@mail.com", name: "email" },
-  { lable: "Card number", placeHolder: "Card number", name: "number" },
-  { lable: "Expiry date", placeHolder: "MM/YY", name: "expiry" },
-  { lable: "CVC/CVV", placeHolder: "CVC/CVV", name: "cvc" },
-];
 const CardView = ({
   setMethod,
   currentVideoId,
@@ -173,18 +170,68 @@ const CardView = ({
   setMethod: Dispatch<SetStateAction<"paypal" | "card" | null>>;
   currentVideoId?: number;
 }) => {
+  const [isFocused, setIsFocused] = useState<{
+    card: boolean;
+    expiry: boolean;
+    cvc: boolean;
+  }>({ card: false, expiry: false, cvc: false });
   const { data: videos } = useGetListVideos();
   const video = videos?.find((video: videoType) => video.id === currentVideoId);
-  const { setIsChangeVoteOpen } = useVoteContext();
-  const { register, handleSubmit } = useForm();
-  const mutaion = useMutation({
-    mutationFn: (videoId: number) => castVote(videoId),
-  });
-  const onSubmit = handleSubmit(async (values) => {
-    if (video) {
-      mutaion.mutate(video.id);
+  const { setIsChangeVoteOpen, clientSecret } = useVoteContext();
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleVote = async (e: any) => {
+    e.preventDefault();
+    if (!stripe || !elements || !clientSecret) return;
+    const cardElement = elements.getElement(CardNumberElement);
+    if (!cardElement) {
+      console.error("no card element found");
+      return;
     }
-  });
+
+    const payment = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: cardElement,
+      },
+    });
+
+    if (payment.error) {
+      console.error("An Error occured while processing the payemtn");
+    } else if (payment.paymentIntent) {
+      console.log("successful payment process", payment.paymentIntent);
+    }
+  };
+
+  const elementOptions = {
+    style: {
+      base: {
+        backgroundColor: "transparent",
+        color: "#FFFFFF",
+        fontSize: "16px",
+        fontFamily: "'Helvetica Neue', Helvetica, sans-serif",
+        fontSmoothing: "antialiased",
+        "::placeholder": {
+          color: "#FFFFFF",
+        },
+        ":focus": {
+          color: "#18aebf",
+        },
+      },
+      invalid: {
+        color: "#9e2146",
+        ":focus": {
+          color: "#fa755a",
+        },
+      },
+    },
+  };
+  const handlePaymentFieldFocus = (fieldNam: string) => {
+    setIsFocused((prev) => ({ ...prev, [fieldNam]: true }));
+  };
+  const handlePaymentFieldBlur = (fieldNam: string) => {
+    setIsFocused((prev) => ({ ...prev, [fieldNam]: false }));
+  };
 
   return (
     <div className="flex flex-col items-start justify-center px-6 mt-6">
@@ -205,23 +252,55 @@ const CardView = ({
         </button>
         <p className="text-[24px] font-semibold">Debit Card</p>
       </div>
-      <form className="flex flex-col gap-y-6 mt-6 w-full" onSubmit={onSubmit}>
-        {PaymentInputs.map((input, index) => (
+      <form className="flex flex-col gap-y-6 mt-6 w-full" onSubmit={handleVote}>
+        <div className="w-full">
+          <label className="block text-sm font-medium text-gray-400 mb-1">
+            Card number
+          </label>
           <div
-            key={`${input.name} - ${index}`}
-            className="flex flex-col items-start gap-y-2"
+            className={`custom-payment-field ${
+              isFocused.card ? "focused" : ""
+            }`}
           >
-            <label className="text-white text-[20px]" htmlFor={input.name}>
-              {input.lable}
-            </label>
-            <input
-              className="bg-transparent border border-white rounded-sm text-gray-text px-2 py-4 focus:text-white focus:border-legendary-500 outline-none stroke-none w-full"
-              type="text"
-              {...register(input.name)}
-              placeholder={input.placeHolder}
+            <CardNumberElement
+              options={elementOptions}
+              onFocus={() => handlePaymentFieldFocus("card")}
+              onBlur={() => handlePaymentFieldBlur("card")}
             />
           </div>
-        ))}
+        </div>
+
+        <div className="w-full">
+          <label className="block text-sm font-medium text-gray-400 mb-1">
+            Expiration date
+          </label>
+          <div
+            className={`custom-payment-field ${
+              isFocused.expiry ? "focused" : ""
+            }`}
+          >
+            <CardExpiryElement
+              options={elementOptions}
+              onFocus={() => handlePaymentFieldFocus("expiry")}
+              onBlur={() => handlePaymentFieldBlur("expiry")}
+            />
+          </div>
+        </div>
+
+        <div className="w-full">
+          <label className="block text-sm font-medium text-gray-400 mb-1">
+            CVC
+          </label>
+          <div
+            className={`custom-payment-field ${isFocused.cvc ? "focused" : ""}`}
+          >
+            <CardCvcElement
+              options={elementOptions}
+              onFocus={() => handlePaymentFieldFocus("cvc")}
+              onBlur={() => handlePaymentFieldBlur("cvc")}
+            />
+          </div>
+        </div>
         <div className="w-full">
           <div className="flex flex-row justify-between items-center ">
             <p className="text-gray-text text-[16px]">you are voting for</p>
@@ -239,7 +318,8 @@ const CardView = ({
         </div>
         <button
           type="submit"
-          className="w-full bg-white rounded-md py-4 text-center text-[#333333] text-[20px] font-semibold"
+          className="w-full bg-white rounded-md py-4 text-center text-[#333333] text-[20px] font-semibold disabled:bg-gray-bg disabled:hover:cursor-not-allowed"
+          disabled={!stripe}
         >
           Confirm Payment and Vote
         </button>

@@ -33,8 +33,22 @@ describe("Test card display view component", () => {
   });
 
   it("tests for change vote is open", () => {
-    renderWithProviders(
-      <CArdsFilterView showFilters={true} setDisplayVid={setDisplayVid} />
+    const mockSetterFn = jest.fn();
+    const mockVoteContextValue = {
+      isVoteOpen: true,
+      currentVoteVideoId: 177,
+      isChangeVoteOpen: true,
+      setIsChangeVoteOpen: mockSetterFn,
+      setIsVoteOpen: mockSetterFn,
+      setClientSecret: mockSetterFn,
+      clientSecret: 'test'
+    };
+    render(
+      <VoteContext.Provider value={mockVoteContextValue}>
+        <QueryClientProvider client={queryClient}>
+          <CArdsFilterView showFilters={true} setDisplayVid={setDisplayVid} />
+        </QueryClientProvider>
+      </VoteContext.Provider>
     );
     expect(screen.getByTestId("vote-preview")).toBeInTheDocument();
   });

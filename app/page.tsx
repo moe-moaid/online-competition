@@ -6,6 +6,7 @@ import Image from "next/image";
 import PlayVideo from "./components/PlayVideo";
 import CArdsFilterView from "./components/CardsFilterView";
 import { useVoteContext } from "@/lib/context/vote context";
+import StripeWrapper from "./components/StripeWrapper";
 
 export default function Home() {
   const { data: videos } = useGetListVideos();
@@ -33,7 +34,7 @@ export default function Home() {
   }
 
   return (
-    <>
+    <StripeWrapper>
       <main className={`relative ${isVoteOpen && "h-screen overflow-hidden"}`}>
         {isVoteOpen && (
           <>
@@ -136,6 +137,6 @@ export default function Home() {
           </MciContainer>
         </section>
       </main>
-    </>
+    </StripeWrapper>
   );
 }

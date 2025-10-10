@@ -1,11 +1,14 @@
+import { useMutation } from "@tanstack/react-query";
 import {
   createContext,
   Dispatch,
   PropsWithChildren,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
 } from "react";
+import { createPaymentIntent } from "../services/vote";
 
 export type ContextType = {
   isVoteOpen: boolean;
@@ -14,6 +17,8 @@ export type ContextType = {
   setIsChangeVoteOpen: Dispatch<SetStateAction<boolean>>;
   currentVoteVideoId?: number;
   setCurrentVoteVideoId?: Dispatch<SetStateAction<number | undefined>>;
+  clientSecret?: string;
+  setClientSecret: Dispatch<SetStateAction<string | undefined>>;
 };
 export const VoteContext = createContext<ContextType | null>(null);
 
@@ -21,9 +26,29 @@ export const VoteProvider = ({ children }: PropsWithChildren) => {
   const [isVoteOpen, setIsVoteOpen] = useState<boolean>(false);
   const [isChangeVoteOpen, setIsChangeVoteOpen] = useState<boolean>(false);
   const [currentVoteVideoId, setCurrentVoteVideoId] = useState<number>();
+  const [clientSecret, setClientSecret] = useState<string | undefined>();
+  const paymentIntent = useMutation<
+    { createPaymentIntent: string }, 
+    Error, 
+    number 
+  >({
+    mutationFn: (videoId: number) => createPaymentIntent(videoId),
+    onSuccess: (data: any) => {
+      setClientSecret(data.createPaymentIntent);
+    },
+    onError: (err: any) => {
+      console.log('error occured while fetching', err);
+    }
+  });
+  useEffect(() => {
+  if (isVoteOpen && currentVoteVideoId) {
+  console.log('triggered mutation', currentVoteVideoId);
+    paymentIntent.mutate(currentVoteVideoId);
+  }
+  }, [isVoteOpen, currentVoteVideoId])
   return (
     <VoteContext.Provider
-      value={{ isVoteOpen, setIsVoteOpen, currentVoteVideoId, setCurrentVoteVideoId, isChangeVoteOpen, setIsChangeVoteOpen }}
+      value={{ isVoteOpen, setIsVoteOpen, currentVoteVideoId, setCurrentVoteVideoId, isChangeVoteOpen, setIsChangeVoteOpen, setClientSecret, clientSecret }}
     >
       {children}
     </VoteContext.Provider>

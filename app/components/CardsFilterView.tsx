@@ -24,7 +24,7 @@ function CArdsFilterView({ showFilters, setDisplayVid }: Props) {
   } = useVoteContext();
 
   const currentlyVotingFor = videos?.find(
-    (video) => video.id === currentVoteVideoId
+    (video:videoType) => video.id === currentVoteVideoId
   );
 
   if (!videos || videos.length === 0)
