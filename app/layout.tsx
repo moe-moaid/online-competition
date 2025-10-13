@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { VoteProvider } from '@/lib/context/vote context';
 import PaymentForm from './components/PaymentForm';
 import StripeWrapper from './components/StripeWrapper';
+import { Toaster } from 'sonner';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -36,6 +37,7 @@ export default function RootLayout({
             <Footer />
           </VoteProvider>
         </QueryClientProvider>
+        <Toaster position="bottom-center" duration={5000} richColors />
       </body>
     </html>
   );

@@ -42,7 +42,6 @@ export const VoteProvider = ({ children }: PropsWithChildren) => {
   });
   useEffect(() => {
     if (isVoteOpen && currentVoteVideoId) {
-      console.log('triggered mutation', currentVoteVideoId);
       paymentIntent.mutate(currentVoteVideoId);
     }
   }, [isVoteOpen, currentVoteVideoId]);

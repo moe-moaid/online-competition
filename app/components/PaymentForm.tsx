@@ -12,6 +12,8 @@ import {
   useElements,
   useStripe,
 } from '@stripe/react-stripe-js';
+import { Spinner } from '@/components/ui/spinner';
+import { toast } from 'sonner';
 
 function PaymentForm() {
   const { isVoteOpen, setIsVoteOpen, currentVoteVideoId } = useVoteContext();
@@ -26,7 +28,7 @@ function PaymentForm() {
     <div
       data-testid="payment-dialog"
       className={clsx(
-        'h-100 fixed bottom-0 right-0 top-0 z-30 h-screen w-1/4 origin-right scale-x-0 overflow-y-scroll border-s border-gray-text bg-black text-white transition-transform duration-300 ease-in-out',
+        'h-100 fixed bottom-0 right-0 top-0 z-30 h-screen w-full origin-right scale-x-0 overflow-y-scroll border-s border-gray-text bg-black text-white transition-transform duration-300 ease-in-out sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4',
         isVoteOpen && 'scale-x-100',
       )}
     >
@@ -177,29 +179,38 @@ const CardView = ({
   }>({ card: false, expiry: false, cvc: false });
   const { data: videos } = useGetListVideos();
   const video = videos?.find((video: videoType) => video.id === currentVideoId);
-  const { setIsChangeVoteOpen, clientSecret } = useVoteContext();
+  const { setIsChangeVoteOpen, clientSecret, setIsVoteOpen } = useVoteContext();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const stripe = useStripe();
   const elements = useElements();
 
   const handleVote = async (e: any) => {
     e.preventDefault();
-    if (!stripe || !elements || !clientSecret) return;
+    if (!stripe || !elements || !clientSecret) {
+      return;
+    }
     const cardElement = elements.getElement(CardNumberElement);
     if (!cardElement) {
       console.error('no card element found');
       return;
     }
-
-    const payment = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: cardElement,
-      },
-    });
-
-    if (payment.error) {
-      console.error('An Error occured while processing the payemtn');
-    } else if (payment.paymentIntent) {
-      console.log('successful payment process', payment.paymentIntent);
+    try {
+      setIsLoading(true);
+      const payment = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: cardElement,
+        },
+      });
+      if (payment.paymentIntent) {
+        toast.success('you voted successfully');
+        setIsVoteOpen(false);
+      } else if (payment.error) {
+        toast.error(`${payment.error.message}`);
+      }
+    } catch (error: any) {
+      toast.error(`${error.message}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -318,10 +329,11 @@ const CardView = ({
         </div>
         <button
           type="submit"
-          className="w-full rounded-md bg-white py-4 text-center text-[20px] font-semibold text-[#333333] disabled:bg-gray-bg disabled:hover:cursor-not-allowed"
-          disabled={!stripe}
+          className="flex w-full flex-row items-center justify-center gap-x-4 rounded-md bg-white py-4 text-center text-[14px] font-semibold text-[#333333] disabled:bg-gray-bg disabled:hover:cursor-not-allowed md:text-[18px] lg:text-[20px]"
+          disabled={!stripe || isLoading}
         >
-          Confirm Payment and Vote
+          <p>Confirm Payment and Vote </p>
+          {isLoading && <Spinner className="size-6 text-legendary-500" />}
         </button>
       </form>
     </div>
