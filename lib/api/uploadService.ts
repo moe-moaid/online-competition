@@ -1,5 +1,5 @@
-import axios from "axios";
-import { useMutation } from "@tanstack/react-query";
+import axios from 'axios';
+import { useMutation } from '@tanstack/react-query';
 
 export function useUploadVideo() {
   return useMutation({
@@ -9,9 +9,9 @@ export function useUploadVideo() {
         data,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
-        }
+        },
       );
       return response.data;
     },

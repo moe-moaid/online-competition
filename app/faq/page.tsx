@@ -1,41 +1,41 @@
-import React from "react";
-import MciContainer from "../components/MciContainer";
+import React from 'react';
+import MciContainer from '../components/MciContainer';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from '@/components/ui/accordion';
 
 const Qs: { question: string; answer: string }[] = [
   {
-    question: "How can I report a problem on your website?",
+    question: 'How can I report a problem on your website?',
     answer:
-      "Our online team is working hard to make sure you have an excellent experience on Showitwithmackie.com Should you find an error or bug, please send us a message at info@showitwithmackie.com",
+      'Our online team is working hard to make sure you have an excellent experience on Showitwithmackie.com Should you find an error or bug, please send us a message at info@showitwithmackie.com',
   },
   {
-    question: "How can I participate as an artist?",
+    question: 'How can I participate as an artist?',
     answer:
-      "you will need to create and account as a singer, then upload your song",
+      'you will need to create and account as a singer, then upload your song',
   },
   {
-    question: "Who organizes Show it with Mackie?",
-    answer: "the mother company",
+    question: 'Who organizes Show it with Mackie?',
+    answer: 'the mother company',
   },
 ];
 function page() {
   return (
-    <MciContainer className="py-[120px] text-white bg-cover bg-center bg-no-repeat bg-[url('/how-it-works.png')] relative z-0">
-      <div className="bg-black/80 absolute inset-0 -z-10" />
+    <MciContainer className="relative z-0 bg-[url('/how-it-works.png')] bg-cover bg-center bg-no-repeat py-[120px] text-white">
+      <div className="absolute inset-0 -z-10 bg-black/80" />
       <Accordion type="single" collapsible className="w-full">
         {Qs.map((q, i) => (
           <AccordionItem key={`${i} - ${q.question}`} value={`${i + 1}`}>
             <AccordionTrigger className="group [&>svg]:hidden">
-              <div className="flex items-center w-full">
+              <div className="flex w-full items-center">
                 <span className="flex-1 text-left">{`${i + 1}. ${
                   q.question
                 }`}</span>
-                <div className="flex items-center justify-center w-6 h-6">
+                <div className="flex h-6 w-6 items-center justify-center">
                   <div className="h-5 w-5 group-data-[state=open]:hidden">
                     <PlusIcon />
                   </div>

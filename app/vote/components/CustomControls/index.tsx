@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import PlayPauseButton from "./PlayPauseButton";
-import SoundControl from "./SoundControl";
+import React, { useEffect, useState } from 'react';
+import PlayPauseButton from './PlayPauseButton';
+import SoundControl from './SoundControl';
 
 type Props = {
   currentVideo: HTMLVideoElement | null;
@@ -33,15 +33,15 @@ function CustomControls({
       setIsFullscreen(isFull);
     };
 
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
     return () =>
-      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
   }, []);
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex w-full flex-col">
       {/* progress bar */}
 
-      <div className="z-10 flex flex-row justify-between items-center">
+      <div className="z-10 flex flex-row items-center justify-between">
         {/* Volume control */}
         <SoundControl currentVideo={currentVideo} />
 

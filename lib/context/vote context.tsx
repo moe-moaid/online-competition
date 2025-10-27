@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation } from '@tanstack/react-query';
 import {
   createContext,
   Dispatch,
@@ -7,10 +7,10 @@ import {
   useContext,
   useEffect,
   useState,
-} from "react";
-import { createPaymentIntent } from "../services/vote";
+} from 'react';
+import { createPaymentIntent } from '../services/vote';
 
-type ContextType = {
+export type ContextType = {
   isVoteOpen: boolean;
   setIsVoteOpen: Dispatch<SetStateAction<boolean>>;
   isChangeVoteOpen: boolean;
@@ -32,20 +32,20 @@ export const VoteProvider = ({ children }: PropsWithChildren) => {
     Error, // TError
     number // TVariables
   >({
-    mutationFn: (videoId) => createPaymentIntent(videoId),
-    onSuccess: (data) => {
+    mutationFn: videoId => createPaymentIntent(videoId),
+    onSuccess: data => {
       // data.createPaymentIntent is a string
       setClientSecret(data.createPaymentIntent);
     },
-    onError: (err) => {
+    onError: err => {
       console.log('error occured while fetching', err);
-    }
+    },
   });
   useEffect(() => {
-  if (isVoteOpen && currentVoteVideoId) {
-    paymentIntent.mutate(currentVoteVideoId);
-  }
-  }, [isVoteOpen, currentVoteVideoId])
+    if (isVoteOpen && currentVoteVideoId) {
+      paymentIntent.mutate(currentVoteVideoId);
+    }
+  }, [isVoteOpen, currentVoteVideoId]);
 
   return (
     <VoteContext.Provider
@@ -68,7 +68,7 @@ export const VoteProvider = ({ children }: PropsWithChildren) => {
 export const useVoteContext = () => {
   const context = useContext(VoteContext);
   if (!context) {
-    throw new Error("useVoteContext should be used within VoteProvider");
+    throw new Error('useVoteContext should be used within VoteProvider');
   }
   return context;
 };

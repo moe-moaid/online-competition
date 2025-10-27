@@ -1,5 +1,5 @@
 'use client';
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState } from 'react';
 
 type Props = {
   currentVideo: HTMLVideoElement | null;
@@ -14,7 +14,7 @@ function SoundControl({ currentVideo }: Props) {
 
   return (
     <div>
-      <button className="group flex flex-row justify-start items-center gap-x-4">
+      <button className="group flex flex-row items-center justify-start gap-x-4">
         {volume > 0 ? (
           <svg
             width="38"
@@ -104,11 +104,11 @@ function SoundControl({ currentVideo }: Props) {
         )}
 
         <input
-          className="accent-legendary-500 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
+          className="origin-left scale-x-0 accent-legendary-500 transition-transform duration-300 ease-in-out group-hover:scale-x-100"
           type="range"
           min={0}
           max={100}
-          onChange={(e) => volumeControl(e)}
+          onChange={e => volumeControl(e)}
           defaultValue={volume * 100}
         />
       </button>

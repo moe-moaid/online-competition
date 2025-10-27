@@ -1,4 +1,4 @@
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request';
 
 export const CAST_VOTE = gql`
   mutation CastVote($videoId: Int!) {

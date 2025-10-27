@@ -1,19 +1,19 @@
-import { videoType } from "@/lib/types/videoType";
-import Image from "next/image";
-import React from "react";
+import { videoType } from '@/lib/types/videoType';
+import Image from 'next/image';
+import React from 'react';
 
 function VotePreview({ video }: { video?: videoType }) {
   return (
-    <div data-testid= "vote-preview">
-      <div className="relative w-full h-full rounded-lg overflow-clip">
+    <div data-testid="vote-preview">
+      <div className="relative h-full w-full overflow-clip rounded-lg">
         <div className={`absolute inset-0 bg-black/65`} />
         <video
-          className="w-full h-full object-cover"
+          className="h-full w-full object-cover"
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${video?.url}`}
         />
 
         <svg
-          className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
+          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform`}
           width="40"
           height="40"
           viewBox="0 0 40 40"
@@ -30,8 +30,8 @@ function VotePreview({ video }: { video?: videoType }) {
           />
         </svg>
       </div>
-      <div className="flex flex-row justify-start items-start gap-x-4 mt-4">
-        <div className="relative rounded-full w-10 h-10 overflow-clip">
+      <div className="mt-4 flex flex-row items-start justify-start gap-x-4">
+        <div className="relative h-10 w-10 overflow-clip rounded-full">
           <Image
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${video?.artist.avatar.url}`}
             fill
@@ -40,8 +40,8 @@ function VotePreview({ video }: { video?: videoType }) {
           />
         </div>
         <div className="flex-flex-col gap-y-4">
-          <p className="font-medium text-[14px] text-white">{video?.title}</p>
-          <p className="flex flex-row items-center gap-x-2 font-medium text-gray-text text-[12px]">
+          <p className="text-[14px] font-medium text-white">{video?.title}</p>
+          <p className="flex flex-row items-center gap-x-2 text-[12px] font-medium text-gray-text">
             By {`${video?.artist.name} `}
             <span>
               <svg

@@ -1,6 +1,6 @@
-"use client";
-import { useVoteContext } from "@/lib/context/vote context";
-import React from "react";
+'use client';
+import { useVoteContext } from '@/lib/context/vote context';
+import React from 'react';
 
 type Props = {
   currentVideoId: number;
@@ -14,7 +14,8 @@ function VotingButton({ currentVideoId }: Props) {
   } = useVoteContext();
   return (
     <button
-      className="w-14 h-14"
+      data-testid="vote-button"
+      className="h-14 w-14"
       onClick={() => {
         if (isChangeVoteOpen) {
           setCurrentVoteVideoId?.(currentVideoId);

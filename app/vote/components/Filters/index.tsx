@@ -1,51 +1,51 @@
-"use client";
-import React, { useState } from "react";
+'use client';
+import React, { useState } from 'react';
 
 const categories = [
-  "Hip Pop",
-  "Rap",
-  "RNB",
-  "Afrobeat",
-  "Raggae",
-  "Dancehall",
-  "Reggarton",
-  "Others",
+  'Hip Pop',
+  'Rap',
+  'RNB',
+  'Afrobeat',
+  'Raggae',
+  'Dancehall',
+  'Reggarton',
+  'Others',
 ];
 function Filter() {
   const [query, setQuery] = useState<string[]>([]);
 
   return (
     <div>
-      <h6 className="text-white text-[24px] mb-5">By Category</h6>
-      <div className="bg-gray-bg rounded-lg px-5 py-3 w-[380px]">
-        <div className="flex flex-col gap-y-4 justify-center text-white max-w-xs">
+      <h6 className="mb-5 text-[24px] text-white">By Category</h6>
+      <div className="w-[380px] rounded-lg bg-gray-bg px-5 py-3">
+        <div className="flex max-w-xs flex-col justify-center gap-y-4 text-white">
           {categories.map((cat, i) => {
             const isChecked = query.includes(cat);
             return (
               <div
                 key={`${cat} - ${i}`}
-                className="flex flex-row gap-x-4 items-center justify-start"
+                className="flex flex-row items-center justify-start gap-x-4"
               >
                 <div className="relative">
                   <input
-                    className="opacity-0 absolute inset-0 w-6 h-6 cursor-pointer"
+                    className="absolute inset-0 h-6 w-6 cursor-pointer opacity-0"
                     type="checkbox"
                     value={cat}
                     name={cat}
                     id={cat}
                     checked={isChecked}
                     onChange={() =>
-                      setQuery((prev) => {
+                      setQuery(prev => {
                         return prev.indexOf(cat) !== -1
-                          ? prev.filter((item) => item !== cat)
+                          ? prev.filter(item => item !== cat)
                           : [...prev, cat];
                       })
                     }
                   />
                   <div
                     className={`
-                  w-6 h-6 rounded border-2 bg-transparent flex items-center justify-center transition-all duration-200
-                  ${isChecked ? "border-white" : "border-gray-text"}
+                  flex h-6 w-6 items-center justify-center rounded border-2 bg-transparent transition-all duration-200
+                  ${isChecked ? 'border-white' : 'border-gray-text'}
                     `}
                   >
                     {isChecked && (
@@ -66,8 +66,8 @@ function Filter() {
                 </div>
                 <label
                   htmlFor={cat}
-                  className={`cursor-pointer text-lg select-none transition-colors duration-200 ${
-                    isChecked ? "text-white" : "text-gray-text"
+                  className={`cursor-pointer select-none text-lg transition-colors duration-200 ${
+                    isChecked ? 'text-white' : 'text-gray-text'
                   }`}
                 >
                   {cat}

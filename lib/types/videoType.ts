@@ -1,5 +1,5 @@
-import { Category } from "./videoUploadFormType";
-import { ArtistType } from "./artistType";
+import { Category } from './videoUploadFormType';
+import { ArtistType } from './artistType';
 
 export type videoType = {
   id: number;
