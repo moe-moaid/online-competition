@@ -1,17 +1,21 @@
-'use client';
-import { useVoteContext } from '@/lib/context/vote context';
-import clsx from 'clsx';
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { useGetListVideos } from '@/lib/api/getListService';
-import { videoType } from '@/lib/types/videoType';
-import VotePreview from '../vote/components/VotePreview';
+"use client";
+import { useVoteContext } from "@/lib/context/vote context";
+import clsx from "clsx";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useGetListVideos } from "@/lib/api/getListService";
+import { videoType } from "@/lib/types/videoType";
+import VotePreview from "../vote/components/VotePreview";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { castVote } from "@/lib/services/vote";
+import { createPaymentIntent } from "@/lib/services/vote";
 import {
-  CardCvcElement,
-  CardExpiryElement,
-  CardNumberElement,
-  useElements,
   useStripe,
-} from '@stripe/react-stripe-js';
+  useElements,
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
+} from "@stripe/react-stripe-js";
 
 function PaymentForm() {
   const { isVoteOpen, setIsVoteOpen, currentVoteVideoId } = useVoteContext();
@@ -177,153 +181,159 @@ const CardView = ({
   }>({ card: false, expiry: false, cvc: false });
   const { data: videos } = useGetListVideos();
   const video = videos?.find((video: videoType) => video.id === currentVideoId);
-  const { setIsChangeVoteOpen, clientSecret } = useVoteContext();
-  const stripe = useStripe();
-  const elements = useElements();
-
-  const handleVote = async (e: any) => {
-    e.preventDefault();
-    if (!stripe || !elements || !clientSecret) return;
-    const cardElement = elements.getElement(CardNumberElement);
-    if (!cardElement) {
-      console.error('no card element found');
-      return;
+  const { setIsChangeVoteOpen } = useVoteContext();
+  const { handleSubmit } = useForm();
+  const mutaion = useMutation({
+    mutationFn: (videoId: number) => castVote(videoId),
+  });
+  const paymentIntent = useMutation({
+    mutationFn: (videoId: number) => createPaymentIntent(videoId),
+  });
+  const onSubmit = handleSubmit(async (values) => {
+    if (video) {
+      mutaion.mutate(video.id);
     }
+  });
 
-    const payment = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: cardElement,
-      },
-    });
+    const stripe = useStripe();
+    const elements = useElements();
 
-    if (payment.error) {
-      console.error('An Error occured while processing the payemtn');
-    } else if (payment.paymentIntent) {
-      console.log('successful payment process', payment.paymentIntent);
-    }
-  };
+    const handleVote = async (e: any) => {
+      e.preventDefault();
+      if (!stripe || !elements) return;
 
-  const elementOptions = {
-    style: {
-      base: {
-        backgroundColor: 'transparent',
-        color: '#FFFFFF',
-        fontSize: '16px',
-        fontFamily: "'Helvetica Neue', Helvetica, sans-serif",
-        fontSmoothing: 'antialiased',
-        '::placeholder': {
-          color: '#FFFFFF',
+      // Confirm payment intent on frontend
+      const { error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          // Return URL only needed for redirects (SCA), but can still set it:
+          return_url: "https://your-site.com/return",
         },
-        ':focus': {
-          color: '#18aebf',
+      });
+
+      if (error) {
+      }
+    };
+
+    const elementOptions = {
+      style: {
+        base: {
+          backgroundColor: "transparent",
+          color: "#FFFFFF",
+          fontSize: "16px",
+          fontFamily: "'Helvetica Neue', Helvetica, sans-serif",
+          fontSmoothing: "antialiased",
+          "::placeholder": {
+            color: "#FFFFFF",
+          },
+          ":focus": {
+            color: "#18aebf",
+          },
+        },
+        invalid: {
+          color: "#9e2146",
+          ":focus": {
+            color: "#fa755a",
+          },
         },
       },
-      invalid: {
-        color: '#9e2146',
-        ':focus': {
-          color: '#fa755a',
-        },
-      },
-    },
-  };
-  const handlePaymentFieldFocus = (fieldNam: string) => {
-    setIsFocused(prev => ({ ...prev, [fieldNam]: true }));
-  };
-  const handlePaymentFieldBlur = (fieldNam: string) => {
-    setIsFocused(prev => ({ ...prev, [fieldNam]: false }));
-  };
+    };
+    const handlePaymentFieldFocus = (fieldNam: string) => {
+      setIsFocused((prev) => ({ ...prev, [fieldNam]: true }));
+    };
+    const handlePaymentFieldBlur = (fieldNam: string) => {
+      setIsFocused((prev) => ({ ...prev, [fieldNam]: false }));
+    };
 
-  return (
-    <div className="mt-6 flex flex-col items-start justify-center px-6">
-      <div className="flex flex-row items-center justify-start gap-x-4">
-        <button onClick={() => setMethod(null)}>
-          <svg
-            width="16"
-            height="14"
-            viewBox="0 0 16 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M15 6.00003H3.14L6.77 1.64003C6.93974 1.43581 7.0214 1.17253 6.99702 0.908108C6.97264 0.643682 6.84422 0.39977 6.64 0.230032C6.43578 0.060293 6.1725 -0.0213689 5.90808 0.0030108C5.64365 0.0273905 5.39974 0.155815 5.23 0.360032L0.23 6.36003C0.196361 6.40776 0.166279 6.45789 0.14 6.51003C0.14 6.56003 0.14 6.59003 0.0700002 6.64003C0.0246737 6.75469 0.000941121 6.87674 0 7.00003C0.000941121 7.12332 0.0246737 7.24537 0.0700002 7.36003C0.0700002 7.41003 0.0699999 7.44003 0.14 7.49003C0.166279 7.54217 0.196361 7.59231 0.23 7.64003L5.23 13.64C5.32402 13.7529 5.44176 13.8437 5.57485 13.9059C5.70793 13.9681 5.85309 14.0003 6 14C6.23365 14.0005 6.46009 13.9191 6.64 13.77C6.74126 13.6861 6.82496 13.583 6.88631 13.4666C6.94766 13.3503 6.98546 13.223 6.99754 13.092C7.00961 12.961 6.99573 12.829 6.95669 12.7034C6.91764 12.5777 6.8542 12.4611 6.77 12.36L3.14 8.00003H15C15.2652 8.00003 15.5196 7.89467 15.7071 7.70714C15.8946 7.5196 16 7.26525 16 7.00003C16 6.73482 15.8946 6.48046 15.7071 6.29292C15.5196 6.10539 15.2652 6.00003 15 6.00003Z"
-              fill="white"
-            />
-          </svg>
-        </button>
-        <p className="text-[24px] font-semibold">Debit Card</p>
-      </div>
-      <form className="mt-6 flex w-full flex-col gap-y-6" onSubmit={handleVote}>
-        <div className="w-full">
-          <label className="mb-1 block text-sm font-medium text-gray-400">
-            Card number
-          </label>
-          <div
-            className={`custom-payment-field ${
-              isFocused.card ? 'focused' : ''
-            }`}
-          >
-            <CardNumberElement
-              options={elementOptions}
-              onFocus={() => handlePaymentFieldFocus('card')}
-              onBlur={() => handlePaymentFieldBlur('card')}
-            />
-          </div>
-        </div>
-
-        <div className="w-full">
-          <label className="mb-1 block text-sm font-medium text-gray-400">
-            Expiration date
-          </label>
-          <div
-            className={`custom-payment-field ${
-              isFocused.expiry ? 'focused' : ''
-            }`}
-          >
-            <CardExpiryElement
-              options={elementOptions}
-              onFocus={() => handlePaymentFieldFocus('expiry')}
-              onBlur={() => handlePaymentFieldBlur('expiry')}
-            />
-          </div>
-        </div>
-
-        <div className="w-full">
-          <label className="mb-1 block text-sm font-medium text-gray-400">
-            CVC
-          </label>
-          <div
-            className={`custom-payment-field ${isFocused.cvc ? 'focused' : ''}`}
-          >
-            <CardCvcElement
-              options={elementOptions}
-              onFocus={() => handlePaymentFieldFocus('cvc')}
-              onBlur={() => handlePaymentFieldBlur('cvc')}
-            />
-          </div>
-        </div>
-        <div className="w-full">
-          <div className="flex flex-row items-center justify-between ">
-            <p className="text-[16px] text-gray-text">you are voting for</p>
-            <button
-              type="button"
-              className="text-[16px] text-legendary-500"
-              onClick={() => setIsChangeVoteOpen(true)}
+    return (
+      <div className="mt-6 flex flex-col items-start justify-center px-6">
+        <div className="flex flex-row items-center justify-start gap-x-4">
+          <button onClick={() => setMethod(null)}>
+            <svg
+              width="16"
+              height="14"
+              viewBox="0 0 16 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              change
-            </button>
-          </div>
-          <div className="mt-4 w-full rounded-md bg-gray-bg p-4">
-            <VotePreview video={video} />
-          </div>
+              <path
+                d="M15 6.00003H3.14L6.77 1.64003C6.93974 1.43581 7.0214 1.17253 6.99702 0.908108C6.97264 0.643682 6.84422 0.39977 6.64 0.230032C6.43578 0.060293 6.1725 -0.0213689 5.90808 0.0030108C5.64365 0.0273905 5.39974 0.155815 5.23 0.360032L0.23 6.36003C0.196361 6.40776 0.166279 6.45789 0.14 6.51003C0.14 6.56003 0.14 6.59003 0.0700002 6.64003C0.0246737 6.75469 0.000941121 6.87674 0 7.00003C0.000941121 7.12332 0.0246737 7.24537 0.0700002 7.36003C0.0700002 7.41003 0.0699999 7.44003 0.14 7.49003C0.166279 7.54217 0.196361 7.59231 0.23 7.64003L5.23 13.64C5.32402 13.7529 5.44176 13.8437 5.57485 13.9059C5.70793 13.9681 5.85309 14.0003 6 14C6.23365 14.0005 6.46009 13.9191 6.64 13.77C6.74126 13.6861 6.82496 13.583 6.88631 13.4666C6.94766 13.3503 6.98546 13.223 6.99754 13.092C7.00961 12.961 6.99573 12.829 6.95669 12.7034C6.91764 12.5777 6.8542 12.4611 6.77 12.36L3.14 8.00003H15C15.2652 8.00003 15.5196 7.89467 15.7071 7.70714C15.8946 7.5196 16 7.26525 16 7.00003C16 6.73482 15.8946 6.48046 15.7071 6.29292C15.5196 6.10539 15.2652 6.00003 15 6.00003Z"
+                fill="white"
+              />
+            </svg>
+          </button>
+          <p className="text-[24px] font-semibold">Debit Card</p>
         </div>
-        <button
-          type="submit"
-          className="w-full rounded-md bg-white py-4 text-center text-[20px] font-semibold text-[#333333] disabled:bg-gray-bg disabled:hover:cursor-not-allowed"
-          disabled={!stripe}
-        >
-          Confirm Payment and Vote
-        </button>
-      </form>
-    </div>
+        <form className="flex flex-col gap-y-6 mt-6 w-full" onSubmit={onSubmit}>
+          <div className="w-full">
+            <label className="block text-sm font-medium text-gray-400 mb-1">
+              Card number
+            </label>
+            <div
+              className={`custom-payment-field ${isFocused.card ? "focused" : ""
+                }`}
+            >
+              <CardNumberElement
+                options={elementOptions}
+                onFocus={() => handlePaymentFieldFocus("card")}
+                onBlur={() => handlePaymentFieldBlur("card")}
+              />
+            </div>
+          </div>
+
+          <div className="w-full">
+            <label className="block text-sm font-medium text-gray-400 mb-1">
+              Expiration date
+            </label>
+            <div
+              className={`custom-payment-field ${isFocused.expiry ? "focused" : ""
+                }`}
+            >
+              <CardExpiryElement
+                options={elementOptions}
+                onFocus={() => handlePaymentFieldFocus("expiry")}
+                onBlur={() => handlePaymentFieldBlur("expiry")}
+              />
+            </div>
+          </div>
+
+          <div className="w-full">
+            <label className="block text-sm font-medium text-gray-400 mb-1">
+              CVC
+            </label>
+            <div
+              className={`custom-payment-field ${isFocused.cvc ? "focused" : ""}`}
+            >
+              <CardCvcElement
+                options={elementOptions}
+                onFocus={() => handlePaymentFieldFocus("cvc")}
+                onBlur={() => handlePaymentFieldBlur("cvc")}
+              />
+            </div>
+          </div>
+          <div className="w-full">
+            <div className="flex flex-row justify-between items-center ">
+              <p className="text-gray-text text-[16px]">you are voting for</p>
+              <button
+                type="button"
+                className="text-[16px] text-legendary-500"
+                onClick={() => setIsChangeVoteOpen(true)}
+              >
+                change
+              </button>
+            </div>
+            <div className="mt-4 w-full rounded-md bg-gray-bg p-4">
+              <VotePreview video={video} />
+            </div>
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-white rounded-md py-4 text-center text-[#333333] text-[20px] font-semibold disabled:bg-gray-bg disabled:hover:cursor-not-allowed"
+            disabled={!stripe}
+          >
+            Confirm Payment and Vote
+          </button>
+        </form>
+      </div>
   );
 };

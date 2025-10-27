@@ -40,8 +40,8 @@ describe('Test card display view component', () => {
       isChangeVoteOpen: true,
       setIsChangeVoteOpen: mockSetterFn,
       setIsVoteOpen: mockSetterFn,
+      clientSecret: 'string',
       setClientSecret: mockSetterFn,
-      clientSecret: 'test',
     };
     render(
       <VoteContext.Provider value={mockVoteContextValue}>
