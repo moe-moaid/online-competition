@@ -184,6 +184,7 @@ const CardView = ({
   const stripe = useStripe();
   const elements = useElements();
 
+  {/* Handle all Stripe logic */}
   const handleVote = async (e: any) => {
     e.preventDefault();
     if (!stripe || !elements || !clientSecret) {
