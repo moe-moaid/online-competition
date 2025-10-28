@@ -17,7 +17,7 @@ export type ContextType = {
   setIsChangeVoteOpen: Dispatch<SetStateAction<boolean>>;
   currentVoteVideoId?: number;
   setCurrentVoteVideoId?: Dispatch<SetStateAction<number | undefined>>;
-  clientSecret?: string;
+  clientSecret: string | undefined;
   setClientSecret: Dispatch<SetStateAction<string | undefined>>;
 };
 export const VoteContext = createContext<ContextType | null>(null);
@@ -28,15 +28,16 @@ export const VoteProvider = ({ children }: PropsWithChildren) => {
   const [currentVoteVideoId, setCurrentVoteVideoId] = useState<number>();
   const [clientSecret, setClientSecret] = useState<string | undefined>();
   const paymentIntent = useMutation<
-    { createPaymentIntent: string },
-    Error,
-    number
+    { createPaymentIntent: string }, // TData
+    Error, // TError
+    number // TVariables
   >({
-    mutationFn: (videoId: number) => createPaymentIntent(videoId),
-    onSuccess: (data: any) => {
+    mutationFn: videoId => createPaymentIntent(videoId),
+    onSuccess: data => {
+      // data.createPaymentIntent is a string
       setClientSecret(data.createPaymentIntent);
     },
-    onError: (err: any) => {
+    onError: err => {
       console.log('error occured while fetching', err);
     },
   });
@@ -45,6 +46,7 @@ export const VoteProvider = ({ children }: PropsWithChildren) => {
       paymentIntent.mutate(currentVoteVideoId);
     }
   }, [isVoteOpen, currentVoteVideoId]);
+
   return (
     <VoteContext.Provider
       value={{
@@ -54,8 +56,8 @@ export const VoteProvider = ({ children }: PropsWithChildren) => {
         setCurrentVoteVideoId,
         isChangeVoteOpen,
         setIsChangeVoteOpen,
-        setClientSecret,
         clientSecret,
+        setClientSecret,
       }}
     >
       {children}

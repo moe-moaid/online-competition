@@ -8,6 +8,7 @@ import { useVoteContext } from '@/lib/context/vote context';
 import CArdsFilterView from '../components/CardsFilterView';
 import PlayVideo from '../components/PlayVideo';
 import StripeWrapper from '../components/StripeWrapper';
+import PaymentForm from '../components/PaymentForm';
 
 function Vote() {
   const { data: videos } = useGetListVideos();
@@ -39,6 +40,8 @@ function Vote() {
   return (
     <StripeWrapper>
       <div className={`relative ${isVoteOpen && 'h-screen overflow-hidden'}`}>
+        <PaymentForm />
+
         {isVoteOpen && (
           <>
             <div

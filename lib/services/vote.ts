@@ -1,4 +1,3 @@
-// services/votes.ts
 import { gqlRequest } from '@/lib/graphql/client/graphqlClient';
 import { CAST_VOTE } from '@/lib/graphql/mutations/mutations';
 import { CREATE_PAYMENT_INTENT } from '@/lib/graphql/mutations/mutations';
