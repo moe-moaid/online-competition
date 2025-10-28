@@ -10953,6 +10953,15 @@ __metadata:
   checksum: 10c0/e01e5f249b1ad852d09aa22f338a6cb3896ac35c92bf0d35744ce1b1e2f4b67901d4a0e886027617a2a8aa9f1a6c67c919c41b544c4aec137b6ebe042ca10d36
   languageName: node
   linkType: hard
+sonner@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/sonner/-/sonner-2.0.7.tgz#810c1487a67ec3370126e0f400dfb9edddc3e4f6"
+  integrity sha512-W6ZN4p58k8aDKA4XPcx2hpIQXBRAgyiWVkYhT7CvK6D3iAu7xjvVyhQHg2/iaKJZ1XVJ4r7XuwGL+WGEK37i9w==
+
+sopplayer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/sopplayer/-/sopplayer-1.0.0.tgz#12be2d3312f12091d5df64c27377921f4c797c10"
+  integrity sha512-lgbWHqQdbsAy7WEEWyi6ciYaPXCa80pprTZxIRN5pdm3OSZBnC2GacNwZ4allmw7AcwHgcyO+D7uPKhwsLiIQQ==
 
 "socks-proxy-agent@npm:^8.0.3":
   version: 8.0.5
