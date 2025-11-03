@@ -1,7 +1,7 @@
 import { GraphQLClient, RequestDocument } from 'graphql-request';
 
 const graphqlClient = new GraphQLClient(
-  process.env.NEXT_PUBLIC_GRAPHQL_API_URL + '/api/data',
+  process.env.NEXT_PUBLIC_API_URL + 'api/data',
   {
     headers: {
       'Content-Type': 'application/json',
