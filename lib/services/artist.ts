@@ -1,11 +1,19 @@
 import { gqlRequest } from '@/lib/graphql/client/graphqlClient';
-import { GET_ARTIST } from '../graphql/queries/queries';
+import { GET_ARTISTS, GET_ARTIST } from '../graphql/queries/queries';
 import { ArtistType } from '../types/artistType';
 
-type ArtistReturnType = {
+type ArtistsReturnType = {
   getArtist: ArtistType[];
 };
 
-export async function getArtist() {
-  return gqlRequest<ArtistReturnType>(GET_ARTIST);
+type ArtistReturnType = {
+  getArtist: ArtistType;
+};
+
+export async function getArtists() {
+  return gqlRequest<ArtistsReturnType>(GET_ARTISTS);
+}
+
+export async function getSingleArtist(id: number) {
+  return gqlRequest<ArtistReturnType>(GET_ARTIST, { id });
 }
