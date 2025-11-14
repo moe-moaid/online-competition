@@ -19,9 +19,9 @@ export const GET_ARTISTS = gql`
       email
       phone
       bio
-      location{
-      country
-      address
+      location {
+        country
+        address
       }
       videos {
         id
@@ -46,9 +46,13 @@ export const GET_ARTIST = gql`
       email
       phone
       bio
-      location{
-      country
-      address
+      avatar {
+        url
+      }
+      location {
+        country
+
+        address
       }
       videos {
         id

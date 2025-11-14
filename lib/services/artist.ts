@@ -7,7 +7,7 @@ type ArtistsReturnType = {
 };
 
 type ArtistReturnType = {
-  getArtist: ArtistType;
+  artist: ArtistType;
 };
 
 export async function getArtists() {
