@@ -20,6 +20,6 @@ export type ArtistType = {
   phone: string;
   location: LocationType;
   avatar: { url: string };
-  video: videoType[];
+  videos: videoType[];
   socialMedias: socialMedia[];
 };

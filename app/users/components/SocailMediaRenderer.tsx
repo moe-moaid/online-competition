@@ -28,11 +28,10 @@ export const SocailMediaRenderer = ({ socials }: Props) => {
       {socials.map(social => {
         const socialMediaLink = social.link;
         const socialMediaIcon = socialMedaiMap[social.platform.toLowerCase()];
-        console.log(social);
         return (
           <div key={`${social.id}`}>
-            <Link href={socialMediaLink}>
-              <div className="hover:shadow-all-sides relative flex h-[48px] w-[48px] items-center justify-center rounded-full bg-lightGray-bg transition-all duration-100 ease-in hover:scale-105 hover:border hover:border-legendary-500">
+            <Link href={socialMediaLink} target="blank">
+              <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-lightGray-bg transition-all duration-100 ease-in hover:scale-105 hover:border hover:border-legendary-500 hover:shadow-all-sides md:h-10 md:w-10 2xl:h-[48px] 2xl:w-[48px]">
                 <Image
                   src={socialMediaIcon}
                   width={12}

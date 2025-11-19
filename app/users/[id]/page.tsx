@@ -2,6 +2,8 @@ import MciContainer from '@/app/components/MciContainer';
 import { getSingleArtist } from '@/lib/services/artist';
 import Image from 'next/image';
 import SocailMediaRenderer from '../components/SocailMediaRenderer';
+import VideoCard from '../components/VideoCard';
+import ReactCountryFlag from 'react-country-flag';
 
 export default async function Page({
   params,
@@ -13,11 +15,11 @@ export default async function Page({
   const me = await getSingleArtist(userId);
 
   return (
-    <div className="text-white">
+    <div className="pb-20 text-white">
       <MciContainer className="mt-[80px]">
-        <h1 className="text-[48px] font-semibold">Profile</h1>
-        <div className="flex w-full flex-col items-start justify-start md:flex-row md:gap-x-10">
-          <div className="relative h-[560px] w-full overflow-clip rounded-lg md:w-[525px]">
+        <h1 className="mb-10 text-[48px] font-semibold">Profile</h1>
+        <div className="flex w-full flex-col items-start justify-start gap-y-8 md:flex-row md:gap-x-10">
+          <div className="xl:h[520px] relative h-[300px] w-full overflow-clip rounded-lg sm:h-[350px] md:h-[460px] md:w-[525px] 2xl:h-[560px]">
             <Image
               src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${me.artist.avatar.url}`}
               className="rounded-lg p-1"
@@ -27,12 +29,21 @@ export default async function Page({
             />
           </div>
           <div className="flex w-full flex-col gap-y-4 md:w-1/2">
-            <p className="text-2xl">{me.artist.name}</p>
-            <p className="flex flex-row items-center justify-start gap-x-4 text-2xl text-white/60">
+            <div className="flex flex-row items-center justify-start gap-x-4">
+              <p className="2l:text-2xl text-sm md:text-lg lg:text-xl">
+                {me.artist.name}
+              </p>
+              <ReactCountryFlag
+                countryCode={me.artist.location.country}
+                style={{ fontSize: '2em' }}
+              />
+            </div>
+            <p className="2l:text-2xl flex flex-row items-center justify-start gap-x-4 text-sm text-white/60 md:text-lg lg:text-xl">
               verified{' '}
               <svg
-                width="32"
-                height="32"
+                className="w-4 md:w-5 lg:w-6 xl:w-7 2xl:w-8"
+                // width="32"
+                // height="32"
                 viewBox="0 0 16 16"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -61,15 +72,30 @@ export default async function Page({
               </svg>
             </p>
 
-            <p className="text-2xl">age: {me.artist.age}</p>
-            <p className="text-2xl">Country: {me.artist.name}</p>
+            <p className="2l:text-2xl text-sm md:text-lg lg:text-xl">
+              age: {me.artist.age || 'Immortal'}
+            </p>
+            <p className="2l:text-2xl text-sm md:text-lg lg:text-xl">
+              Country: {me.artist.name}
+            </p>
             <div className="flex flex-row items-center justify-start gap-x-4">
-              <p className="text-2xl">Social info:</p>
+              <p className="2l:text-2xl text-sm md:text-lg lg:text-xl">
+                Social info:
+              </p>
               <SocailMediaRenderer socials={me.artist.socialMedias} />
             </div>
-            <p className="text-2xl tracking-wider ">Bio</p>
-            <p className="text-2xl tracking-wider">{me.artist.bio}</p>
+            <p className="2l:text-2xl text-sm md:text-lg lg:text-xl ">Bio</p>
+            <p className="2l:text-2xl text-sm md:text-lg lg:text-xl">
+              {me.artist.bio}
+            </p>
           </div>
+        </div>
+
+        <h1 className="mb-6 mt-20 text-2xl font-semibold text-white">{`Uploaded Videos (${me.artist.videos.length})`}</h1>
+        <div className="flex w-full flex-row flex-wrap items-center justify-start gap-x-7 gap-y-10">
+          {me.artist.videos.map((video, index) => {
+            return <VideoCard key={`${index}-${video.id}`} video={video} />;
+          })}
         </div>
       </MciContainer>
     </div>
