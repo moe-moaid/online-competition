@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { useVoteContext } from '@/lib/context/vote context';
+import { useVoteContext } from '@/lib/context/voteContext';
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,

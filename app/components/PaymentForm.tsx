@@ -1,5 +1,5 @@
 'use client';
-import { useVoteContext } from '@/lib/context/vote context';
+import { useVoteContext } from '@/lib/context/voteContext';
 import clsx from 'clsx';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useGetListVideos } from '@/lib/api/getListService';
@@ -184,7 +184,9 @@ const CardView = ({
   const stripe = useStripe();
   const elements = useElements();
 
-  {/* Handle all Stripe logic */}
+  {
+    /* Handle all Stripe logic */
+  }
   const handleVote = async (e: any) => {
     e.preventDefault();
     if (!stripe || !elements || !clientSecret) {
@@ -340,4 +342,3 @@ const CardView = ({
     </div>
   );
 };
-

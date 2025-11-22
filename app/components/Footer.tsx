@@ -1,4 +1,4 @@
-import { useVoteContext } from '@/lib/context/vote context';
+import { useVoteContext } from '@/lib/context/voteContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';

@@ -1,5 +1,5 @@
 'use client';
-import { useVoteContext } from '@/lib/context/vote context';
+import { useVoteContext } from '@/lib/context/voteContext';
 import React from 'react';
 
 type Props = {

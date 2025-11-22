@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import './globals.css';
 import { Inter } from 'next/font/google';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { VoteProvider } from '@/lib/context/vote context';
+import { VoteProvider } from '@/lib/context/voteContext';
 import { Toaster } from 'sonner';
 import StripeWrapper from './components/StripeWrapper';
 import PaymentForm from './components/PaymentForm';

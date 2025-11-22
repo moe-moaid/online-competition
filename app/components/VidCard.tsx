@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import VotingButton from './VotingButton';
 import { videoType } from '@/lib/types/videoType';
-import { useVoteContext } from '@/lib/context/vote context';
+import { useVoteContext } from '@/lib/context/voteContext';
 
 type Props = {
   video: videoType;

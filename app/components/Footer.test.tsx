@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import Footer from './Footer';
-import { VoteProvider } from '@/lib/context/vote context';
+import { VoteProvider } from '@/lib/context/voteContext';
 
 /*
 How the role is determined?

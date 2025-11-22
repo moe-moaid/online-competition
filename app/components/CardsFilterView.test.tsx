@@ -1,7 +1,7 @@
 import { screen, render, waitFor, RenderOptions } from '@testing-library/react';
 import CArdsFilterView from './CardsFilterView';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { VoteContext, ContextType } from '@/lib/context/vote context';
+import { VoteContext, ContextType } from '@/lib/context/voteContext';
 import { ReactElement } from 'react';
 
 describe('Test card display view component', () => {

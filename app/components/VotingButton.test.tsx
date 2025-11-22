@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import VotingButton from './VotingButton';
-import { VoteProvider } from '@/lib/context/vote context';
+import { VoteProvider } from '@/lib/context/voteContext';
 import PaymentForm from './PaymentForm';
 
 describe('make sure voting button opens voting dialog', () => {

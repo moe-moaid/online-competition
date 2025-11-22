@@ -5,7 +5,7 @@ import MciContainer from './components/MciContainer';
 import Image from 'next/image';
 import PlayVideo from './components/PlayVideo';
 import CArdsFilterView from './components/CardsFilterView';
-import { useVoteContext } from '@/lib/context/vote context';
+import { useVoteContext } from '@/lib/context/voteContext';
 
 export default function Home() {
   const { data: videos } = useGetListVideos();
