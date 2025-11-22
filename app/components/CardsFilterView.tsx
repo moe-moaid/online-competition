@@ -5,7 +5,7 @@ import { videoType } from '@/lib/types/videoType';
 import Filter from '../vote/components/Filters';
 import MciContainer from './MciContainer';
 import { lazy } from 'react';
-import { useVoteContext } from '@/lib/context/vote context';
+import { useVoteContext } from '@/lib/context/voteContext';
 import VotePreview from '../vote/components/VotePreview';
 import clsx from 'clsx';
 const VidCard = lazy(() => import('./VidCard'));

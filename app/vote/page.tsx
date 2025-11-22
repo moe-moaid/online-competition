@@ -4,7 +4,7 @@ import { useGetListVideos } from '@/lib/api/getListService';
 import { videoType } from '@/lib/types/videoType';
 import Image from 'next/image';
 import CustomControls from './components/CustomControls';
-import { useVoteContext } from '@/lib/context/vote context';
+import { useVoteContext } from '@/lib/context/voteContext';
 import CArdsFilterView from '../components/CardsFilterView';
 import PlayVideo from '../components/PlayVideo';
 

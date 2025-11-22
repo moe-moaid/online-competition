@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import VidCard from './VidCard';
 import { videoType } from '@/lib/types/videoType';
-import { VoteProvider } from '@/lib/context/vote context';
+import { VoteProvider } from '@/lib/context/voteContext';
 
 describe('test video cards for rendering the right things', () => {
   const mockVideo: videoType = {
