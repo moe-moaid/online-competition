@@ -57,13 +57,17 @@ function Navbar() {
             className="rounded-md border border-legendary bg-transparent text-white"
             variant="outline"
           >
-            Login
+            <Link href="/login" data-testid="navigation-link">
+              Login
+            </Link>
           </Button>
           <Button
             className="rounded-md bg-legendary text-white"
             variant="default"
           >
-            Signup
+            <Link href="/signup" data-testid="navigation-link">
+              Signup
+            </Link>
           </Button>
         </div>
       </div>
