@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, HTMLInputTypeAttribute } from 'react';
 
 interface inputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
@@ -7,10 +7,11 @@ interface inputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
   name: string;
   fullWidth?: boolean;
+  type?: HTMLInputTypeAttribute;
 }
 const MciInput = forwardRef<HTMLInputElement, inputProps>(
   (
-    { className, name, required, label, placeholder, fullWidth, ...props },
+    { className, name, required, label, placeholder, fullWidth, type, ...props },
     ref,
   ) => {
     return (
@@ -19,7 +20,6 @@ const MciInput = forwardRef<HTMLInputElement, inputProps>(
           fullWidth ? 'w-full' : ''
         } ${className}`}
       >
-        {/* <label htmlFor={name}>{`${label}`}</label> */}
         <label htmlFor={name}>
           {label ? label : ''}
           {required && <span className="text-red-600">*</span>}
@@ -27,7 +27,7 @@ const MciInput = forwardRef<HTMLInputElement, inputProps>(
         <input
           {...props}
           ref={ref}
-          type="text"
+          type={type || "text"}
           name={name}
           placeholder={placeholder}
           className="rounded-md border border-white bg-transparent px-3 py-1 text-[#838383] outline-none hover:border-legendary-500 hover:text-white focus:border-legendary-500 focus:text-white"
