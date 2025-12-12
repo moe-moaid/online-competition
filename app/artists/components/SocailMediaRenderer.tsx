@@ -25,7 +25,7 @@ type Props = {
 export const SocailMediaRenderer = ({ socials }: Props) => {
   return (
     <div className=" flex flex-row items-center justify-start gap-x-4 rounded-full">
-      {socials.map(social => {
+      {socials?.map(social => {
         const socialMediaLink = social.link;
         const socialMediaIcon = socialMedaiMap[social.platform.toLowerCase()];
         return (
