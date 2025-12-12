@@ -22,7 +22,7 @@ export default async function Page({
         <div className="flex w-full flex-col items-start justify-start gap-y-8 md:flex-row md:gap-x-10">
           <div className="xl:h[520px] relative h-[300px] w-full overflow-clip rounded-lg sm:h-[350px] md:h-[460px] md:w-[525px] 2xl:h-[560px]">
             <Image
-              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.artist.avatar.url}`}
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user?.artist?.avatar?.url}`}
               className="rounded-lg p-1"
               fill
               alt="singer image"
@@ -32,10 +32,10 @@ export default async function Page({
           <div className="flex w-full flex-col gap-y-4 md:w-1/2">
             <div className="flex flex-row items-center justify-start gap-x-4">
               <p className="2l:text-2xl text-sm md:text-lg lg:text-xl">
-                {user.artist.name}
+                {user.artist?.name}
               </p>
               <ReactCountryFlag
-                countryCode={user.artist.location.country}
+                countryCode={user.artist?.location.country}
                 style={{ fontSize: '2em' }}
               />
             </div>
@@ -74,27 +74,27 @@ export default async function Page({
             </p>
 
             <p className="2l:text-2xl text-sm md:text-lg lg:text-xl">
-              age: {user.artist.age || 'Immortal'}
+              age: {user.artist?.age || 'Immortal'}
             </p>
             <p className="2l:text-2xl text-sm md:text-lg lg:text-xl">
-              Country: {user.artist.name}
+              Country: {user.artist?.name}
             </p>
             <div className="flex flex-row items-center justify-start gap-x-4">
               <p className="2l:text-2xl text-sm md:text-lg lg:text-xl">
                 Social info:
               </p>
-              <SocailMediaRenderer socials={user.artist.socialMedias} />
+              <SocailMediaRenderer socials={user.artist?.socialMedias} />
             </div>
             <p className="2l:text-2xl text-sm md:text-lg lg:text-xl ">Bio</p>
             <p className="2l:text-2xl text-sm md:text-lg lg:text-xl">
-              {user.artist.bio}
+              {user.artist?.bio}
             </p>
           </div>
         </div>
 
-        <h1 className="mb-6 mt-20 text-2xl font-semibold text-white">{`Uploaded Videos (${user.artist.videos.length})`}</h1>
+        <h1 className="mb-6 mt-20 text-2xl font-semibold text-white">{`Uploaded Videos (${user.artist?.videos.length})`}</h1>
         <div className="flex w-full flex-row flex-wrap items-center justify-start gap-x-7 gap-y-10">
-          {user.artist.videos.map((video, index) => {
+          {user.artist?.videos.map((video, index) => {
             return <VideoCard key={`${index}-${video.id}`} video={video} />;
           })}
         </div>
