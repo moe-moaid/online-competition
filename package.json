@@ -11,6 +11,7 @@
     "format": "prettier --write \"{app,components,lib}/**/*.{ts,tsx,js,jsx,css,md,mdx}\""
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^4.14.0",
     "@next/font": "^14.2.15",
     "@radix-ui/react-accordion": "^1.2.10",
     "@radix-ui/react-dialog": "^1.1.14",

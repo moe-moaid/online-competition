@@ -7,11 +7,15 @@ import CustomControls from './components/CustomControls';
 import { useVoteContext } from '@/lib/context/voteContext';
 import CArdsFilterView from '../components/CardsFilterView';
 import PlayVideo from '../components/PlayVideo';
+import { useAuthContext } from '@/lib/context/authContext';
 
 function Vote() {
   const { data: videos } = useGetListVideos();
   const [displayVid, setDisplayVid] = useState<string | undefined>();
   const { isVoteOpen, setIsVoteOpen } = useVoteContext();
+  const {token} = useAuthContext();
+
+  console.log('token ====', token);
 
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
