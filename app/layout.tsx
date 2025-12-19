@@ -8,6 +8,7 @@ import { VoteProvider } from '@/lib/context/voteContext';
 import { Toaster } from 'sonner';
 import StripeWrapper from './components/StripeWrapper';
 import PaymentForm from './components/PaymentForm';
+import { AuthProvider } from '@/lib/context/authContext';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -24,19 +25,21 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="bg-black">
-        <nav className="px-3 py-4 lg:px-[90px] xl:px-[150px]">
-          <Navbar />
-        </nav>
-        <QueryClientProvider client={queryClient}>
-          <VoteProvider>
-            <StripeWrapper>
-              <PaymentForm />
-              {children}
-            </StripeWrapper>
-            <Footer />
-          </VoteProvider>
-        </QueryClientProvider>
-        <Toaster position="bottom-center" duration={5000} richColors />
+        <AuthProvider>
+          <nav className="px-3 py-4 lg:px-[90px] xl:px-[150px]">
+            <Navbar />
+          </nav>
+          <QueryClientProvider client={queryClient}>
+            <VoteProvider>
+              <StripeWrapper>
+                <PaymentForm />
+                {children}
+              </StripeWrapper>
+              <Footer />
+            </VoteProvider>
+          </QueryClientProvider>
+          <Toaster position="bottom-center" duration={5000} richColors />
+        </AuthProvider>
       </body>
     </html>
   );

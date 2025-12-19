@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useLogin } from '@/lib/services/login';
 import { toast } from 'sonner';
 import { ClientError } from 'graphql-request';
+import { useAuthContext } from '@/lib/context/authContext';
 
 type Inputs = {
   email: string;
@@ -15,11 +16,14 @@ type Inputs = {
 function page() {
   const { register, handleSubmit } = useForm<Inputs>();
   const { mutate: login, isPending } = useLogin();
+  const {setToken} = useAuthContext();
   const onSubmit: SubmitHandler<Inputs> = async data => {
     login(
       { email: data.email, password: data.password },
       {
-        onSuccess: () => toast.success('Logged in Successfully'),
+        onSuccess: (res) => {
+          setToken(res.login.accessToken)
+          toast.success('Logged in Successfully')},
         onError: error => {
           console.log(
             'error on client side ====',

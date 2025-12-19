@@ -1,14 +1,14 @@
 import { GraphQLClient, RequestDocument } from 'graphql-request';
 
-const graphqlClient = new GraphQLClient(
-  process.env.NEXT_PUBLIC_API_BASE_URL + 'api/data',
-  {
-    // credentials: 'include',
+const graphqlClient = (token?: string) => {
+  new GraphQLClient(process.env.NEXT_PUBLIC_API_BASE_URL + 'api/data', {
     headers: {
       'Content-Type': 'application/json',
+      ...(token && { Authorization: `Bearer ${token}` }),
     },
-  },
-);
+    credentials: 'include',
+  });
+};
 
 export default graphqlClient;
 

@@ -53,12 +53,14 @@ function Navbar() {
           </Link>
         </div>
         <div className="flex gap-x-8">
-          <Button
-            className="rounded-md border border-legendary bg-transparent text-white"
-            variant="outline"
+          <Link
+          href='/login'
+            className="rounded-md border border-legendary bg-transparent text-white bg-legendary px-4 py-1"
+            
+            // variant="outline"
           >
             Login
-          </Button>
+          </Link>
           <Button
             className="rounded-md bg-legendary text-white"
             variant="default"
